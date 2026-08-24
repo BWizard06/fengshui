@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+import { routes } from '../i18n/routes';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<footer class="border-t border-blush/42 bg-rose/14">
+  <div class="wrap max-w-[1240px] pt-[34px] pb-[30px] text-center desk:pt-14 desk:pb-10">
+    <a href={localizePath('/', locale)} class="inline-block" aria-label={t.site.logoAlt}>
+      <Image
+        src={logo}
+        alt={t.site.logoAlt}
+        widths={[190, 380]}
+        sizes="190px"
+        class="mx-auto mb-[18px] h-24 w-auto desk:mb-[26px] desk:h-[130px]"
+        loading="lazy"
+        layout="none"
+      />
+    </a>
+
+    <p class="mb-1 script-accent text-script-lg">{t.footer.tagline}</p>
+
+    <nav class="my-6 desk:mt-7 desk:mb-[30px]" aria-label={t.site.name}>
+      <ul class="flex flex-col items-center gap-3.5 desk:flex-row desk:justify-center desk:gap-6">
+        {
+          routes.map((route) => (
+            <li>
+              <a
+                href={localizePath(route.path, locale)}
+                class="block text-[0.65625rem] leading-tight font-medium tracking-[0.125rem] text-mute uppercase no-underline transition-colors hover:text-taupe"
+              >
+                {t.nav[route.key]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <span class="mx-auto mb-[18px] rule-line desk:mb-[22px]"></span>
+
+    <p class="text-micro leading-[2] text-mute">
+      {t.footer.copyright}<br />{t.footer.address}
+    </p>
+  </div>
+</footer>

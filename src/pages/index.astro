@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PillLink from '../components/PillLink.astro';
+import RubrikGrid from '../components/RubrikGrid.astro';
+import heroImage from '../assets/images/hero-living-room.jpg';
+import peonies from '../assets/images/peonies.jpg';
+import flowerOfLife from '../assets/images/flower-of-life.jpg';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.meta.home.title} description={t.meta.home.description} path="/">
+  <section
+    class="wrap grid max-w-[1240px] items-center gap-0 pt-[34px] pb-[30px] desk:grid-cols-[1.05fr_0.95fr] desk:gap-x-[72px] desk:pt-18 desk:pb-22"
+  >
+    <div class="desk:col-start-1">
+      <p class="mb-1.5 script-accent text-script-lg">{t.home.eyebrow}</p>
+      <h1 class="text-display">{t.home.title}</h1>
+    </div>
+
+    <div
+      class="my-6 desk:col-start-2 desk:row-span-3 desk:row-start-1 desk:my-0 desk:justify-self-end"
+    >
+      <Image
+        src={heroImage}
+        alt={t.home.heroAlt}
+        widths={[420, 640, 900, 1120]}
+        sizes="(min-width: 900px) 540px, 100vw"
+        class="mx-auto aspect-5/4 w-full max-w-[540px] rounded-t-[140px] rounded-b-[20px] object-cover shadow-hero desk:mx-0 desk:aspect-60/43 desk:rounded-t-[200px] desk:rounded-b-3xl"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+
+    <div class="desk:col-start-1 desk:mt-[26px]">
+      <p class="mb-3.5 text-body font-light desk:mb-4 desk:text-lead">{t.home.intro[0]}</p>
+      <p class="mb-6 text-body font-light desk:mb-[34px] desk:text-lead">{t.home.intro[1]}</p>
+    </div>
+
+    <div
+      class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 desk:col-start-1"
+    >
+      <PillLink href={localizePath('/contact', locale)}>{t.actions.bookIntro}</PillLink>
+      <PillLink href={localizePath('/feng-shui', locale)} variant="outline">
+        {t.actions.learnMore}
+      </PillLink>
+    </div>
+  </section>
+
+  <section class="wrap max-w-[1240px] pb-10 desk:pb-24">
+    <RubrikGrid />
+  </section>
+
+  <section class="bg-blush/16">
+    <div class="wrap max-w-[1180px] py-10 desk:py-22">
+      <div class="grid items-center gap-0 desk:grid-cols-[0.85fr_1.15fr] desk:gap-[72px]">
+        <Image
+          src={peonies}
+          alt={t.home.peony.imageAlt}
+          widths={[420, 640, 840]}
+          sizes="(min-width: 900px) 420px, 100vw"
+          class="mb-[26px] block aspect-3214/3319 w-full rounded-[20px] object-cover shadow-card desk:mb-0 desk:max-w-[420px] desk:justify-self-center desk:rounded-3xl"
+          loading="lazy"
+        />
+        <div>
+          <p class="mb-2.5 eyebrow text-sage desk:mb-3.5">{t.home.peony.eyebrow}</p>
+          <h2 class="mb-4 text-h2-lg desk:mb-[22px]">{t.home.peony.title}</h2>
+          <p class="mb-3.5 text-body font-light desk:mb-4">{t.home.peony.paragraphs[0]}</p>
+          <p class="text-body font-light">{t.home.peony.paragraphs[1]}</p>
+        </div>
+      </div>
+
+      <div class="mt-[26px] grid items-center gap-0 desk:mt-16 desk:grid-cols-2 desk:gap-16">
+        <Image
+          src={flowerOfLife}
+          alt={t.home.peony.flowerAlt}
+          widths={[300, 420, 840]}
+          sizes="(min-width: 900px) 420px, 74vw"
+          class="order-1 mx-auto mb-[22px] block aspect-square w-[74%] max-w-[300px] object-contain mix-blend-multiply desk:order-2 desk:mb-0 desk:w-[86%] desk:max-w-[420px]"
+          loading="lazy"
+        />
+        <div class="order-2 desk:order-1">
+          <p class="mb-3.5 text-body font-light desk:mb-4">{t.home.peony.closing[0]}</p>
+          <p class="mb-5 text-body font-light desk:mb-[26px]">{t.home.peony.closing[1]}</p>
+          <p class="text-body font-light">{t.home.peony.signOff}</p>
+          <p class="mt-0.5 script-accent text-script-lg">{t.home.peony.signature}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

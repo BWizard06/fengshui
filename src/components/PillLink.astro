@@ -1,0 +1,27 @@
+---
+interface Props {
+  href: string;
+  variant?: 'solid' | 'outline';
+  block?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'solid', block = false, class: className } = Astro.props;
+
+const base =
+  'inline-block rounded-full text-center text-[0.71875rem] desk:text-xs font-medium tracking-[0.125rem] uppercase no-underline transition-colors';
+
+const styles = {
+  solid:
+    'bg-sage text-cream hover:bg-sage-deep hover:text-cream px-5 py-4 desk:px-[30px] desk:py-[15px]',
+  outline:
+    'border border-rose text-rose hover:bg-blush/20 hover:text-rose px-5 py-[15px] desk:px-[30px] desk:py-3.5',
+};
+---
+
+<a
+  href={href}
+  class:list={[base, styles[variant], block && 'block w-full sm:inline-block sm:w-auto', className]}
+>
+  <slot />
+</a>

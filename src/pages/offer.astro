@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PillLink from '../components/PillLink.astro';
+import OfferSteps from '../components/OfferSteps';
+import greenSofa from '../assets/images/green-sofa.jpg';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.meta.offer.title} description={t.meta.offer.description} path="/offer">
+  <div class="wrap max-w-[820px] pt-8 pb-0 desk:pt-16 desk:pb-2">
+    <PageIntro eyebrow={t.offer.eyebrow} title={t.offer.title} lead={t.offer.lead} />
+  </div>
+
+  <section
+    class="wrap grid max-w-[1100px] items-center gap-0 pt-[34px] pb-[38px] desk:grid-cols-[1.1fr_0.9fr] desk:gap-x-16 desk:gap-y-0 desk:py-18"
+  >
+    <h2 class="mb-4 text-h2-sm desk:col-start-1 desk:row-start-1 desk:mb-5">
+      {t.offer.problem.title}
+    </h2>
+    <Image
+      src={greenSofa}
+      alt={t.offer.problem.imageAlt}
+      widths={[420, 640, 940]}
+      sizes="(min-width: 900px) 460px, 100vw"
+      class="mb-[22px] block aspect-4/3 w-full rounded-[18px] object-cover shadow-card desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:mb-0 desk:rounded-[20px]"
+      loading="eager"
+    />
+    <div class="desk:col-start-1 desk:row-start-2">
+      {
+        t.offer.problem.paragraphs.map((paragraph, index) => (
+          <p class:list={['text-body font-light', index < 2 && 'mb-4']}>{paragraph}</p>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-blush/16">
+    <div class="wrap max-w-[820px] py-10 desk:py-18">
+      <div class="text-center">
+        <h2 class="mb-3.5 text-h2-sm desk:mb-4">{t.offer.solution.title}</h2>
+        <p class="mb-3 text-body font-light desk:mb-3.5">{t.offer.solution.paragraphs[0]}</p>
+        <p class="mb-[18px] text-body font-light desk:mb-[26px]">
+          {t.offer.solution.paragraphs[1]}
+        </p>
+        <p class="mb-[18px] script-accent text-script-xl desk:mb-[26px]">
+          {t.offer.solution.question}
+        </p>
+        <p class="text-body font-light">{t.offer.solution.closing}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap max-w-[820px] pt-[38px] desk:pt-19">
+    <div class="text-center">
+      <h2 class="mb-3 text-h2 desk:mb-4">{t.offer.process.title}</h2>
+      <p class="text-body font-light text-taupe">{t.offer.process.lead}</p>
+    </div>
+
+    <div class="mt-6 desk:mt-10">
+      <OfferSteps client:visible steps={t.offer.process.steps} />
+      <p class="mt-[22px] text-center text-micro font-light text-mute desk:mt-[30px]">
+        {t.offer.process.note}
+      </p>
+    </div>
+  </section>
+
+  <section
+    class="wrap flex max-w-[1100px] flex-col items-center gap-0 pt-[38px] pb-11 desk:gap-12 desk:pt-19 desk:pb-24"
+  >
+    <div class="w-full max-w-[760px] text-left desk:text-center">
+      <h2 class="mb-3.5 text-h2 desk:mb-[18px]">{t.offer.approach.title}</h2>
+      {
+        t.offer.approach.paragraphs.map((paragraph, index) => (
+          <p class:list={['text-body font-light', index < 2 && 'mb-4']}>{paragraph}</p>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-[30px] w-full max-w-[700px] rounded-[20px] border border-blush/42 bg-white px-6 pt-8 pb-[30px] text-center shadow-lift desk:mt-0 desk:px-10 desk:py-11"
+    >
+      <p class="mb-3 eyebrow text-sage">{t.offer.pricing.eyebrow}</p>
+      <p class="font-serif text-[2.75rem] leading-none font-medium text-taupe desk:text-[3.25rem]">
+        {t.offer.pricing.price}
+      </p>
+      <p class="mt-1.5 mb-5 text-[0.78125rem] font-light text-mute desk:mb-6">
+        {t.offer.pricing.unit}
+      </p>
+      <div
+        class="mb-6 flex flex-col gap-3 border-t border-line/55 pt-5 text-left desk:mb-7 desk:gap-3.5 desk:pt-6"
+      >
+        {
+          t.offer.pricing.details.map((detail) => (
+            <p class="text-[0.84375rem] leading-[1.8] font-light">{detail}</p>
+          ))
+        }
+      </div>
+      <PillLink href={localizePath('/contact', locale)} block class="desk:inline-block desk:w-auto">
+        {t.actions.getInTouch}
+      </PillLink>
+    </div>
+  </section>
+</BaseLayout>

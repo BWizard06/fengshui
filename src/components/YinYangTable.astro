@@ -1,0 +1,36 @@
+---
+import { resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { headings, rows } = t.fengShui.yinYang;
+---
+
+<div
+  class="clear-both my-[26px] overflow-hidden rounded-2xl border border-line/55 desk:my-[34px] desk:rounded-[18px]"
+>
+  <div class="grid grid-cols-2 bg-blush/16">
+    <p
+      class="border-r border-line/55 px-4 py-3 font-serif text-[1.25rem] font-semibold text-taupe desk:px-7 desk:py-[18px] desk:text-2xl"
+    >
+      {headings.yin}
+    </p>
+    <p
+      class="px-4 py-3 font-serif text-[1.25rem] font-semibold text-taupe desk:px-7 desk:py-[18px] desk:text-2xl"
+    >
+      {headings.yang}
+    </p>
+  </div>
+  {
+    rows.map((row) => (
+      <div class="grid grid-cols-2 border-t border-blush/16 bg-white transition-colors desk:hover:bg-cream">
+        <p class="border-r border-blush/16 px-4 py-3 text-[0.78125rem] leading-[1.6] font-light desk:px-7 desk:py-[15px] desk:text-[0.90625rem]">
+          {row.yin}
+        </p>
+        <p class="px-4 py-3 text-[0.78125rem] leading-[1.6] font-light desk:px-7 desk:py-[15px] desk:text-[0.90625rem]">
+          {row.yang}
+        </p>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,280 @@
+---
+import { Image, getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import TrigramGrid from '../components/TrigramGrid.astro';
+import SeatingPositions from '../components/SeatingPositions.astro';
+import YinYangTable from '../components/YinYangTable.astro';
+import BaguaExplorer from '../components/BaguaExplorer';
+import lakePanorama from '../assets/images/lake-panorama.jpg';
+import harmoniousRoom from '../assets/images/harmonious-room.jpg';
+import fountain from '../assets/images/fountain.jpg';
+import yinYangStones from '../assets/images/yin-yang-stones.jpg';
+import bedroom from '../assets/images/bedroom.jpg';
+import fiveElements from '../assets/images/five-elements.jpg';
+import xun from '../assets/images/bagua/xun.png';
+import li from '../assets/images/bagua/li.png';
+import kun from '../assets/images/bagua/kun.png';
+import zhen from '../assets/images/bagua/zhen.png';
+import taiji from '../assets/images/bagua/taiji.png';
+import dui from '../assets/images/bagua/dui.png';
+import gen from '../assets/images/bagua/gen.png';
+import kan from '../assets/images/bagua/kan.png';
+import qian from '../assets/images/bagua/qian.png';
+import { baguaAccentHex, type BaguaKey } from '../lib/bagua';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const offerHref = localizePath('/offer', locale);
+
+const iconSources: Record<BaguaKey, ImageMetadata> = {
+  xun,
+  li,
+  kun,
+  zhen,
+  taiji,
+  dui,
+  gen,
+  kan,
+  qian,
+};
+
+const areas = await Promise.all(
+  t.fengShui.bagua.areas.map(async (area) => ({
+    ...area,
+    accent: baguaAccentHex[area.key as BaguaKey],
+    iconSrc: (
+      await getImage({ src: iconSources[area.key as BaguaKey], width: 160, format: 'webp' })
+    ).src,
+  }))
+);
+
+const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format: 'webp' });
+---
+
+<BaseLayout
+  title={t.meta.fengShui.title}
+  description={t.meta.fengShui.description}
+  path="/feng-shui"
+>
+  <div class="wrap max-w-[820px] pt-8 pb-2 desk:flow-root desk:pt-16 desk:pb-10">
+    <PageIntro eyebrow={t.fengShui.eyebrow} title={t.fengShui.title} class="mb-[26px] desk:mb-12" />
+
+    {t.fengShui.intro.map((paragraph) => <p class="mb-4 text-body font-light">{paragraph}</p>)}
+
+    <blockquote
+      class="relative my-[26px] overflow-hidden rounded-[18px] bg-cover bg-center px-6 py-11 text-center shadow-card desk:my-[34px] desk:px-11 desk:py-18"
+      style={`background-image: linear-gradient(rgb(58 68 74 / 0.52), rgb(46 54 60 / 0.6)), url(${quoteBackground.src});`}
+    >
+      <span class="mx-auto mb-[18px] block h-px w-12 bg-cream/60 desk:mb-[26px] desk:w-[60px]"
+      ></span>
+      <p
+        class="font-serif text-quote font-medium text-cream italic [text-shadow:0_2px_16px_rgb(0_0_0/0.55),0_1px_4px_rgb(0_0_0/0.4)]"
+      >
+        {t.fengShui.quote}
+      </p>
+      <span class="mx-auto mt-[18px] block h-px w-12 bg-cream/60 desk:mt-[26px] desk:w-[60px]"
+      ></span>
+    </blockquote>
+
+    <Image
+      src={harmoniousRoom}
+      alt={t.fengShui.roomAlt}
+      widths={[340, 500, 700]}
+      sizes="(min-width: 900px) 322px, 100vw"
+      class="mb-6 block aspect-square w-full rounded-2xl object-cover shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%] desk:rounded-2xl"
+      loading="lazy"
+    />
+
+    {t.fengShui.qi.map((paragraph) => <p class="mb-4 text-body font-light">{paragraph}</p>)}
+    <p class="mb-4 text-body font-light">
+      {t.fengShui.qiClosing}{' '}
+      <a href={offerHref} class="border-b border-blush text-rose no-underline">
+        {t.actions.moreOnOffer}
+      </a>
+    </p>
+
+    <h2 class="clear-both mt-9 mb-4 text-h2-sm desk:mt-14 desk:mb-[18px]">
+      {t.fengShui.history.title}
+    </h2>
+    <Image
+      src={fountain}
+      alt={t.fengShui.fountainAlt}
+      widths={[340, 500, 700]}
+      sizes="(min-width: 900px) 322px, 100vw"
+      class="mb-[22px] block aspect-1024/681 w-full rounded-2xl object-cover shadow-soft desk:float-left desk:mt-1.5 desk:mr-[34px] desk:mb-5 desk:w-[322px] desk:max-w-[44%]"
+      loading="lazy"
+    />
+    {
+      t.fengShui.history.paragraphs.map((paragraph) => (
+        <p class="mb-4 text-body font-light">{paragraph}</p>
+      ))
+    }
+  </div>
+
+  <section class="mt-[26px] bg-blush/16 desk:mt-6">
+    <div class="wrap max-w-[1100px] py-10 desk:py-18">
+      <h2 class="mb-3 text-center text-h2-lg desk:mb-3.5">{t.fengShui.schools.title}</h2>
+      <p class="mx-auto mb-[26px] max-w-[700px] text-center text-body font-light desk:mb-11">
+        {t.fengShui.schools.lead}
+      </p>
+
+      <ul class="flex flex-col gap-4 desk:grid desk:grid-cols-2 desk:gap-6">
+        {
+          t.fengShui.schools.cards.map((card) => (
+            <li class="rounded-[18px] border border-line/55 bg-white px-[22px] py-[26px] desk:px-9 desk:py-[38px]">
+              <p class="mb-2 eyebrow text-sage desk:mb-2.5">{card.eyebrow}</p>
+              <p class="mb-3 font-serif text-serif-lg font-semibold text-taupe">{card.title}</p>
+              {card.paragraphs.map((paragraph, index) => (
+                <p class:list={['text-body-sm font-light', index === 0 && 'mb-3']}>{paragraph}</p>
+              ))}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mx-auto mt-9 max-w-[760px] text-center desk:mt-14">
+        <h2 class="mb-3 text-h2-sm desk:mb-3.5">{t.fengShui.protection.title}</h2>
+        <div class="mx-auto max-w-[700px] text-left">
+          <p class="mb-3 text-body font-light desk:mb-3.5">{t.fengShui.protection.lead}</p>
+          <ul class="mb-3 flex flex-col gap-2 desk:mb-3.5 desk:gap-[9px]">
+            {
+              t.fengShui.protection.items.map((item) => (
+                <li class="grid grid-cols-[auto_1fr] items-baseline gap-2.5">
+                  <span class="text-blush">—</span>
+                  <span class="text-body font-light">
+                    <strong class="font-medium">{item.label}</strong> {item.text}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="text-body font-light">
+            {t.fengShui.protection.closing}{' '}
+            <a href={offerHref} class="border-b border-blush text-rose no-underline">
+              {t.actions.moreOnOffer}
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <SeatingPositions />
+    </div>
+  </section>
+
+  <div class="wrap max-w-[820px] pt-10 desk:pt-18">
+    <p class="mb-[22px] text-center text-body font-light text-sage desk:mb-[30px]">
+      {t.fengShui.bagua.lead}
+    </p>
+    <h2 class="mb-3.5 text-h2-lg desk:mb-[18px]">{t.fengShui.bagua.title}</h2>
+    <p class="mb-4 text-body font-light">{t.fengShui.bagua.intro}</p>
+
+    <TrigramGrid />
+
+    <p class="mb-5 text-body font-light desk:mb-[18px]">{t.fengShui.bagua.afterGrid}</p>
+
+    <div
+      class="mb-[22px] grid items-center gap-3.5 rounded-2xl border border-line/70 px-[18px] py-5 desk:mb-[34px] desk:grid-cols-2 desk:gap-7 desk:rounded-[18px] desk:px-[30px] desk:py-7"
+    >
+      <Image
+        src={fiveElements}
+        alt={t.fengShui.bagua.elementsAlt}
+        widths={[380, 560, 760]}
+        sizes="(min-width: 900px) 380px, 78vw"
+        class="mx-auto block w-[78%] rounded-[14px] desk:w-full"
+        loading="lazy"
+      />
+      <p class="text-center text-body-sm font-light text-taupe desk:text-left">
+        {t.fengShui.bagua.elementsCaption}
+      </p>
+    </div>
+
+    <p class="mb-4 text-body font-light desk:mb-2">{t.fengShui.bagua.explorePrompt}</p>
+  </div>
+
+  <div class="wrap max-w-[1100px] pt-0 desk:pt-5">
+    <BaguaExplorer
+      client:visible
+      areas={areas}
+      labels={{
+        element: t.fengShui.bagua.detailLabels.element,
+        colors: t.fengShui.bagua.detailLabels.colors,
+        support: t.fengShui.bagua.detailLabels.support,
+        themes: t.fengShui.bagua.detailLabels.themes,
+        close: t.actions.close,
+      }}
+    />
+  </div>
+
+  <div class="wrap max-w-[820px] pt-[26px] desk:flow-root desk:pt-[34px]">
+    <p class="mb-4 text-body font-light">
+      {t.fengShui.disturbance.leadPrefix}<a
+        href={t.fengShui.disturbance.linkHref}
+        target="_blank"
+        rel="noopener">{t.fengShui.disturbance.linkLabel}</a
+      >{t.fengShui.disturbance.leadSuffix}
+    </p>
+    {
+      t.fengShui.disturbance.paragraphs.map((paragraph) => (
+        <p class="mb-4 text-body font-light">{paragraph}</p>
+      ))
+    }
+    <p class="mb-4 text-body font-light">
+      {t.fengShui.disturbance.closing}{' '}
+      <a href={offerHref} class="border-b border-blush text-rose no-underline">
+        {t.actions.moreOnOffer}
+      </a>
+    </p>
+
+    <h2 class="mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]">{t.fengShui.flyingStars.title}</h2>
+    {
+      t.fengShui.flyingStars.paragraphs.map((paragraph) => (
+        <p class="mb-4 text-body font-light">{paragraph}</p>
+      ))
+    }
+    <p class="mb-4 text-body font-light">
+      {t.fengShui.flyingStars.closing}{' '}
+      <a href={offerHref} class="border-b border-blush text-rose no-underline">
+        {t.actions.moreOnOffer}
+      </a>
+    </p>
+
+    <h2 class="mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]">{t.fengShui.yinYang.title}</h2>
+    <Image
+      src={yinYangStones}
+      alt={t.fengShui.yinYangImageAlt}
+      widths={[340, 500, 700]}
+      sizes="(min-width: 900px) 322px, 100vw"
+      class="mb-[22px] block aspect-5/4 w-full rounded-2xl object-cover shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%]"
+      loading="lazy"
+    />
+    {
+      t.fengShui.yinYang.intro.map((paragraph) => (
+        <p class="mb-4 text-body font-light">{paragraph}</p>
+      ))
+    }
+
+    <YinYangTable />
+
+    <Image
+      src={bedroom}
+      alt={t.fengShui.bedroomAlt}
+      widths={[280, 420, 600]}
+      sizes="(min-width: 900px) 270px, 70vw"
+      class="mx-auto mb-[22px] block aspect-683/1024 w-[70%] rounded-2xl object-cover shadow-soft desk:float-left desk:mx-0 desk:mt-1.5 desk:mr-[38px] desk:mb-5 desk:w-[270px] desk:max-w-[38%]"
+      loading="lazy"
+    />
+    {
+      t.fengShui.yinYang.closing.map((paragraph) => (
+        <p class="mb-4 text-body font-light">{paragraph}</p>
+      ))
+    }
+
+    <p
+      class="clear-both border-t border-line/55 pt-[18px] pb-10 text-micro font-light text-mute desk:pt-[22px] desk:pb-16"
+    >
+      {t.fengShui.literature}
+    </p>
+  </div>
+</BaseLayout>

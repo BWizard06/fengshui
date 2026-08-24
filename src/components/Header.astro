@@ -1,0 +1,78 @@
+---
+import { Image, getImage } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import MobileMenu from './MobileMenu';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+import { routes } from '../i18n/routes';
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const items = routes.map((route) => ({
+  label: t.nav[route.key],
+  href: localizePath(route.path, locale),
+  active: route.path === path,
+}));
+
+const menuLogo = await getImage({ src: logo, width: 220, format: 'webp' });
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-line/55 bg-cream/95 backdrop-blur-[10px]"
+  transition:persist
+>
+  <div class="wrap flex max-w-[1240px] items-center justify-between gap-6 py-1.5 desk:py-2.5">
+    <a href={localizePath('/', locale)} class="flex-none" aria-label={t.site.logoAlt}>
+      <Image
+        src={logo}
+        alt={t.site.logoAlt}
+        widths={[110, 220]}
+        sizes="110px"
+        class="h-[54px] w-auto desk:h-[78px]"
+        loading="eager"
+        layout="none"
+      />
+    </a>
+
+    <nav class="hidden desk:block" aria-label={t.site.name}>
+      <ul class="flex flex-wrap items-center gap-[26px]">
+        {
+          items.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={item.active ? 'page' : undefined}
+                class:list={[
+                  'block border-b px-px pt-1.5 pb-[5px] text-[0.71875rem] font-medium tracking-[0.1375rem] uppercase no-underline transition-colors hover:text-taupe',
+                  item.active ? 'border-blush text-taupe' : 'border-transparent text-mute',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <MobileMenu
+      client:load
+      items={items}
+      logoSrc={menuLogo.src}
+      logoAlt={t.site.logoAlt}
+      labels={{
+        open: t.actions.openMenu,
+        close: t.actions.closeMenu,
+        cta: t.actions.bookIntro,
+        tagline: t.menu.tagline,
+      }}
+      ctaHref={localizePath('/contact', locale)}
+    />
+  </div>
+</header>

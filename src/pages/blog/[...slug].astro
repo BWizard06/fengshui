@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { htmlLang, localizePath, resolveLocale, useTranslations } from '../../i18n';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+};
+
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+const { Content } = await render(post);
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+}).format(post.data.publishDate);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} path={`/blog/${post.id}`}>
+  <article class="wrap max-w-[820px] pt-8 pb-11 desk:pt-16 desk:pb-24">
+    <header class="mb-7 text-center desk:mb-12">
+      <p class="mb-2.5 eyebrow text-sage">{publishedOn}</p>
+      <h1 class="text-h1">{post.data.title}</h1>
+      <p class="mx-auto mt-3 max-w-[560px] text-lead font-light">{post.data.description}</p>
+    </header>
+
+    {
+      post.data.cover && (
+        <Image
+          src={post.data.cover}
+          alt={post.data.coverAlt ?? ''}
+          widths={[420, 720, 1040]}
+          sizes="(min-width: 900px) 820px, 100vw"
+          class="mb-7 block aspect-4/3 w-full rounded-2xl object-cover shadow-card desk:mb-12 desk:rounded-[18px]"
+          loading="eager"
+        />
+      )
+    }
+
+    <div class="prose-fs">
+      <Content />
+    </div>
+
+    <a
+      href={localizePath('/blog', locale)}
+      class="mt-9 inline-block border-b border-blush pb-0.5 text-[0.71875rem] font-medium tracking-[0.125rem] uppercase no-underline desk:mt-14 desk:text-xs"
+    >
+      {t.blog.backToOverview}
+    </a>
+  </article>
+</BaseLayout>

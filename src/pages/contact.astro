@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.meta.contact.title} description={t.meta.contact.description} path="/contact">
+  <div class="wrap max-w-[1100px] pt-8 pb-11 desk:pt-16 desk:pb-24">
+    <div
+      class="grid items-start gap-0 desk:grid-cols-2 desk:grid-rows-[auto_1fr] desk:gap-x-18 desk:gap-y-0"
+    >
+      <div class="desk:col-start-1 desk:row-start-1">
+        <p class="script-accent text-script">{t.contact.eyebrow}</p>
+        <h1 class="mt-1 mb-4 text-h1 desk:mt-1.5 desk:mb-[22px]">{t.contact.title}</h1>
+        <p class="mb-4 text-body font-light">{t.contact.paragraphs[0]}</p>
+        <p class="mb-[26px] text-body font-light desk:mb-[34px]">{t.contact.paragraphs[1]}</p>
+      </div>
+
+      <div
+        class="rounded-[20px] border border-blush/42 bg-white px-5 py-[26px] shadow-lift desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:px-[38px] desk:py-10"
+      >
+        <form class="flex flex-col gap-4 desk:gap-[18px]">
+          <div>
+            <label
+              for="contact-name"
+              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
+            >
+              {t.contact.form.name}
+            </label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              class="field-input"
+            />
+          </div>
+          <div>
+            <label
+              for="contact-email"
+              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
+            >
+              {t.contact.form.email}
+            </label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              class="field-input"
+            />
+          </div>
+          <div>
+            <label
+              for="contact-message"
+              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
+            >
+              {t.contact.form.message}
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              class="min-h-[117px] field-input resize-y desk:min-h-[134px]"></textarea>
+          </div>
+          <button
+            type="submit"
+            class="rounded-full bg-sage px-5 py-4 text-center text-[0.71875rem] font-medium tracking-[0.125rem] text-cream uppercase transition-colors hover:bg-sage-deep desk:px-[30px] desk:py-[15px] desk:text-xs"
+          >
+            {t.actions.sendMessage}
+          </button>
+        </form>
+      </div>
+
+      <div
+        class="mt-7 border-t border-line/55 pt-[22px] desk:col-start-1 desk:row-start-2 desk:mt-0 desk:pt-6"
+      >
+        <p class="mb-1.5 eyebrow text-sage desk:mb-2">{t.contact.addressLabel}</p>
+        <p class="text-sm leading-[2] font-light text-taupe">
+          {t.contact.address[0]}<br />{t.contact.address[1]}
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

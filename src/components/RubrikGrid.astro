@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import rosa from '../assets/images/logos/rosa.png';
+import sage from '../assets/images/logos/sage.png';
+import sand from '../assets/images/logos/sand.png';
+import taupe from '../assets/images/logos/taupe.png';
+import brown from '../assets/images/logos/brown.png';
+import green from '../assets/images/logos/green.png';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+import { routePath, rubrikOrder, type RubrikKey } from '../i18n/routes';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const icons: Record<RubrikKey, ImageMetadata> = {
+  about: rosa,
+  fengShui: sage,
+  offer: sand,
+  blog: taupe,
+  contact: brown,
+  partners: green,
+};
+---
+
+<ul
+  class="grid grid-cols-2 gap-3 sm:grid-cols-3 desk:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] desk:gap-[18px]"
+>
+  {
+    rubrikOrder.map((key) => (
+      <li class="contents">
+        <a
+          href={localizePath(routePath[key], locale)}
+          class="flex flex-col items-center gap-2.5 rounded-2xl border border-line/55 bg-white px-3 pt-5 pb-[18px] text-center no-underline transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-soft desk:gap-3.5 desk:px-[18px] desk:pt-[26px] desk:pb-[22px]"
+        >
+          <span class="flex size-14 overflow-hidden rounded-full desk:size-[72px]">
+            <Image
+              src={icons[key]}
+              alt=""
+              widths={[112, 160]}
+              sizes="72px"
+              class="size-full object-cover"
+              loading="lazy"
+            />
+          </span>
+          <span class="font-serif text-serif-sm font-semibold text-taupe">{t.navShort[key]}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

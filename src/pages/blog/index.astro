@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { htmlLang, localizePath, resolveLocale, useTranslations } from '../../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={t.meta.blog.title} description={t.meta.blog.description} path="/blog">
+  <div class="wrap max-w-[1100px] pt-8 pb-11 desk:pt-16 desk:pb-24">
+    <PageIntro
+      eyebrow={t.blog.eyebrow}
+      title={t.blog.title}
+      lead={t.blog.lead}
+      class="mb-7 desk:mb-14"
+    />
+
+    {
+      posts.length > 0 ? (
+        <ul class="flex flex-col gap-[18px] desk:grid desk:grid-cols-3 desk:gap-6">
+          {posts.map((post) => (
+            <li class="overflow-hidden rounded-[18px] border border-line/55 bg-white">
+              <a href={localizePath(`/blog/${post.id}`, locale)} class="block no-underline">
+                {post.data.cover && (
+                  <Image
+                    src={post.data.cover}
+                    alt={post.data.coverAlt ?? ''}
+                    widths={[340, 520, 700]}
+                    sizes="(min-width: 900px) 340px, 100vw"
+                    class="block aspect-4/3 w-full object-cover"
+                    loading="lazy"
+                  />
+                )}
+                <div class="px-5 pt-5 pb-6 desk:px-[26px] desk:pt-[26px] desk:pb-[30px]">
+                  <p class="mb-2 eyebrow text-sage desk:mb-2.5">
+                    {dateFormatter.format(post.data.publishDate)}
+                  </p>
+                  <p class="mb-2 font-serif text-serif-md font-semibold text-taupe desk:mb-2.5">
+                    {post.data.title}
+                  </p>
+                  <p class="text-body-sm font-light text-mute">{post.data.description}</p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="mx-auto max-w-[620px] rounded-[18px] border border-line/55 bg-white px-6 py-10 text-center desk:px-10 desk:py-14">
+          <span class="mx-auto mb-5 rule-line" />
+          <p class="mb-2.5 font-serif text-serif-lg font-semibold text-taupe">
+            {t.blog.empty.title}
+          </p>
+          <p class="text-body-sm font-light text-mute">{t.blog.empty.text}</p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
