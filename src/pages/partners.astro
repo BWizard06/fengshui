@@ -27,17 +27,21 @@ const linkClass =
   <div class="wrap max-w-[820px] pt-8 pb-11 desk:pt-16 desk:pb-24">
     <PageIntro eyebrow={t.partners.eyebrow} title={t.partners.title} class="mb-7 desk:mb-14" />
 
-    <ul class="flex flex-col gap-[18px] desk:gap-6">
+    <ul class="flex flex-col gap-[18px] desk:gap-6" data-reveal-group>
       <li class={cardClass}>
         <div class="desk:flex desk:items-center desk:gap-[30px]">
-          <Image
-            src={brunner}
-            alt={cecile.imageAlt ?? ''}
-            widths={[380, 560, 760]}
-            sizes="(min-width: 900px) 190px, 100vw"
-            class="mb-[18px] block aspect-4/3 w-full rounded-xl object-cover desk:mb-0 desk:aspect-square desk:size-[190px] desk:flex-none"
-            loading="eager"
-          />
+          <div
+            class="zoom-frame mb-[18px] w-full rounded-xl desk:mb-0 desk:size-[190px] desk:flex-none"
+          >
+            <Image
+              src={brunner}
+              alt={cecile.imageAlt ?? ''}
+              widths={[380, 560, 760]}
+              sizes="(min-width: 900px) 190px, 100vw"
+              class="block aspect-4/3 w-full object-cover desk:aspect-square desk:h-full"
+              loading="eager"
+            />
+          </div>
           <div class="desk:min-w-[260px] desk:flex-1">
             <p class={nameClass}>{cecile.name}</p>
             <p class={roleClass}>{cecile.role}</p>
@@ -66,14 +70,16 @@ const linkClass =
         ].map(({ entry, image }) => (
           <li class={cardClass}>
             <div class="grid grid-cols-[88px_1fr] items-center gap-x-4 gap-y-0 desk:grid-cols-[170px_1fr] desk:gap-x-[30px]">
-              <Image
-                src={image}
-                alt={entry.imageAlt ?? ''}
-                widths={[180, 340, 520]}
-                sizes="(min-width: 900px) 170px, 88px"
-                class="h-[98px] w-[88px] rounded-xl object-cover object-top desk:row-span-2 desk:h-[190px] desk:w-[170px]"
-                loading="lazy"
-              />
+              <div class="zoom-frame h-[98px] w-[88px] rounded-xl desk:row-span-2 desk:h-[190px] desk:w-[170px]">
+                <Image
+                  src={image}
+                  alt={entry.imageAlt ?? ''}
+                  widths={[180, 340, 520]}
+                  sizes="(min-width: 900px) 170px, 88px"
+                  class="block h-full w-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
               <div>
                 <p class={nameClass}>{entry.name}</p>
                 <p class={roleClass}>{entry.role}</p>

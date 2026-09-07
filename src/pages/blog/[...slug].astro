@@ -26,7 +26,7 @@ const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
 
 <BaseLayout title={post.data.title} description={post.data.description} path={`/blog/${post.id}`}>
   <article class="wrap max-w-[820px] pt-8 pb-11 desk:pt-16 desk:pb-24">
-    <header class="mb-7 text-center desk:mb-12">
+    <header class="mb-7 text-center desk:mb-12" data-reveal-group>
       <p class="mb-2.5 eyebrow text-sage">{publishedOn}</p>
       <h1 class="text-h1">{post.data.title}</h1>
       <p class="mx-auto mt-3 max-w-[560px] text-lead font-light">{post.data.description}</p>
@@ -34,18 +34,20 @@ const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
 
     {
       post.data.cover && (
-        <Image
-          src={post.data.cover}
-          alt={post.data.coverAlt ?? ''}
-          widths={[420, 720, 1040]}
-          sizes="(min-width: 900px) 820px, 100vw"
-          class="mb-7 block aspect-4/3 w-full rounded-2xl object-cover shadow-card desk:mb-12 desk:rounded-[18px]"
-          loading="eager"
-        />
+        <div class="zoom-frame mb-7 w-full rounded-2xl shadow-card desk:mb-12 desk:rounded-[18px]">
+          <Image
+            src={post.data.cover}
+            alt={post.data.coverAlt ?? ''}
+            widths={[420, 720, 1040]}
+            sizes="(min-width: 900px) 820px, 100vw"
+            class="block aspect-4/3 w-full object-cover"
+            loading="eager"
+          />
+        </div>
       )
     }
 
-    <div class="prose-fs">
+    <div class="prose-fs" data-reveal-group>
       <Content />
     </div>
 

@@ -26,10 +26,12 @@ const icons: Record<RubrikKey, ImageMetadata> = {
   class="grid grid-cols-2 gap-3 sm:grid-cols-3 desk:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] desk:gap-[18px]"
 >
   {
-    rubrikOrder.map((key) => (
+    rubrikOrder.map((key, index) => (
       <li class="contents">
         <a
           href={localizePath(routePath[key], locale)}
+          data-reveal
+          style={`--reveal-delay: calc(${index} * var(--reveal-stagger))`}
           class="flex flex-col items-center gap-2.5 rounded-2xl border border-line/55 bg-white px-3 pt-5 pb-[18px] text-center no-underline transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-soft desk:gap-3.5 desk:px-[18px] desk:pt-[26px] desk:pb-[22px]"
         >
           <span class="flex size-14 overflow-hidden rounded-full desk:size-[72px]">

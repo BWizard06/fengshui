@@ -15,16 +15,23 @@ const t = useTranslations(locale);
   <div class="wrap max-w-[1240px] pt-8 pb-11 desk:pt-16 desk:pb-24">
     <PageIntro eyebrow={t.about.eyebrow} title={t.about.title} class="mb-7 desk:mb-14" />
 
-    <div class="grid items-center gap-0 desk:grid-cols-[0.82fr_1.18fr] desk:gap-16">
+    <div
+      class="grid items-center gap-0 desk:grid-cols-[0.82fr_1.18fr] desk:gap-16"
+      data-reveal-group
+    >
       <figure class="m-0 mb-7 desk:mb-0">
-        <Image
-          src={portrait}
-          alt={t.about.portraitAlt}
-          widths={[420, 640, 980]}
-          sizes="(min-width: 900px) 480px, 100vw"
-          class="block aspect-30/37 w-full rounded-t-[150px] rounded-b-[20px] object-cover object-[38%_center] shadow-card desk:aspect-10/13 desk:rounded-t-[220px] desk:rounded-b-3xl"
-          loading="eager"
-        />
+        <div
+          class="zoom-frame w-full rounded-t-[150px] rounded-b-[20px] shadow-card desk:rounded-t-[220px] desk:rounded-b-3xl"
+        >
+          <Image
+            src={portrait}
+            alt={t.about.portraitAlt}
+            widths={[420, 640, 980]}
+            sizes="(min-width: 900px) 480px, 100vw"
+            class="block aspect-30/37 w-full object-cover object-[38%_center] desk:aspect-10/13"
+            loading="eager"
+          />
+        </div>
         <figcaption
           class="mt-3.5 text-center font-serif text-[1.1875rem] text-mute italic desk:mt-[18px] desk:text-[1.375rem]"
         >
@@ -38,18 +45,23 @@ const t = useTranslations(locale);
 
     <div
       class="mt-0 grid items-center gap-0 desk:mt-16 desk:grid-cols-[1.12fr_0.88fr] desk:gap-x-16 desk:gap-y-0"
+      data-reveal-group
     >
       <p class="text-body font-light desk:col-start-1 desk:row-start-1 desk:mb-0">
         {t.about.middleLead}
       </p>
-      <Image
-        src={warmRoom}
-        alt={t.about.roomAlt}
-        widths={[420, 640, 1040]}
-        sizes="(min-width: 900px) 520px, 100vw"
-        class="my-6 block aspect-1024/682 w-full rounded-2xl object-cover shadow-card desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:my-0 desk:rounded-[18px]"
-        loading="lazy"
-      />
+      <div
+        class="zoom-frame my-6 w-full rounded-2xl shadow-card desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:my-0 desk:rounded-[18px]"
+      >
+        <Image
+          src={warmRoom}
+          alt={t.about.roomAlt}
+          widths={[420, 640, 1040]}
+          sizes="(min-width: 900px) 520px, 100vw"
+          class="block aspect-1024/682 w-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <div class="desk:col-start-1 desk:row-start-2 desk:mt-[18px]">
         {
           t.about.middle.map((paragraph, index) => (
@@ -59,21 +71,26 @@ const t = useTranslations(locale);
       </div>
     </div>
 
-    <blockquote class="mx-auto my-7 max-w-[1020px] px-5 py-1.5 text-center desk:my-16">
+    <blockquote class="mx-auto my-7 max-w-[1020px] px-5 py-1.5 text-center desk:my-16" data-reveal>
       <span class="mx-auto mb-5 rule-line desk:mb-[26px]"></span>
       <p class="font-serif text-quote font-medium text-rose italic">{t.about.quote}</p>
       <span class="mx-auto mt-5 rule-line desk:mt-[26px]"></span>
     </blockquote>
 
-    <div class="grid items-center gap-0 desk:grid-cols-[0.88fr_1.12fr] desk:gap-16">
-      <Image
-        src={duneGrass}
-        alt={t.about.duneAlt}
-        widths={[420, 640, 1040]}
-        sizes="(min-width: 900px) 520px, 100vw"
-        class="mb-6 block aspect-20/17 w-full rounded-2xl object-cover shadow-card desk:mb-0 desk:rounded-[18px]"
-        loading="lazy"
-      />
+    <div
+      class="grid items-center gap-0 desk:grid-cols-[0.88fr_1.12fr] desk:gap-16"
+      data-reveal-group
+    >
+      <div class="zoom-frame mb-6 w-full rounded-2xl shadow-card desk:mb-0 desk:rounded-[18px]">
+        <Image
+          src={duneGrass}
+          alt={t.about.duneAlt}
+          widths={[420, 640, 1040]}
+          sizes="(min-width: 900px) 520px, 100vw"
+          class="block aspect-20/17 w-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <div>
         {t.about.rest.map((paragraph) => <p class="mb-4 text-body font-light">{paragraph}</p>)}
       </div>
@@ -81,6 +98,7 @@ const t = useTranslations(locale);
 
     <section
       class="mx-auto mt-7 max-w-[996px] rounded-[20px] border border-line/55 bg-blush/16 px-[22px] pt-[30px] pb-[26px] desk:mt-16 desk:rounded-[22px] desk:px-12 desk:py-13"
+      data-reveal
     >
       <h2 class="mb-[18px] text-center text-h2-sm desk:mb-[34px]">{t.about.education.title}</h2>
       <div

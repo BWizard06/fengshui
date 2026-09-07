@@ -153,6 +153,20 @@ export default {
   fengShui: {
     eyebrow: 'Wind und Wasser',
     title: 'Was ist Feng Shui?',
+    toc: {
+      title: 'Inhalt',
+      open: 'Inhaltsverzeichnis öffnen',
+      close: 'Inhaltsverzeichnis schliessen',
+      items: [
+        { id: 'einfuehrung', label: 'Einführung' },
+        { id: 'geschichte', label: 'Geschichtliche Bauten' },
+        { id: 'schulen', label: 'Form- und Kompassschule' },
+        { id: 'schutzposition', label: 'Schutzposition' },
+        { id: 'ba-gua', label: 'Das Ba Gua' },
+        { id: 'fliegende-sterne', label: 'Fliegende Sterne' },
+        { id: 'yin-yang', label: 'Yin und Yang' },
+      ],
+    },
     intro: [
       'Feng Shui ist weit mehr als ein Einrichtungstrend: Es ist eine jahrtausendealte chinesische Lehre, die sich mit dem Zusammenspiel zwischen dem Menschen und dem ihn umgebenden Energiefeld beschäftigt. Dieses Feld – oft auch als «Matrix» bezeichnet – wird einerseits von uns selbst beeinflusst und wirkt andererseits ständig auf uns zurück. Ganz im Sinne der Prinzipien «wie innen, so aussen» und «wie aussen, so innen» befinden wir uns in einem fortwährenden Dialog mit unserer Umgebung.',
       'Wenn Räume bewusst gestaltet werden, können sie zu einem spürbaren Ort von Ruhe, Klarheit und innerer Stabilität werden. Farben, Formen und Materialien sind dabei weit mehr als dekorative Elemente – sie sind Ausdruck und Träger von Energie. Im Feng Shui werden sie gezielt eingesetzt, um den Energiefluss im Raum zu harmonisieren, zu lenken und in Balance zu bringen. So entsteht eine Atmosphäre, die nicht nur ästhetisch wirkt, sondern tief im Inneren berührt. Ein harmonisches Umfeld kann uns zurück in unsere Mitte führen, Kraft schenken und Räume schaffen, in denen wir uns wirklich entfalten können.',

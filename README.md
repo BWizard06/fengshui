@@ -4,14 +4,14 @@ Website für die Feng-Shui-Beratung von Kati Schepis-Buck, Neftenbach.
 
 ## Stack
 
-| Bereich          | Technologie                          |
-| ---------------- | ------------------------------------ |
-| Framework        | Astro 7 (statischer Export)          |
-| Interaktivität   | React 19 als Astro Islands           |
-| Styling          | Tailwind CSS 4 mit Design-Tokens     |
-| Schriften        | Fontsource, selbst gehostet          |
-| Bilder           | Astro Assets mit Sharp, AVIF/WebP    |
-| Sprache          | TypeScript 6                         |
+| Bereich        | Technologie                       |
+| -------------- | --------------------------------- |
+| Framework      | Astro 7 (statischer Export)       |
+| Interaktivität | React 19 als Astro Islands        |
+| Styling        | Tailwind CSS 4 mit Design-Tokens  |
+| Schriften      | Fontsource, selbst gehostet       |
+| Bilder         | Astro Assets mit Sharp, AVIF/WebP |
+| Sprache        | TypeScript 6                      |
 
 ## Entwicklung
 
@@ -45,15 +45,15 @@ src/
 
 ## Seiten
 
-| Route         | Inhalt            |
-| ------------- | ----------------- |
-| `/`           | Startseite        |
-| `/about`      | Über mich         |
-| `/feng-shui`  | Was ist Feng Shui |
-| `/offer`      | Angebot           |
-| `/blog`       | Blog              |
-| `/contact`    | Kontakt           |
-| `/partners`   | Partner           |
+| Route        | Inhalt            |
+| ------------ | ----------------- |
+| `/`          | Startseite        |
+| `/about`     | Über mich         |
+| `/feng-shui` | Was ist Feng Shui |
+| `/offer`     | Angebot           |
+| `/blog`      | Blog              |
+| `/contact`   | Kontakt           |
+| `/partners`  | Partner           |
 
 ## Mehrsprachigkeit
 
@@ -67,6 +67,40 @@ Sprachen vorbereitet:
 
 Deutsche URLs bleiben unverändert, weitere Sprachen erscheinen unter `/en/about` und so fort.
 `localizePath` erzeugt alle Links automatisch passend zur aktiven Sprache.
+
+## Bewegung
+
+Alle Inhalte blenden beim Scrollen sanft von unten ein. Ein Element wird zum Ziel, sobald es
+`data-reveal` trägt; steht `data-reveal-group` an einem Container, animieren dessen direkte
+Kinder nacheinander mit leichtem Versatz. `data-reveal-skip` nimmt ein Element aus – im Einsatz
+beim Hero-Bild, damit der grösste sichtbare Inhalt sofort steht.
+
+Fotos zoomen bei Hover um wenige Prozent heran. Dazu wird das Bild in ein Element mit
+`zoom-frame` gelegt, das Radius, Schatten und Beschnitt übernimmt. Liegt der Auslöser weiter
+aussen, etwa bei einer ganz verlinkten Karte, bekommt der Auslöser zusätzlich `zoom-host`.
+
+Tempo, Weg und Zoomstärke stehen als Variablen am Anfang von `src/styles/global.css`
+(`--reveal-shift`, `--reveal-duration`, `--reveal-stagger`, `--zoom-scale`, `--zoom-duration`).
+Wer im Betriebssystem reduzierte Bewegung eingestellt hat, sieht alles sofort und ohne Zoom.
+Ohne JavaScript bleibt ebenfalls alles sichtbar.
+
+## Inhaltsverzeichnis
+
+Die Feng-Shui-Seite hat ein Inhaltsverzeichnis: am Desktop ab 1280px eine feste Leiste links
+neben dem Text, darunter ein Button unten rechts, der ein Sheet öffnet. Der gerade gelesene
+Abschnitt wird hervorgehoben.
+
+Ein- und ausschalten über `src/config.ts`:
+
+```ts
+export const features = {
+  fengShuiTableOfContents: true,
+};
+```
+
+Auf `false` verschwinden Leiste und Button vollständig; die Sprungmarken im Text bleiben
+erhalten, sodass Links wie `/feng-shui#ba-gua` weiter funktionieren. Kapitel und Beschriftungen
+stehen unter `fengShui.toc` in `src/i18n/de.ts`, die `id` dort muss zur `id` im Markup passen.
 
 ## Design-System
 

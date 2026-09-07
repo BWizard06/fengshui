@@ -23,10 +23,7 @@ const items = routes.map((route) => ({
 const menuLogo = await getImage({ src: logo, width: 220, format: 'webp' });
 ---
 
-<header
-  class="sticky top-0 z-50 border-b border-line/55 bg-cream/95 backdrop-blur-[10px]"
-  transition:persist
->
+<header class="sticky top-0 z-50 border-b border-line/55 bg-cream/95 backdrop-blur-[10px]">
   <div class="wrap flex max-w-[1240px] items-center justify-between gap-6 py-1.5 desk:py-2.5">
     <a href={localizePath('/', locale)} class="flex-none" aria-label={t.site.logoAlt}>
       <Image

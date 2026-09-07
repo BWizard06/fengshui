@@ -10,7 +10,7 @@ interface Props {
 const { eyebrow, title, lead, align = 'center', class: className } = Astro.props;
 ---
 
-<div class:list={[align === 'center' ? 'text-center' : 'text-left', className]}>
+<div class:list={[align === 'center' ? 'text-center' : 'text-left', className]} data-reveal-group>
   <p class="script-accent text-script">{eyebrow}</p>
   <h1 class="mt-1 text-h1 desk:mt-1.5">{title}</h1>
   {

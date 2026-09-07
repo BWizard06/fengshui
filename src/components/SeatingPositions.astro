@@ -12,7 +12,7 @@ const badgeTone = { ok: 'bg-approve', warn: 'bg-caution' } as const;
 ---
 
 <div class="mt-8 desk:mt-14">
-  <p class="mx-auto mb-5 flex items-center justify-center gap-2.5 desk:mb-7 desk:gap-3">
+  <p class="mx-auto mb-5 flex items-center justify-center gap-2.5 desk:mb-7 desk:gap-3" data-reveal>
     <span class="inline-block h-[7px] w-6 flex-none rounded-[4px] bg-guide desk:h-2 desk:w-[26px]"
     ></span>
     <span class="text-[0.75rem] font-light text-sage desk:text-[0.8125rem]">
@@ -22,18 +22,21 @@ const badgeTone = { ok: 'bg-approve', warn: 'bg-caution' } as const;
 
   <ul
     class="mx-auto flex max-w-[820px] flex-col gap-4 desk:grid desk:grid-cols-2 desk:items-stretch desk:gap-7"
+    data-reveal-group
   >
     {
       t.fengShui.seating.positions.map((position, index) => (
         <li class="flex h-full flex-col overflow-hidden rounded-2xl border border-line/55 bg-white shadow-soft">
-          <Image
-            src={images[index]}
-            alt={position.title}
-            widths={[380, 560, 760]}
-            sizes="(min-width: 900px) 380px, 100vw"
-            class="block aspect-1139/1314 w-full object-cover"
-            loading="lazy"
-          />
+          <div class="zoom-frame w-full">
+            <Image
+              src={images[index]}
+              alt={position.title}
+              widths={[380, 560, 760]}
+              sizes="(min-width: 900px) 380px, 100vw"
+              class="block aspect-1139/1314 w-full object-cover"
+              loading="lazy"
+            />
+          </div>
           <div class="flex flex-1 items-start gap-[11px] px-[18px] pt-[18px] pb-5 desk:gap-3 desk:px-[22px] desk:pt-[22px] desk:pb-[26px]">
             <span
               class:list={[

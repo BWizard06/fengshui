@@ -11,7 +11,7 @@ const t = useTranslations(locale);
     <div
       class="grid items-start gap-0 desk:grid-cols-2 desk:grid-rows-[auto_1fr] desk:gap-x-18 desk:gap-y-0"
     >
-      <div class="desk:col-start-1 desk:row-start-1">
+      <div class="desk:col-start-1 desk:row-start-1" data-reveal-group>
         <p class="script-accent text-script">{t.contact.eyebrow}</p>
         <h1 class="mt-1 mb-4 text-h1 desk:mt-1.5 desk:mb-[22px]">{t.contact.title}</h1>
         <p class="mb-4 text-body font-light">{t.contact.paragraphs[0]}</p>
@@ -20,6 +20,7 @@ const t = useTranslations(locale);
 
       <div
         class="rounded-[20px] border border-blush/42 bg-white px-5 py-[26px] shadow-lift desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:px-[38px] desk:py-10"
+        data-reveal
       >
         <form class="flex flex-col gap-4 desk:gap-[18px]">
           <div>
@@ -76,6 +77,7 @@ const t = useTranslations(locale);
 
       <div
         class="mt-7 border-t border-line/55 pt-[22px] desk:col-start-1 desk:row-start-2 desk:mt-0 desk:pt-6"
+        data-reveal
       >
         <p class="mb-1.5 eyebrow text-sage desk:mb-2">{t.contact.addressLabel}</p>
         <p class="text-sm leading-[2] font-light text-taupe">

@@ -58,6 +58,12 @@ const fullTitle = path === '/' ? title : `${title} · ${t.site.shortName}`;
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <ClientRouter />
+
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reveal-ready');
+      }
+    </script>
   </head>
   <body class="flex min-h-dvh flex-col bg-cream">
     <Header path={path} />
@@ -65,5 +71,81 @@ const fullTitle = path === '/' ? title : `${title} · ${t.site.shortName}`;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      import type { TransitionBeforeSwapEvent } from 'astro:transitions/client';
+
+      const STAGGER_CAP = 6;
+
+      const prefersReducedMotion = () =>
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const revealAll = () => {
+        const groupChildren = [...document.querySelectorAll('[data-reveal-group]')].flatMap(
+          (group) => [...group.children]
+        );
+        const targets = [...document.querySelectorAll('[data-reveal]'), ...groupChildren].filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement && !el.hasAttribute('data-reveal-skip')
+        );
+
+        if (prefersReducedMotion()) {
+          targets.forEach((el) => el.setAttribute('data-revealed', ''));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.setAttribute('data-revealed', '');
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -60px 0px', threshold: 0 }
+        );
+
+        targets.forEach((el) => {
+          const parent = el.parentElement;
+          if (
+            parent?.hasAttribute('data-reveal-group') &&
+            !el.style.getPropertyValue('--reveal-delay')
+          ) {
+            const index = [...parent.children].indexOf(el);
+            const steps = Math.min(index, STAGGER_CAP);
+            el.style.setProperty('--reveal-delay', `calc(${steps} * var(--reveal-stagger))`);
+          }
+        });
+
+        const revealRemaining = () => {
+          const reachedBottom =
+            window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+          if (!reachedBottom) return;
+          targets.forEach((el) => {
+            if (el.hasAttribute('data-revealed')) return;
+            el.setAttribute('data-revealed', '');
+            observer.unobserve(el);
+          });
+          window.removeEventListener('scroll', revealRemaining);
+        };
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            targets.forEach((el) => observer.observe(el));
+            window.addEventListener('scroll', revealRemaining, { passive: true });
+            revealRemaining();
+          });
+        });
+      };
+
+      document.addEventListener('astro:before-swap', (event) => {
+        if (prefersReducedMotion()) return;
+        (event as TransitionBeforeSwapEvent).newDocument.documentElement.classList.add(
+          'reveal-ready'
+        );
+      });
+
+      document.addEventListener('astro:page-load', revealAll);
+    </script>
   </body>
 </html>

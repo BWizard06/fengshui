@@ -6,6 +6,7 @@ import TrigramGrid from '../components/TrigramGrid.astro';
 import SeatingPositions from '../components/SeatingPositions.astro';
 import YinYangTable from '../components/YinYangTable.astro';
 import BaguaExplorer from '../components/BaguaExplorer';
+import TableOfContents from '../components/TableOfContents';
 import lakePanorama from '../assets/images/lake-panorama.jpg';
 import harmoniousRoom from '../assets/images/harmonious-room.jpg';
 import fountain from '../assets/images/fountain.jpg';
@@ -23,6 +24,7 @@ import kan from '../assets/images/bagua/kan.png';
 import qian from '../assets/images/bagua/qian.png';
 import { baguaAccentHex, type BaguaKey } from '../lib/bagua';
 import { localizePath, resolveLocale, useTranslations } from '../i18n';
+import { features } from '../config';
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -51,6 +53,8 @@ const areas = await Promise.all(
 );
 
 const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format: 'webp' });
+
+const anchor = 'scroll-mt-24 desk:scroll-mt-32';
 ---
 
 <BaseLayout
@@ -58,13 +62,37 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
   description={t.meta.fengShui.description}
   path="/feng-shui"
 >
-  <div class="wrap max-w-[820px] pt-8 pb-2 desk:flow-root desk:pt-16 desk:pb-10">
+  {
+    features.fengShuiTableOfContents && (
+      <TableOfContents
+        client:load
+        items={t.fengShui.toc.items}
+        labels={{
+          title: t.fengShui.toc.title,
+          open: t.fengShui.toc.open,
+          close: t.fengShui.toc.close,
+        }}
+      />
+    )
+  }
+
+  <div
+    id={t.fengShui.toc.items[0].id}
+    class:list={['wrap max-w-[820px] pt-8 pb-2 desk:flow-root desk:pt-16 desk:pb-10', anchor]}
+  >
     <PageIntro eyebrow={t.fengShui.eyebrow} title={t.fengShui.title} class="mb-[26px] desk:mb-12" />
 
-    {t.fengShui.intro.map((paragraph) => <p class="mb-4 text-body font-light">{paragraph}</p>)}
+    {
+      t.fengShui.intro.map((paragraph) => (
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
+      ))
+    }
 
     <blockquote
       class="relative my-[26px] overflow-hidden rounded-[18px] bg-cover bg-center px-6 py-11 text-center shadow-card desk:my-[34px] desk:px-11 desk:py-18"
+      data-reveal
       style={`background-image: linear-gradient(rgb(58 68 74 / 0.52), rgb(46 54 60 / 0.6)), url(${quoteBackground.src});`}
     >
       <span class="mx-auto mb-[18px] block h-px w-12 bg-cream/60 desk:mb-[26px] desk:w-[60px]"
@@ -78,49 +106,76 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
       ></span>
     </blockquote>
 
-    <Image
-      src={harmoniousRoom}
-      alt={t.fengShui.roomAlt}
-      widths={[340, 500, 700]}
-      sizes="(min-width: 900px) 322px, 100vw"
-      class="mb-6 block aspect-square w-full rounded-2xl object-cover shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%] desk:rounded-2xl"
-      loading="lazy"
-    />
+    <div
+      class="zoom-frame mb-6 w-full rounded-2xl shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%]"
+      data-reveal
+    >
+      <Image
+        src={harmoniousRoom}
+        alt={t.fengShui.roomAlt}
+        widths={[340, 500, 700]}
+        sizes="(min-width: 900px) 322px, 100vw"
+        class="block aspect-square w-full object-cover"
+        loading="lazy"
+      />
+    </div>
 
-    {t.fengShui.qi.map((paragraph) => <p class="mb-4 text-body font-light">{paragraph}</p>)}
-    <p class="mb-4 text-body font-light">
+    {
+      t.fengShui.qi.map((paragraph) => (
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
+      ))
+    }
+    <p class="mb-4 text-body font-light" data-reveal>
       {t.fengShui.qiClosing}{' '}
       <a href={offerHref} class="border-b border-blush text-rose no-underline">
         {t.actions.moreOnOffer}
       </a>
     </p>
 
-    <h2 class="clear-both mt-9 mb-4 text-h2-sm desk:mt-14 desk:mb-[18px]">
+    <h2
+      id={t.fengShui.toc.items[1].id}
+      class:list={['clear-both mt-9 mb-4 text-h2-sm desk:mt-14 desk:mb-[18px]', anchor]}
+      data-reveal
+    >
       {t.fengShui.history.title}
     </h2>
-    <Image
-      src={fountain}
-      alt={t.fengShui.fountainAlt}
-      widths={[340, 500, 700]}
-      sizes="(min-width: 900px) 322px, 100vw"
-      class="mb-[22px] block aspect-1024/681 w-full rounded-2xl object-cover shadow-soft desk:float-left desk:mt-1.5 desk:mr-[34px] desk:mb-5 desk:w-[322px] desk:max-w-[44%]"
-      loading="lazy"
-    />
+    <div
+      class="zoom-frame mb-[22px] w-full rounded-2xl shadow-soft desk:float-left desk:mt-1.5 desk:mr-[34px] desk:mb-5 desk:w-[322px] desk:max-w-[44%]"
+      data-reveal
+    >
+      <Image
+        src={fountain}
+        alt={t.fengShui.fountainAlt}
+        widths={[340, 500, 700]}
+        sizes="(min-width: 900px) 322px, 100vw"
+        class="block aspect-1024/681 w-full object-cover"
+        loading="lazy"
+      />
+    </div>
     {
       t.fengShui.history.paragraphs.map((paragraph) => (
-        <p class="mb-4 text-body font-light">{paragraph}</p>
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
       ))
     }
   </div>
 
-  <section class="mt-[26px] bg-blush/16 desk:mt-6">
+  <section id={t.fengShui.toc.items[2].id} class:list={['mt-[26px] bg-blush/16 desk:mt-6', anchor]}>
     <div class="wrap max-w-[1100px] py-10 desk:py-18">
-      <h2 class="mb-3 text-center text-h2-lg desk:mb-3.5">{t.fengShui.schools.title}</h2>
-      <p class="mx-auto mb-[26px] max-w-[700px] text-center text-body font-light desk:mb-11">
+      <h2 class="mb-3 text-center text-h2-lg desk:mb-3.5" data-reveal>
+        {t.fengShui.schools.title}
+      </h2>
+      <p
+        class="mx-auto mb-[26px] max-w-[700px] text-center text-body font-light desk:mb-11"
+        data-reveal
+      >
         {t.fengShui.schools.lead}
       </p>
 
-      <ul class="flex flex-col gap-4 desk:grid desk:grid-cols-2 desk:gap-6">
+      <ul class="flex flex-col gap-4 desk:grid desk:grid-cols-2 desk:gap-6" data-reveal-group>
         {
           t.fengShui.schools.cards.map((card) => (
             <li class="rounded-[18px] border border-line/55 bg-white px-[22px] py-[26px] desk:px-9 desk:py-[38px]">
@@ -135,10 +190,18 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
       </ul>
 
       <div class="mx-auto mt-9 max-w-[760px] text-center desk:mt-14">
-        <h2 class="mb-3 text-h2-sm desk:mb-3.5">{t.fengShui.protection.title}</h2>
+        <h2
+          id={t.fengShui.toc.items[3].id}
+          class:list={['mb-3 text-h2-sm desk:mb-3.5', anchor]}
+          data-reveal
+        >
+          {t.fengShui.protection.title}
+        </h2>
         <div class="mx-auto max-w-[700px] text-left">
-          <p class="mb-3 text-body font-light desk:mb-3.5">{t.fengShui.protection.lead}</p>
-          <ul class="mb-3 flex flex-col gap-2 desk:mb-3.5 desk:gap-[9px]">
+          <p class="mb-3 text-body font-light desk:mb-3.5" data-reveal>
+            {t.fengShui.protection.lead}
+          </p>
+          <ul class="mb-3 flex flex-col gap-2 desk:mb-3.5 desk:gap-[9px]" data-reveal-group>
             {
               t.fengShui.protection.items.map((item) => (
                 <li class="grid grid-cols-[auto_1fr] items-baseline gap-2.5">
@@ -150,7 +213,7 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
               ))
             }
           </ul>
-          <p class="text-body font-light">
+          <p class="text-body font-light" data-reveal>
             {t.fengShui.protection.closing}{' '}
             <a href={offerHref} class="border-b border-blush text-rose no-underline">
               {t.actions.moreOnOffer}
@@ -164,18 +227,27 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
   </section>
 
   <div class="wrap max-w-[820px] pt-10 desk:pt-18">
-    <p class="mb-[22px] text-center text-body font-light text-sage desk:mb-[30px]">
+    <p class="mb-[22px] text-center text-body font-light text-sage desk:mb-[30px]" data-reveal>
       {t.fengShui.bagua.lead}
     </p>
-    <h2 class="mb-3.5 text-h2-lg desk:mb-[18px]">{t.fengShui.bagua.title}</h2>
-    <p class="mb-4 text-body font-light">{t.fengShui.bagua.intro}</p>
+    <h2
+      id={t.fengShui.toc.items[4].id}
+      class:list={['mb-3.5 text-h2-lg desk:mb-[18px]', anchor]}
+      data-reveal
+    >
+      {t.fengShui.bagua.title}
+    </h2>
+    <p class="mb-4 text-body font-light" data-reveal>{t.fengShui.bagua.intro}</p>
 
     <TrigramGrid />
 
-    <p class="mb-5 text-body font-light desk:mb-[18px]">{t.fengShui.bagua.afterGrid}</p>
+    <p class="mb-5 text-body font-light desk:mb-[18px]" data-reveal>
+      {t.fengShui.bagua.afterGrid}
+    </p>
 
     <div
       class="mb-[22px] grid items-center gap-3.5 rounded-2xl border border-line/70 px-[18px] py-5 desk:mb-[34px] desk:grid-cols-2 desk:gap-7 desk:rounded-[18px] desk:px-[30px] desk:py-7"
+      data-reveal
     >
       <Image
         src={fiveElements}
@@ -190,10 +262,10 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
       </p>
     </div>
 
-    <p class="mb-4 text-body font-light desk:mb-2">{t.fengShui.bagua.explorePrompt}</p>
+    <p class="mb-4 text-body font-light desk:mb-2" data-reveal>{t.fengShui.bagua.explorePrompt}</p>
   </div>
 
-  <div class="wrap max-w-[1100px] pt-0 desk:pt-5">
+  <div class="wrap max-w-[1100px] pt-0 desk:pt-5" data-reveal>
     <BaguaExplorer
       client:visible
       areas={areas}
@@ -208,7 +280,7 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
   </div>
 
   <div class="wrap max-w-[820px] pt-[26px] desk:flow-root desk:pt-[34px]">
-    <p class="mb-4 text-body font-light">
+    <p class="mb-4 text-body font-light" data-reveal>
       {t.fengShui.disturbance.leadPrefix}<a
         href={t.fengShui.disturbance.linkHref}
         target="_blank"
@@ -217,62 +289,93 @@ const quoteBackground = await getImage({ src: lakePanorama, width: 1800, format:
     </p>
     {
       t.fengShui.disturbance.paragraphs.map((paragraph) => (
-        <p class="mb-4 text-body font-light">{paragraph}</p>
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
       ))
     }
-    <p class="mb-4 text-body font-light">
+    <p class="mb-4 text-body font-light" data-reveal>
       {t.fengShui.disturbance.closing}{' '}
       <a href={offerHref} class="border-b border-blush text-rose no-underline">
         {t.actions.moreOnOffer}
       </a>
     </p>
 
-    <h2 class="mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]">{t.fengShui.flyingStars.title}</h2>
+    <h2
+      id={t.fengShui.toc.items[5].id}
+      class:list={['mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]', anchor]}
+      data-reveal
+    >
+      {t.fengShui.flyingStars.title}
+    </h2>
     {
       t.fengShui.flyingStars.paragraphs.map((paragraph) => (
-        <p class="mb-4 text-body font-light">{paragraph}</p>
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
       ))
     }
-    <p class="mb-4 text-body font-light">
+    <p class="mb-4 text-body font-light" data-reveal>
       {t.fengShui.flyingStars.closing}{' '}
       <a href={offerHref} class="border-b border-blush text-rose no-underline">
         {t.actions.moreOnOffer}
       </a>
     </p>
 
-    <h2 class="mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]">{t.fengShui.yinYang.title}</h2>
-    <Image
-      src={yinYangStones}
-      alt={t.fengShui.yinYangImageAlt}
-      widths={[340, 500, 700]}
-      sizes="(min-width: 900px) 322px, 100vw"
-      class="mb-[22px] block aspect-5/4 w-full rounded-2xl object-cover shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%]"
-      loading="lazy"
-    />
+    <h2
+      id={t.fengShui.toc.items[6].id}
+      class:list={['mt-9 mb-3.5 text-h2-lg desk:mt-14 desk:mb-[18px]', anchor]}
+      data-reveal
+    >
+      {t.fengShui.yinYang.title}
+    </h2>
+    <div
+      class="zoom-frame mb-[22px] w-full rounded-2xl shadow-soft desk:float-right desk:mt-1.5 desk:mb-5 desk:ml-[34px] desk:w-[322px] desk:max-w-[44%]"
+      data-reveal
+    >
+      <Image
+        src={yinYangStones}
+        alt={t.fengShui.yinYangImageAlt}
+        widths={[340, 500, 700]}
+        sizes="(min-width: 900px) 322px, 100vw"
+        class="block aspect-5/4 w-full object-cover"
+        loading="lazy"
+      />
+    </div>
     {
       t.fengShui.yinYang.intro.map((paragraph) => (
-        <p class="mb-4 text-body font-light">{paragraph}</p>
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
       ))
     }
 
     <YinYangTable />
 
-    <Image
-      src={bedroom}
-      alt={t.fengShui.bedroomAlt}
-      widths={[280, 420, 600]}
-      sizes="(min-width: 900px) 270px, 70vw"
-      class="mx-auto mb-[22px] block aspect-683/1024 w-[70%] rounded-2xl object-cover shadow-soft desk:float-left desk:mx-0 desk:mt-1.5 desk:mr-[38px] desk:mb-5 desk:w-[270px] desk:max-w-[38%]"
-      loading="lazy"
-    />
+    <div
+      class="zoom-frame mx-auto mb-[22px] w-[70%] rounded-2xl shadow-soft desk:float-left desk:mx-0 desk:mt-1.5 desk:mr-[38px] desk:mb-5 desk:w-[270px] desk:max-w-[38%]"
+      data-reveal
+    >
+      <Image
+        src={bedroom}
+        alt={t.fengShui.bedroomAlt}
+        widths={[280, 420, 600]}
+        sizes="(min-width: 900px) 270px, 70vw"
+        class="block aspect-683/1024 w-full object-cover"
+        loading="lazy"
+      />
+    </div>
     {
       t.fengShui.yinYang.closing.map((paragraph) => (
-        <p class="mb-4 text-body font-light">{paragraph}</p>
+        <p class="mb-4 text-body font-light" data-reveal>
+          {paragraph}
+        </p>
       ))
     }
 
     <p
       class="clear-both border-t border-line/55 pt-[18px] pb-10 text-micro font-light text-mute desk:pt-[22px] desk:pb-16"
+      data-reveal
     >
       {t.fengShui.literature}
     </p>

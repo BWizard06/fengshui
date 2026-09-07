@@ -9,7 +9,10 @@ const t = useTranslations(locale);
 ---
 
 <footer class="border-t border-blush/42 bg-rose/14">
-  <div class="wrap max-w-[1240px] pt-[34px] pb-[30px] text-center desk:pt-14 desk:pb-10">
+  <div
+    class="wrap max-w-[1240px] pt-[34px] pb-[30px] text-center desk:pt-14 desk:pb-10"
+    data-reveal-group
+  >
     <a href={localizePath('/', locale)} class="inline-block" aria-label={t.site.logoAlt}>
       <Image
         src={logo}

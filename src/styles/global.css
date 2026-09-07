@@ -140,6 +140,14 @@
 }
 
 @layer base {
+  :root {
+    --reveal-shift: 14px;
+    --reveal-duration: 700ms;
+    --reveal-stagger: 70ms;
+    --zoom-scale: 1.045;
+    --zoom-duration: 900ms;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -200,6 +208,24 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html.reveal-ready [data-reveal]:not([data-reveal-skip]),
+    html.reveal-ready [data-reveal-group] > *:not([data-reveal-skip]) {
+      opacity: 0;
+      transform: translate3d(0, var(--reveal-shift), 0);
+      transition:
+        opacity var(--reveal-duration) var(--ease-gentle),
+        transform var(--reveal-duration) var(--ease-gentle);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    html.reveal-ready [data-reveal][data-revealed]:not([data-reveal-skip]),
+    html.reveal-ready [data-reveal-group] > [data-revealed]:not([data-reveal-skip]) {
+      opacity: 1;
+      transform: none;
     }
   }
 }
@@ -340,5 +366,26 @@
     width: 3.75rem;
     border: 0;
     background-color: var(--color-blush);
+  }
+}
+
+@layer components {
+  .zoom-frame {
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .zoom-frame img {
+    display: block;
+    width: 100%;
+    transition: transform var(--zoom-duration) var(--ease-gentle);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .zoom-frame:hover img,
+    .zoom-host:hover .zoom-frame img,
+    .zoom-host:focus-visible .zoom-frame img {
+      transform: scale(var(--zoom-scale));
+    }
   }
 }
