@@ -86,9 +86,15 @@ Ohne JavaScript bleibt ebenfalls alles sichtbar.
 
 ## Inhaltsverzeichnis
 
-Die Feng-Shui-Seite hat ein Inhaltsverzeichnis: am Desktop ab 1280px eine feste Leiste links
-neben dem Text, darunter ein Button unten rechts, der ein Sheet öffnet. Der gerade gelesene
-Abschnitt wird hervorgehoben.
+Die Feng-Shui-Seite hat ein Inhaltsverzeichnis: eine feste Leiste links neben dem Text, sonst
+ein Button unten rechts, der ein Sheet öffnet. Der gerade gelesene Abschnitt wird hervorgehoben.
+
+Die Leiste misst zur Laufzeit den linken Rand des breitesten Inhaltscontainers und setzt sich
+mit festem Abstand davor. Bleibt dafür zu wenig Platz, blendet sie sich aus und der Button
+übernimmt. Dadurch kann sie sich nie mit dem Inhalt überschneiden, auch wenn sich Container-
+breiten später ändern. Bei den aktuellen Breiten – der breiteste Container misst 1172px –
+erscheint die Leiste ab rund 1530px Fensterbreite. Die Werte dafür stehen als Konstanten oben
+in `src/components/TableOfContents.tsx` (`RAIL_WIDTH`, `RAIL_GAP`, `RAIL_MIN_EDGE`).
 
 Ein- und ausschalten über `src/config.ts`:
 

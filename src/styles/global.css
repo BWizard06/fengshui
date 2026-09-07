@@ -141,9 +141,9 @@
 
 @layer base {
   :root {
-    --reveal-shift: 14px;
-    --reveal-duration: 700ms;
-    --reveal-stagger: 70ms;
+    --reveal-shift: 32px;
+    --reveal-duration: 820ms;
+    --reveal-stagger: 95ms;
     --zoom-scale: 1.045;
     --zoom-duration: 900ms;
   }
@@ -195,6 +195,12 @@
     outline: 2px solid var(--color-rose);
     outline-offset: 3px;
     border-radius: 4px;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled),
+  summary {
+    cursor: pointer;
   }
 
   @media (prefers-reduced-motion: reduce) {

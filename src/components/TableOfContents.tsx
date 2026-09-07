@@ -16,14 +16,49 @@ interface Props {
 }
 
 const HEADER_OFFSET = 140;
+const RAIL_WIDTH = 132;
+const RAIL_GAP = 24;
+const RAIL_MIN_EDGE = 20;
 
 export default function TableOfContents({ items, labels }: Props) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? '');
   const [sheetOpen, setSheetOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [railLeft, setRailLeft] = useState<number | null>(null);
   const frame = useRef(0);
+  const layoutFrame = useRef(0);
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    const measure = () => {
+      const containers = [...document.querySelectorAll('main .wrap')];
+      if (containers.length === 0) {
+        setRailLeft(null);
+        return;
+      }
+
+      const contentLeft = Math.min(...containers.map((el) => el.getBoundingClientRect().left));
+      const left = contentLeft - RAIL_GAP - RAIL_WIDTH;
+      setRailLeft(left >= RAIL_MIN_EDGE ? left : null);
+    };
+
+    const onResize = () => {
+      cancelAnimationFrame(layoutFrame.current);
+      layoutFrame.current = requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener('resize', onResize);
+
+    const fonts = document.fonts;
+    fonts?.ready.then(measure);
+
+    return () => {
+      cancelAnimationFrame(layoutFrame.current);
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -84,7 +119,9 @@ export default function TableOfContents({ items, labels }: Props) {
     <>
       <nav
         aria-label={labels.title}
-        className="fixed top-1/2 left-[max(1.5rem,calc(50%-41rem))] z-30 hidden w-[150px] -translate-y-1/2 xl:block"
+        hidden={railLeft === null}
+        style={{ left: `${railLeft ?? 0}px`, width: `${RAIL_WIDTH}px` }}
+        className="fixed top-1/2 z-30 -translate-y-1/2"
       >
         <p className="mb-3 eyebrow text-sage">{labels.title}</p>
         <ul className="flex flex-col border-l border-line/55">
@@ -114,7 +151,8 @@ export default function TableOfContents({ items, labels }: Props) {
         onClick={() => setSheetOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={sheetOpen}
-        className="fixed right-5 bottom-5 z-40 rounded-full border border-line/55 bg-cream/95 px-[18px] py-3 text-[0.65625rem] font-medium tracking-[0.125rem] text-taupe uppercase shadow-card backdrop-blur-[10px] transition-colors hover:border-blush xl:hidden"
+        hidden={!mounted || railLeft !== null}
+        className="fixed right-5 bottom-5 z-40 rounded-full border border-line/55 bg-cream/95 px-[18px] py-3 text-[0.65625rem] font-medium tracking-[0.125rem] text-taupe uppercase shadow-card backdrop-blur-[10px] transition-colors hover:border-blush"
       >
         {labels.title}
       </button>
