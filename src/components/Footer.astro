@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/images/logo.png';
 import { localizePath, resolveLocale, useTranslations } from '../i18n';
-import { routes } from '../i18n/routes';
+import { legalRoutes, routes } from '../i18n/routes';
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -49,5 +49,22 @@ const t = useTranslations(locale);
     <p class="text-micro leading-[2] text-mute">
       {t.footer.copyright}<br />{t.footer.address}
     </p>
+
+    <nav class="mt-3.5 desk:mt-4" aria-label={t.legal.label}>
+      <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        {
+          legalRoutes.map((route) => (
+            <li>
+              <a
+                href={localizePath(route.path, locale)}
+                class="text-micro text-mute no-underline transition-colors hover:text-taupe"
+              >
+                {t.legal[route.key]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
 </footer>

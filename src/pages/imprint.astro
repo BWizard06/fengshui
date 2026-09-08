@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import LegalSections from '../components/LegalSections.astro';
+import { resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.meta.imprint.title} description={t.meta.imprint.description} path="/imprint">
+  <div class="wrap max-w-[720px] pt-8 pb-11 desk:pt-16 desk:pb-24">
+    <PageIntro eyebrow={t.imprint.eyebrow} title={t.imprint.title} class="mb-7 desk:mb-12" />
+    <LegalSections sections={t.imprint.sections} />
+  </div>
+</BaseLayout>

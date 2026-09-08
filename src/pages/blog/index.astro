@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import NewsletterForm from '../../components/NewsletterForm';
 import { htmlLang, localizePath, resolveLocale, useTranslations } from '../../i18n';
+import { legalPath } from '../../i18n/routes';
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -103,6 +104,11 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
           }}
           errors={t.forms.errors}
           fieldError={t.forms.fields.email}
+          privacy={{
+            text: t.blog.newsletter.privacy.text,
+            linkLabel: t.blog.newsletter.privacy.linkLabel,
+            href: localizePath(legalPath.privacy, locale),
+          }}
         />
       </div>
     </section>

@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm';
-import { resolveLocale, useTranslations } from '../i18n';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+import { legalPath } from '../i18n/routes';
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -38,6 +39,11 @@ const t = useTranslations(locale);
           }}
           errors={t.forms.errors}
           fieldErrors={t.forms.fields}
+          privacy={{
+            text: t.contact.form.privacy.text,
+            linkLabel: t.contact.form.privacy.linkLabel,
+            href: localizePath(legalPath.privacy, locale),
+          }}
         />
       </div>
 

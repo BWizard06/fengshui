@@ -25,12 +25,17 @@ interface Props {
     email: string;
     message: string;
   };
+  privacy: {
+    text: string;
+    linkLabel: string;
+    href: string;
+  };
 }
 
 type Status = 'idle' | 'sending' | 'done' | 'failed';
 type FieldName = 'name' | 'email' | 'message';
 
-export default function ContactForm({ labels, errors, fieldErrors }: Props) {
+export default function ContactForm({ labels, errors, fieldErrors, privacy }: Props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -188,6 +193,14 @@ export default function ContactForm({ labels, errors, fieldErrors }: Props) {
           <span className="mt-0.5 block text-[0.71875rem] text-mute">{labels.newsletterHint}</span>
         </span>
       </label>
+
+      <p className="text-[0.71875rem] leading-[1.6] font-light text-mute">
+        {privacy.text}{' '}
+        <a href={privacy.href} className="text-mute">
+          {privacy.linkLabel}
+        </a>
+        .
+      </p>
 
       {errorKey && (
         <p role="alert" className="text-[0.78125rem] leading-[1.7] font-light text-caution">

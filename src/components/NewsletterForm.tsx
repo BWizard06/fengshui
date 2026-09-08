@@ -17,11 +17,16 @@ interface Props {
     network: string;
   };
   fieldError: string;
+  privacy: {
+    text: string;
+    linkLabel: string;
+    href: string;
+  };
 }
 
 type Status = 'idle' | 'sending' | 'done' | 'failed';
 
-export default function NewsletterForm({ labels, errors, fieldError }: Props) {
+export default function NewsletterForm({ labels, errors, fieldError, privacy }: Props) {
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const [status, setStatus] = useState<Status>('idle');
@@ -101,6 +106,14 @@ export default function NewsletterForm({ labels, errors, fieldError }: Props) {
           {status === 'sending' ? labels.sending : labels.submit}
         </button>
       </div>
+
+      <p className="mt-3 text-center text-[0.6875rem] leading-[1.6] font-light text-mute">
+        {privacy.text}{' '}
+        <a href={privacy.href} className="text-mute">
+          {privacy.linkLabel}
+        </a>
+        .
+      </p>
 
       <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
         <label htmlFor="newsletter-website">Website</label>

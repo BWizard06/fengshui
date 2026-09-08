@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import LegalSections from '../components/LegalSections.astro';
+import { resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.meta.privacy.title} description={t.meta.privacy.description} path="/privacy">
+  <div class="wrap max-w-[720px] pt-8 pb-11 desk:pt-16 desk:pb-24">
+    <PageIntro
+      eyebrow={t.privacy.eyebrow}
+      title={t.privacy.title}
+      lead={t.privacy.lead}
+      class="mb-7 desk:mb-12"
+    />
+    <LegalSections sections={t.privacy.sections} />
+    <p class="mt-9 border-t border-line/55 pt-5 text-micro text-mute desk:mt-12" data-reveal>
+      {t.privacy.updated}
+    </p>
+  </div>
+</BaseLayout>

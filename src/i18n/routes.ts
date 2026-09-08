@@ -14,6 +14,17 @@ export const routePath = Object.fromEntries(
   routes.map((route) => [route.key, route.path])
 ) as Record<RouteKey, string>;
 
+export const legalRoutes = [
+  { key: 'imprint', path: '/imprint' },
+  { key: 'privacy', path: '/privacy' },
+] as const;
+
+export type LegalRouteKey = (typeof legalRoutes)[number]['key'];
+
+export const legalPath = Object.fromEntries(
+  legalRoutes.map((route) => [route.key, route.path])
+) as Record<LegalRouteKey, string>;
+
 export const rubrikOrder = ['about', 'fengShui', 'offer', 'blog', 'contact', 'partners'] as const;
 
 export type RubrikKey = (typeof rubrikOrder)[number];

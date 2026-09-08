@@ -94,6 +94,15 @@ export default {
       description:
         'Menschen und Betriebe, mit denen ich zusammenarbeite: Cécile Brunner, Nature First Apotheke, Gonzalo und Ben Brändle.',
     },
+    imprint: {
+      title: 'Impressum',
+      description: 'Verantwortliche Stelle, Kontakt und rechtliche Hinweise zu dieser Website.',
+    },
+    privacy: {
+      title: 'Datenschutzerklärung',
+      description:
+        'Welche Daten diese Website bearbeitet, zu welchem Zweck und welche Rechte Ihnen zustehen.',
+    },
   },
 
   home: {
@@ -541,6 +550,10 @@ export default {
       label: 'E-Mail-Adresse',
       placeholder: 'ihre@e-mail.ch',
       submit: 'Anmelden',
+      privacy: {
+        text: 'Jederzeit abbestellbar. Näheres in der',
+        linkLabel: 'Datenschutzerklärung',
+      },
       success: {
         title: 'Vielen Dank',
         text: 'Ihre Anmeldung ist eingegangen.',
@@ -563,6 +576,10 @@ export default {
       message: 'Ihre Nachricht',
       newsletter: 'Ich möchte den Newsletter abonnieren',
       newsletterHint: 'Alle ein bis zwei Monate ein Beitrag. Jederzeit abbestellbar.',
+      privacy: {
+        text: 'Ihre Angaben werden per E-Mail übermittelt, um Ihre Anfrage zu beantworten. Näheres in der',
+        linkLabel: 'Datenschutzerklärung',
+      },
       success: {
         title: 'Vielen Dank für Ihre Nachricht',
         text: 'Ich habe Ihre Anfrage erhalten und melde mich in den nächsten Tagen persönlich bei Ihnen.',
@@ -615,6 +632,150 @@ export default {
     tagline: 'Harmonie für Ihr Zuhause und für Ihr Leben.',
     copyright: '© 2026 Kati Schepis · Feng Shui',
     address: 'Kati Schepis-Buck, 8413 Neftenbach',
+  },
+
+  legal: {
+    label: 'Rechtliches',
+    imprint: 'Impressum',
+    privacy: 'Datenschutz',
+  },
+
+  imprint: {
+    eyebrow: 'Rechtliches',
+    title: 'Impressum',
+    sections: [
+      {
+        title: 'Verantwortlich für diese Website',
+        lines: ['Kati Schepis-Buck', '[Strasse und Hausnummer]', '8413 Neftenbach', 'Schweiz'],
+      },
+      {
+        title: 'Kontakt',
+        paragraphs: [
+          'E-Mail: <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>',
+          'Telefon: [Telefonnummer]',
+        ],
+      },
+      {
+        title: 'Haftung für Inhalte',
+        paragraphs: [
+          'Die Inhalte dieser Website werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität kann dennoch keine Gewähr übernommen werden.',
+          'Die Ausführungen zu Feng Shui verstehen sich als Anregung und als Beschreibung einer jahrhundertealten Lehre. Sie ersetzen weder eine persönliche Beratung noch eine medizinische, bauliche oder rechtliche Fachauskunft.',
+        ],
+      },
+      {
+        title: 'Haftung für Links',
+        paragraphs: [
+          'Diese Website verweist an einzelnen Stellen auf externe Angebote. Auf deren Inhalte besteht kein Einfluss, weshalb dafür keine Haftung übernommen wird. Verantwortlich für verlinkte Seiten sind ausschliesslich deren Betreiberinnen und Betreiber.',
+        ],
+      },
+      {
+        title: 'Urheberrecht',
+        paragraphs: [
+          'Texte, Bilder und Gestaltung dieser Website sind urheberrechtlich geschützt. Eine Verwendung ausserhalb der Schranken des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung.',
+        ],
+      },
+      {
+        title: 'Bildnachweis und Gestaltung',
+        paragraphs: [
+          'Fotografie: Gonzalo, <a href="https://gonzalo.ch" target="_blank" rel="noopener">gonzalo.ch</a>',
+          'Gestaltung und Umsetzung: Ben Brändle',
+        ],
+      },
+    ],
+  },
+
+  privacy: {
+    eyebrow: 'Rechtliches',
+    title: 'Datenschutzerklärung',
+    lead: 'Diese Website kommt mit so wenig Daten wie möglich aus: keine Cookies, keine Analyse-Werkzeuge, keine Weitergabe zu Werbezwecken.',
+    updated: 'Stand: September 2026',
+    sections: [
+      {
+        title: 'Verantwortliche Stelle',
+        paragraphs: [
+          'Verantwortlich für die Bearbeitung von Personendaten auf dieser Website ist:',
+        ],
+        lines: [
+          'Kati Schepis-Buck',
+          '[Strasse und Hausnummer]',
+          '8413 Neftenbach',
+          'Schweiz',
+          'info@katischepis.ch',
+        ],
+      },
+      {
+        title: 'Grundsatz',
+        paragraphs: [
+          'Ihre Personendaten werden vertraulich, nach den Vorgaben des schweizerischen Datenschutzgesetzes und nur so weit bearbeitet, wie es für den jeweiligen Zweck nötig ist. Es werden keine Daten verkauft, vermietet oder zu Werbezwecken an Dritte weitergegeben.',
+          'Soweit Sie diese Website aus dem Europäischen Wirtschaftsraum aufrufen, kann zusätzlich die Datenschutz-Grundverordnung zur Anwendung gelangen. Die nachstehend beschriebenen Rechte stehen Ihnen in diesem Fall ebenfalls zu.',
+        ],
+      },
+      {
+        title: 'Aufruf der Website',
+        paragraphs: [
+          'Beim Aufruf dieser Website werden technisch notwendige Angaben verarbeitet, die Ihr Browser automatisch übermittelt: IP-Adresse, Zeitpunkt des Zugriffs, aufgerufene Seite, übermittelte Datenmenge sowie Angaben zu Browser und Betriebssystem.',
+          'Diese Angaben sind erforderlich, um die Seite auszuliefern und ihren sicheren Betrieb zu gewährleisten. Sie werden nicht mit anderen Datenquellen zusammengeführt und nicht dazu verwendet, einzelne Personen zu identifizieren.',
+        ],
+      },
+      {
+        title: 'Kontaktformular',
+        paragraphs: [
+          'Über das Kontaktformular werden Ihr Name, Ihre E-Mail-Adresse, Ihre Nachricht sowie die Angabe, ob Sie den Newsletter abonnieren möchten, erhoben. Diese Angaben werden ausschliesslich per E-Mail an die verantwortliche Stelle übermittelt und dort bearbeitet, um Ihre Anfrage zu beantworten.',
+          'Es besteht keine Datenbank, in der Formulareingaben gespeichert würden. Ihre Nachricht verbleibt im E-Mail-Postfach der verantwortlichen Stelle und wird gelöscht, sobald sie nicht mehr benötigt wird und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.',
+          'Die Angabe der Daten erfolgt freiwillig. Ohne Name, E-Mail-Adresse und Nachricht kann eine Anfrage jedoch nicht beantwortet werden.',
+        ],
+      },
+      {
+        title: 'Newsletter',
+        paragraphs: [
+          'Für die Anmeldung zum Newsletter wird ausschliesslich Ihre E-Mail-Adresse erhoben. Sie wird verwendet, um Ihnen in unregelmässigen Abständen Beiträge rund um Feng Shui und Raumgestaltung zuzustellen.',
+          'Die Anmeldung beruht auf Ihrer Einwilligung. Sie können diese jederzeit widerrufen, indem Sie sich abmelden oder eine kurze Nachricht an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a> senden. Die Rechtmässigkeit der bis dahin erfolgten Bearbeitung bleibt davon unberührt.',
+        ],
+      },
+      {
+        title: 'Schutz vor Missbrauch der Formulare',
+        paragraphs: [
+          'Damit die Formulare nicht für Massensendungen missbraucht werden, wird bei jedem Absenden gezählt, wie viele Nachrichten von einer IP-Adresse ausgegangen sind. Dazu wird die IP-Adresse zusammen mit einem Zählerstand kurzzeitig gespeichert.',
+          'Diese Einträge löschen sich automatisch, spätestens nach 24 Stunden. Sie werden ausschliesslich zu diesem Zweck verwendet, nicht ausgewertet und nicht mit anderen Daten verknüpft.',
+        ],
+      },
+      {
+        title: 'Eingesetzte Dienstleister',
+        paragraphs: [
+          'Für Betrieb und Versand werden zwei Dienstleister als Auftragsbearbeiter eingesetzt. Beide sind vertraglich verpflichtet, die Daten ausschliesslich weisungsgemäss zu bearbeiten.',
+        ],
+        items: [
+          '<strong>Cloudflare</strong> stellt Hosting und Auslieferung der Website bereit. Dabei fallen die oben beschriebenen technischen Angaben an. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Datenschutzerklärung von Cloudflare</a>',
+          '<strong>Resend</strong> versendet die E-Mails aus den Formularen. Der Versand läuft über Server in der Europäischen Union. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Resend</a>',
+        ],
+      },
+      {
+        title: 'Keine Cookies, keine Analyse',
+        paragraphs: [
+          'Diese Website setzt keine Cookies und verwendet keine Analyse-, Tracking- oder Werbewerkzeuge. Es findet keine Profilbildung statt, und es werden keine Besucherstatistiken erhoben.',
+          'Sämtliche Schriften sind lokal eingebunden. Beim Aufruf der Seite werden dadurch keine Verbindungen zu Servern Dritter aufgebaut.',
+        ],
+      },
+      {
+        title: 'Ihre Rechte',
+        paragraphs: [
+          'Sie haben das Recht, Auskunft über die zu Ihrer Person bearbeiteten Daten zu verlangen sowie deren Berichtigung oder Löschung zu beantragen. Ebenso können Sie der Bearbeitung widersprechen und eine erteilte Einwilligung jederzeit widerrufen.',
+          'Wenden Sie sich dafür an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>. Zudem steht Ihnen der Weg an die zuständige Aufsichtsbehörde offen; in der Schweiz ist dies der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte.',
+        ],
+      },
+      {
+        title: 'Datensicherheit',
+        paragraphs: [
+          'Die Übertragung zwischen Ihrem Browser und dieser Website erfolgt verschlüsselt über HTTPS. Ein vollständiger Schutz von Daten bei der Übermittlung über das Internet ist technisch allerdings nicht möglich.',
+        ],
+      },
+      {
+        title: 'Änderungen',
+        paragraphs: [
+          'Diese Datenschutzerklärung kann angepasst werden, wenn sich die Website oder die rechtlichen Vorgaben ändern. Massgebend ist die jeweils hier veröffentlichte Fassung.',
+        ],
+      },
+    ],
   },
 
   menu: {

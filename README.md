@@ -248,6 +248,19 @@ Sperre zuverlässig; gegen ein Skript, das viele Anfragen gleichzeitig abfeuert,
 Für eine exakte Zählung braucht es ein Durable Object: dort laufen alle Anfragen desselben
 Schlüssels seriell durch dieselbe Instanz, wodurch verlorene Aktualisierungen ausgeschlossen sind.
 
+## Rechtliche Seiten
+
+`/imprint` und `/privacy` sind über den Footer erreichbar und stehen bewusst nicht in der
+Hauptnavigation. Beide Formulare verweisen direkt neben dem Absenden auf die Datenschutzerklärung.
+
+Der gesamte Text steht unter `imprint` und `privacy` in `src/i18n/de.ts`, aufgeteilt in Abschnitte
+mit `title` und wahlweise `paragraphs`, `lines` oder `items`. In den Absätzen ist HTML erlaubt, damit
+Links gesetzt werden können; gerendert wird über `src/components/LegalSections.astro`.
+
+Die Datenschutzerklärung beschreibt den tatsächlichen Stand: keine Cookies, keine Analyse, lokal
+eingebundene Schriften, Formulardaten nur per E-Mail, IP-Zähler mit maximal 24 Stunden Lebensdauer,
+Cloudflare und Resend als Auftragsbearbeiter. Ändert sich daran etwas, gehört der Text angepasst.
+
 ## Deployment auf Cloudflare
 
 Die Seite bleibt statisch, nur die beiden API-Routen laufen als Worker.
