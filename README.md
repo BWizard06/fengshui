@@ -24,7 +24,7 @@ npm run dev
 | ---------------------- | ----------------------------------------- |
 | `npm run dev`          | Entwicklungsserver auf Port 4321          |
 | `npm run build`        | Typprüfung und statischer Build nach dist |
-| `npm run preview`      | Build lokal ausliefern                    |
+| `npm run preview`      | Build im echten Worker samt KV ausliefern |
 | `npm run check`        | Nur Typprüfung                            |
 | `npm run format`       | Prettier über das gesamte Projekt         |
 | `npm run format:check` | Formatierung prüfen ohne zu schreiben     |
@@ -135,15 +135,92 @@ Inhalt des Artikels.
 
 Übersicht und Detailseite werden daraus automatisch erzeugt.
 
+## Kontaktformular und Newsletter
+
+Beide Formulare senden über [Resend](https://resend.com) an `info@katischepis.ch`. Absender ist
+`website@katischepis.ch`, als Antwortadresse wird die Adresse der schreibenden Person gesetzt.
+Die Domain ist in Resend verifiziert, Region eu-west-1.
+
+| Route             | Auslöser                          | Mails                                          |
+| ----------------- | --------------------------------- | ---------------------------------------------- |
+| `/api/contact`    | Kontaktformular auf `/contact`    | Benachrichtigung an Kati, optional Bestätigung |
+| `/api/newsletter` | Newsletter-Feld unten auf `/blog` | Benachrichtigung an Kati                       |
+
+Die Checkbox im Kontaktformular ist standardmässig leer. Ist sie gesetzt, steht `Newsletter: Ja`
+in der Mail an Kati. Die Weitergabe an Mailchimp ist noch nicht angebunden.
+
+### Schalter und Grenzwerte
+
+Beides in `src/config.ts`:
+
+```ts
+export const features = {
+  contactConfirmationEmail: true,
+};
+
+export const mailLimits = {
+  perIpPerHour: 3,
+  perIpPerDay: 8,
+  globalPerDay: 80,
+  minSecondsBeforeSubmit: 3,
+};
+```
+
+`contactConfirmationEmail` auf `false` und die schreibende Person erhält keine Eingangsbestätigung
+mehr; die Mail an Kati bleibt unberührt. Die Absender- und Empfängeradressen stehen im selben
+File unter `mail`.
+
+### Schutz vor Missbrauch
+
+Drei Ebenen, alle ohne Drittanbieter und damit ohne Datenschutzthema:
+
+1. Ein für Menschen unsichtbares Zusatzfeld. Wird es ausgefüllt, meldet der Server Erfolg,
+   sendet aber nichts – ein Bot merkt so nicht, dass er erkannt wurde.
+2. Eine Mindestzeit zwischen Laden und Absenden, gleiche Behandlung.
+3. Zählwerke in Cloudflare KV: pro IP-Adresse und ein globales Tageslimit für versendete Mails.
+   Das globale Limit schützt das Resend-Kontingent von 100 Mails pro Tag – auch dann, wenn jemand
+   die IP wechselt. Wird es erreicht, verweist die Meldung auf die direkte Adresse.
+
+Ohne KV-Bindung greifen die Zählwerke nicht, das Formular funktioniert aber weiter. Die Bindung
+ist deshalb vor dem Launch einzurichten.
+
+## Deployment auf Cloudflare
+
+Die Seite bleibt statisch, nur die beiden API-Routen laufen als Worker.
+
+1. KV-Namespace anlegen und die zurückgegebene ID in `wrangler.jsonc` unter `kv_namespaces`
+   eintragen:
+
+   ```bash
+   npx wrangler kv namespace create RATE_LIMIT
+   ```
+
+2. Den Resend-Schlüssel als Secret hinterlegen:
+
+   ```bash
+   npx wrangler secret put RESEND_API_KEY
+   ```
+
+3. Bauen und veröffentlichen:
+
+   ```bash
+   npm run build
+   npx wrangler deploy --config dist/server/wrangler.json
+   ```
+
+Lokal liegt der Schlüssel in `.env` für `npm run dev` und zusätzlich in `.dev.vars` für
+`npm run preview`, das den echten Worker samt KV startet. Beide Dateien sind aus Git
+ausgeschlossen. `worker-configuration.d.ts` wird von `wrangler types` erzeugt und ebenfalls nicht
+eingecheckt; `npm run build` und `npm run check` erzeugen es automatisch.
+
 ## Offene Punkte
 
-- Kontaktformular ohne Versandlogik; Felder und Zustände sind angelegt.
-- Newsletter noch nicht umgesetzt.
-- Animationen folgen in einem eigenen Schritt.
-- Impressum und Datenschutzerklärung fehlen noch.
+- Mailchimp ist noch nicht angebunden; die Newsletter-Zustimmung wird bisher nur per Mail an
+  Kati gemeldet.
+- Impressum und Datenschutzerklärung fehlen noch. Für ein Formular, das personenbezogene Daten
+  entgegennimmt, gehört ein Hinweis dorthin und idealerweise ein Link direkt beim Formular.
 
 ## Deployment
 
-Der Build erzeugt statische Dateien in `dist/` und läuft auf jedem Static-Host.
-Die Produktionsadresse ist in `astro.config.mjs` unter `site` hinterlegt und
-steuert Sitemap, Canonical-Tags und Open-Graph-Angaben.
+Die Produktionsadresse ist in `astro.config.mjs` unter `site` hinterlegt und steuert Sitemap,
+Canonical-Tags und Open-Graph-Angaben. Die Schritte für Cloudflare stehen weiter oben.

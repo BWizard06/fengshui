@@ -26,3 +26,8 @@ pnpm-debug.log*
 # editor / tooling
 .vscode/
 .claude/
+.dev.vars
+.wrangler/
+
+# generierte Cloudflare-Typen
+worker-configuration.d.ts

@@ -1,0 +1,8 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fengshui",
+  "compatibility_date": "2026-09-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "html_handling": "drop-trailing-slash" },
+  "kv_namespaces": [{ "binding": "RATE_LIMIT", "id": "rate-limit-local" }],
+}

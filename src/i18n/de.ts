@@ -27,6 +27,26 @@ export default {
     partners: 'Partner',
   },
 
+  forms: {
+    sending: 'Wird gesendet …',
+    required: 'Pflichtfeld',
+    errors: {
+      validation: 'Bitte prüfen Sie die markierten Felder.',
+      rateLimit:
+        'Es sind bereits mehrere Nachrichten von hier eingegangen. Bitte versuchen Sie es später noch einmal oder schreiben Sie direkt an info@katischepis.ch.',
+      notConfigured:
+        'Der Versand ist im Moment nicht möglich. Bitte schreiben Sie direkt an info@katischepis.ch.',
+      server:
+        'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder schreiben Sie direkt an info@katischepis.ch.',
+      network: 'Keine Verbindung zum Server. Bitte prüfen Sie Ihre Internetverbindung.',
+    },
+    fields: {
+      name: 'Bitte geben Sie Ihren Namen an.',
+      email: 'Bitte geben Sie eine gültige E-Mail-Adresse an.',
+      message: 'Bitte schreiben Sie mindestens ein paar Worte.',
+    },
+  },
+
   actions: {
     bookIntro: 'Kennenlerngespräch buchen',
     learnMore: 'Mehr erfahren',
@@ -514,6 +534,18 @@ export default {
       text: 'Schauen Sie bald wieder vorbei – oder schreiben Sie mir, welche Themen Sie besonders interessieren.',
     },
     backToOverview: 'Zurück zur Übersicht',
+    newsletter: {
+      eyebrow: 'Newsletter',
+      title: 'Impulse direkt in Ihr Postfach',
+      text: 'Alle ein bis zwei Monate ein neuer Beitrag rund um Feng Shui, Raumgestaltung und harmonisches Wohnen. Jederzeit abbestellbar.',
+      label: 'E-Mail-Adresse',
+      placeholder: 'ihre@e-mail.ch',
+      submit: 'Anmelden',
+      success: {
+        title: 'Vielen Dank',
+        text: 'Ihre Anmeldung ist eingegangen.',
+      },
+    },
   },
 
   contact: {
@@ -529,6 +561,12 @@ export default {
       name: 'Name',
       email: 'E-Mail',
       message: 'Ihre Nachricht',
+      newsletter: 'Ich möchte den Newsletter abonnieren',
+      newsletterHint: 'Alle ein bis zwei Monate ein Beitrag. Jederzeit abbestellbar.',
+      success: {
+        title: 'Vielen Dank für Ihre Nachricht',
+        text: 'Ich habe Ihre Anfrage erhalten und melde mich in den nächsten Tagen persönlich bei Ihnen.',
+      },
     },
   },
 

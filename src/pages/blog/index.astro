@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import NewsletterForm from '../../components/NewsletterForm';
 import { htmlLang, localizePath, resolveLocale, useTranslations } from '../../i18n';
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -78,5 +79,31 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
         </div>
       )
     }
+
+    <section
+      class="mx-auto mt-10 max-w-[760px] rounded-[20px] border border-blush/42 bg-blush/16 px-6 py-9 desk:mt-16 desk:px-11 desk:py-12"
+      data-reveal
+    >
+      <div class="desk:grid desk:grid-cols-[1fr_1fr] desk:items-center desk:gap-10">
+        <div class="mb-6 text-center desk:mb-0 desk:text-left">
+          <p class="mb-2 eyebrow text-sage">{t.blog.newsletter.eyebrow}</p>
+          <h2 class="mb-2.5 text-h2-sm">{t.blog.newsletter.title}</h2>
+          <p class="text-body-sm font-light">{t.blog.newsletter.text}</p>
+        </div>
+        <NewsletterForm
+          client:visible
+          labels={{
+            label: t.blog.newsletter.label,
+            placeholder: t.blog.newsletter.placeholder,
+            submit: t.blog.newsletter.submit,
+            sending: t.forms.sending,
+            successTitle: t.blog.newsletter.success.title,
+            successText: t.blog.newsletter.success.text,
+          }}
+          errors={t.forms.errors}
+          fieldError={t.forms.fields.email}
+        />
+      </div>
+    </section>
   </div>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm';
 import { resolveLocale, useTranslations } from '../i18n';
 
 const locale = resolveLocale(Astro.currentLocale);
@@ -22,57 +23,22 @@ const t = useTranslations(locale);
         class="rounded-[20px] border border-blush/42 bg-white px-5 py-[26px] shadow-lift desk:col-start-2 desk:row-span-2 desk:row-start-1 desk:px-[38px] desk:py-10"
         data-reveal
       >
-        <form class="flex flex-col gap-4 desk:gap-[18px]">
-          <div>
-            <label
-              for="contact-name"
-              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
-            >
-              {t.contact.form.name}
-            </label>
-            <input
-              id="contact-name"
-              name="name"
-              type="text"
-              autocomplete="name"
-              class="field-input"
-            />
-          </div>
-          <div>
-            <label
-              for="contact-email"
-              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
-            >
-              {t.contact.form.email}
-            </label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              class="field-input"
-            />
-          </div>
-          <div>
-            <label
-              for="contact-message"
-              class="mb-1.5 block text-[0.625rem] font-medium tracking-[0.125rem] text-mute uppercase desk:mb-[7px] desk:text-[0.6875rem]"
-            >
-              {t.contact.form.message}
-            </label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows="5"
-              class="min-h-[117px] field-input resize-y desk:min-h-[134px]"></textarea>
-          </div>
-          <button
-            type="submit"
-            class="rounded-full bg-sage px-5 py-4 text-center text-[0.71875rem] font-medium tracking-[0.125rem] text-cream uppercase transition-colors hover:bg-sage-deep desk:px-[30px] desk:py-[15px] desk:text-xs"
-          >
-            {t.actions.sendMessage}
-          </button>
-        </form>
+        <ContactForm
+          client:load
+          labels={{
+            name: t.contact.form.name,
+            email: t.contact.form.email,
+            message: t.contact.form.message,
+            newsletter: t.contact.form.newsletter,
+            newsletterHint: t.contact.form.newsletterHint,
+            submit: t.actions.sendMessage,
+            sending: t.forms.sending,
+            successTitle: t.contact.form.success.title,
+            successText: t.contact.form.success.text,
+          }}
+          errors={t.forms.errors}
+          fieldErrors={t.forms.fields}
+        />
       </div>
 
       <div
