@@ -225,12 +225,14 @@ node scripts/rate-limit.mjs status --preview
 node scripts/rate-limit.mjs status --remote
 ```
 
-Zählwerke zurücksetzen – Entwicklungsserver vorher stoppen, sonst hält er die Datei offen und
-die Stände geraten durcheinander:
+Einzelne Zählwerke zurücksetzen, bei laufendem Entwicklungsserver:
 
 ```bash
-rm -rf .wrangler/state
+npx wrangler kv key delete "ip:127.0.0.1:day:2026-09-08" --binding RATE_LIMIT --config wrangler.jsonc --local
 ```
+
+Alles auf einmal geht über `rm -rf .wrangler/state`, dafür muss der Entwicklungsserver aber
+gestoppt sein – sonst hält er die Datei offen und die Stände geraten durcheinander.
 
 Die Stundenzähler laufen nach einer Stunde ab, die Tageszähler nach 24 Stunden – beides über die
 Ablaufzeit in KV, es braucht also kein Aufräumen.
