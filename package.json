@@ -10,6 +10,8 @@
     "build": "wrangler types && astro check && astro build",
     "preview": "astro build && wrangler dev --config dist/server/wrangler.json",
     "check": "wrangler types && astro check",
+    "rate-limit": "node scripts/rate-limit.mjs status",
+    "rate-limit:test": "node scripts/rate-limit.mjs test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "astro": "astro"

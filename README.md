@@ -20,14 +20,16 @@ npm install
 npm run dev
 ```
 
-| Skript                 | Zweck                                     |
-| ---------------------- | ----------------------------------------- |
-| `npm run dev`          | Entwicklungsserver auf Port 4321          |
-| `npm run build`        | Typprüfung und statischer Build nach dist |
-| `npm run preview`      | Build im echten Worker samt KV ausliefern |
-| `npm run check`        | Nur Typprüfung                            |
-| `npm run format`       | Prettier über das gesamte Projekt         |
-| `npm run format:check` | Formatierung prüfen ohne zu schreiben     |
+| Skript                    | Zweck                                     |
+| ------------------------- | ----------------------------------------- |
+| `npm run dev`             | Entwicklungsserver auf Port 4321          |
+| `npm run build`           | Typprüfung und statischer Build nach dist |
+| `npm run preview`         | Build im echten Worker samt KV ausliefern |
+| `npm run check`           | Nur Typprüfung                            |
+| `npm run rate-limit`      | Zählerstand des Rate Limitings anzeigen   |
+| `npm run rate-limit:test` | Rate Limiting und Spamschutz durchspielen |
+| `npm run format`          | Prettier über das gesamte Projekt         |
+| `npm run format:check`    | Formatierung prüfen ohne zu schreiben     |
 
 ## Struktur
 
@@ -183,6 +185,52 @@ Drei Ebenen, alle ohne Drittanbieter und damit ohne Datenschutzthema:
 
 Ohne KV-Bindung greifen die Zählwerke nicht, das Formular funktioniert aber weiter. Die Bindung
 ist deshalb vor dem Launch einzurichten.
+
+### Rate Limiting prüfen
+
+Die Zählwerke liegen in KV und lassen sich jederzeit auslesen. Lokal setzt das einen Build und
+einen laufenden Worker voraus, weil die Bindung erst dort existiert:
+
+```bash
+npm run build
+npx wrangler dev --config dist/server/wrangler.json --port 4333
+```
+
+Aktueller Stand pro IP-Adresse, in einem zweiten Terminal:
+
+```bash
+npm run rate-limit
+```
+
+Die Ausgabe zeigt je IP den Stundenzähler, den Tageszähler und darunter die insgesamt heute
+versendeten Mails gegen das Tageslimit. `[blockiert]` markiert eine IP, die gerade abgewiesen wird.
+
+Den ganzen Ablauf durchspielen – drei Anfragen kommen durch, die vierte wird abgewiesen, eine
+zweite IP bleibt unberührt, Honeypot, Zeitsperre und Feldprüfung greifen:
+
+```bash
+npm run rate-limit:test
+```
+
+Der Test verschickt echte Mails und bricht deshalb ab, solange `mail.to` in `src/config.ts` auf
+die Adresse von Kati zeigt. Für einen Lauf dort vorübergehend `delivered@resend.dev` eintragen –
+die Sandbox von Resend, die alles annimmt und nichts zustellt – und neu bauen. Danach zurückstellen.
+
+Lokale Zählwerke zurücksetzen:
+
+```bash
+rm -rf dist/server/.wrangler/state
+```
+
+Auf der Produktion greifen dieselben Befehle mit `--remote`, sobald der KV-Namespace angelegt und
+in `wrangler.jsonc` eingetragen ist:
+
+```bash
+node scripts/rate-limit.mjs status --remote
+```
+
+Die Stundenzähler laufen nach einer Stunde ab, die Tageszähler nach 24 Stunden – beides über die
+Ablaufzeit in KV, es braucht also kein Aufräumen.
 
 ## Deployment auf Cloudflare
 

@@ -66,7 +66,7 @@ export default function NewsletterForm({ labels, errors, fieldError }: Props) {
 
   if (status === 'done') {
     return (
-      <div className="text-center desk:text-left">
+      <div className="text-center">
         <p className="mb-1.5 font-serif text-serif-md font-semibold text-taupe">
           {labels.successTitle}
         </p>
@@ -80,25 +80,23 @@ export default function NewsletterForm({ labels, errors, fieldError }: Props) {
       <label htmlFor="newsletter-email" className="sr-only">
         {labels.label}
       </label>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-3">
-        <div className="flex-1">
-          <input
-            id="newsletter-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            placeholder={labels.placeholder}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            aria-invalid={invalid}
-            className="field-input"
-          />
-        </div>
+      <div className="flex flex-col gap-3">
+        <input
+          id="newsletter-email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          required
+          placeholder={labels.placeholder}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          aria-invalid={invalid}
+          className="field-input"
+        />
         <button
           type="submit"
           disabled={status === 'sending'}
-          className="flex-none rounded-full bg-sage px-5 py-4 text-center text-[0.71875rem] font-medium tracking-[0.125rem] text-cream uppercase transition-colors hover:bg-sage-deep disabled:cursor-progress disabled:opacity-70 desk:px-[30px] desk:py-[15px] desk:text-xs"
+          className="rounded-full bg-sage px-5 py-4 text-center text-[0.71875rem] font-medium tracking-[0.125rem] text-cream uppercase transition-colors hover:bg-sage-deep disabled:cursor-progress disabled:opacity-70 desk:px-[30px] desk:py-[15px] desk:text-xs"
         >
           {status === 'sending' ? labels.sending : labels.submit}
         </button>
