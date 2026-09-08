@@ -188,15 +188,15 @@ ist deshalb vor dem Launch einzurichten.
 
 ### Rate Limiting prüfen
 
-Die Zählwerke liegen in KV und lassen sich jederzeit auslesen. Lokal setzt das einen Build und
-einen laufenden Worker voraus, weil die Bindung erst dort existiert:
+Der Entwicklungsserver läuft dank `@cloudflare/vite-plugin` bereits in einer echten
+Workers-Umgebung. Die KV-Bindung aus `wrangler.jsonc` ist damit schon unter `npm run dev`
+aktiv, und die Zählwerke entstehen ab dem ersten abgeschickten Formular.
 
-```bash
-npm run build
-npx wrangler dev --config dist/server/wrangler.json --port 4333
-```
+**Achtung:** Der Entwicklungsserver sendet mit dem Schlüssel aus `.env` echte Mails an die
+Adresse in `mail.to`. Zum Ausprobieren dort `delivered@resend.dev` eintragen – die Sandbox von
+Resend nimmt alles an und stellt nichts zu.
 
-Aktueller Stand pro IP-Adresse, in einem zweiten Terminal:
+Aktueller Stand pro IP-Adresse:
 
 ```bash
 npm run rate-limit
@@ -205,32 +205,46 @@ npm run rate-limit
 Die Ausgabe zeigt je IP den Stundenzähler, den Tageszähler und darunter die insgesamt heute
 versendeten Mails gegen das Tageslimit. `[blockiert]` markiert eine IP, die gerade abgewiesen wird.
 
-Den ganzen Ablauf durchspielen – drei Anfragen kommen durch, die vierte wird abgewiesen, eine
-zweite IP bleibt unberührt, Honeypot, Zeitsperre und Feldprüfung greifen:
+Den ganzen Ablauf durchspielen – Anfragen bis zum Limit kommen durch, die nächste wird
+abgewiesen, eine zweite IP bleibt unberührt, Honeypot, Zeitsperre und Feldprüfung greifen:
 
 ```bash
 npm run rate-limit:test
 ```
 
-Der Test verschickt echte Mails und bricht deshalb ab, solange `mail.to` in `src/config.ts` auf
-die Adresse von Kati zeigt. Für einen Lauf dort vorübergehend `delivered@resend.dev` eintragen –
-die Sandbox von Resend, die alles annimmt und nichts zustellt – und neu bauen. Danach zurückstellen.
+Der Test bricht ab, solange `mail.to` auf die Adresse von Kati zeigt. Mit `--force` lässt er
+sich erzwingen.
 
-Lokale Zählwerke zurücksetzen:
+Gegen den gebauten Worker statt den Entwicklungsserver laufen beide Befehle mit `--preview`,
+gegen die Produktion mit `--remote`:
 
 ```bash
-rm -rf dist/server/.wrangler/state
+npm run build
+npx wrangler dev --config dist/server/wrangler.json --port 4333
+node scripts/rate-limit.mjs status --preview
+node scripts/rate-limit.mjs status --remote
 ```
 
-Auf der Produktion greifen dieselben Befehle mit `--remote`, sobald der KV-Namespace angelegt und
-in `wrangler.jsonc` eingetragen ist:
+Zählwerke zurücksetzen – Entwicklungsserver vorher stoppen, sonst hält er die Datei offen und
+die Stände geraten durcheinander:
 
 ```bash
-node scripts/rate-limit.mjs status --remote
+rm -rf .wrangler/state
 ```
 
 Die Stundenzähler laufen nach einer Stunde ab, die Tageszähler nach 24 Stunden – beides über die
 Ablaufzeit in KV, es braucht also kein Aufräumen.
+
+### Grenze der Zählwerke
+
+KV kennt kein atomares Hochzählen. Jede Anfrage liest den Stand, addiert eins und schreibt
+zurück. Treffen Anfragen gleichzeitig ein, lesen sie denselben Ausgangswert und überschreiben
+sich gegenseitig – sechs parallele Anfragen wurden im Test alle durchgelassen und hinterliessen
+den Zählerstand fünf. Gegen einen Menschen, der das Formular mehrfach abschickt, greift die
+Sperre zuverlässig; gegen ein Skript, das viele Anfragen gleichzeitig abfeuert, nicht.
+
+Für eine exakte Zählung braucht es ein Durable Object: dort laufen alle Anfragen desselben
+Schlüssels seriell durch dieselbe Instanz, wodurch verlorene Aktualisierungen ausgeschlossen sind.
 
 ## Deployment auf Cloudflare
 

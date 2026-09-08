@@ -5,12 +5,14 @@ import { mail, mailLimits, features } from '../src/config.ts';
 const args = process.argv.slice(2);
 const command = args.find((value) => !value.startsWith('--')) ?? 'status';
 const remote = args.includes('--remote');
+const preview = args.includes('--preview');
 const force = args.includes('--force');
-const baseUrl = (
-  args.find((value) => value.startsWith('--url=')) ?? '--url=http://localhost:4333'
-).slice(6);
+const defaultUrl = preview ? 'http://localhost:4333' : 'http://localhost:4321';
+const baseUrl = (args.find((value) => value.startsWith('--url=')) ?? `--url=${defaultUrl}`).slice(
+  6
+);
 
-const configPath = remote ? 'wrangler.jsonc' : 'dist/server/wrangler.json';
+const configPath = preview ? 'dist/server/wrangler.json' : 'wrangler.jsonc';
 const scopeFlag = remote ? '--remote' : '--local';
 
 const wrangler = (params) =>
@@ -37,7 +39,9 @@ function listKeys() {
     console.error(
       remote
         ? '\nHinweis: braucht eine echte KV-Namespace-ID in wrangler.jsonc und einen Login (npx wrangler login).'
-        : '\nHinweis: zuerst "npm run build" ausfuehren, damit dist/server/wrangler.json existiert.'
+        : preview
+          ? '\nHinweis: fuer --preview zuerst "npm run build" ausfuehren.'
+          : '\nHinweis: Zaehler entstehen erst, wenn ueber "npm run dev" ein Formular abgeschickt wurde.'
     );
     process.exit(1);
   }
@@ -77,7 +81,8 @@ function status() {
     perIp.set(ip, entry);
   }
 
-  console.log(`\nRate Limit — ${remote ? 'Produktion' : 'lokal'}  (${today}, Stunde ${hour})\n`);
+  const label = remote ? 'Produktion' : preview ? 'Preview-Worker' : 'Entwicklungsserver';
+  console.log(`\nRate Limit — ${label}  (${today}, Stunde ${hour})\n`);
 
   if (perIp.size === 0) {
     console.log('  Keine Anfragen in der laufenden Stunde bzw. am heutigen Tag.\n');
