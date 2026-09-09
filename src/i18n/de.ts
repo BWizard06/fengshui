@@ -646,13 +646,13 @@ export default {
     sections: [
       {
         title: 'Verantwortlich für diese Website',
-        lines: ['Kati Schepis-Buck', '[Strasse und Hausnummer]', '8413 Neftenbach', 'Schweiz'],
+        lines: ['Kati Schepis-Buck', 'Auenrainstrasse 7', '8413 Neftenbach', 'Schweiz'],
       },
       {
         title: 'Kontakt',
         paragraphs: [
           'E-Mail: <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>',
-          'Telefon: [Telefonnummer]',
+          'Telefon: <a href="tel:+41793823680">+41 79 382 36 80</a>',
         ],
       },
       {
@@ -687,7 +687,7 @@ export default {
   privacy: {
     eyebrow: 'Rechtliches',
     title: 'Datenschutzerklärung',
-    lead: 'Diese Website kommt mit so wenig Daten wie möglich aus: keine Cookies, keine Analyse-Werkzeuge, keine Weitergabe zu Werbezwecken.',
+    lead: 'Diese Website bearbeitet nur jene Daten, die für den Betrieb und für Ihre Anfragen nötig sind.',
     updated: 'Stand: September 2026',
     sections: [
       {
@@ -697,82 +697,36 @@ export default {
         ],
         lines: [
           'Kati Schepis-Buck',
-          '[Strasse und Hausnummer]',
+          'Auenrainstrasse 7',
           '8413 Neftenbach',
           'Schweiz',
           'info@katischepis.ch',
         ],
       },
       {
-        title: 'Grundsatz',
+        title: 'Welche Daten bearbeitet werden',
         paragraphs: [
-          'Ihre Personendaten werden vertraulich, nach den Vorgaben des schweizerischen Datenschutzgesetzes und nur so weit bearbeitet, wie es für den jeweiligen Zweck nötig ist. Es werden keine Daten verkauft, vermietet oder zu Werbezwecken an Dritte weitergegeben.',
-          'Soweit Sie diese Website aus dem Europäischen Wirtschaftsraum aufrufen, kann zusätzlich die Datenschutz-Grundverordnung zur Anwendung gelangen. Die nachstehend beschriebenen Rechte stehen Ihnen in diesem Fall ebenfalls zu.',
+          'Beim Aufruf der Website übermittelt Ihr Browser technisch notwendige Angaben wie IP-Adresse, Zeitpunkt und aufgerufene Seite. Sie dienen der Auslieferung und dem sicheren Betrieb und werden nicht mit anderen Daten verknüpft.',
+          'Über das Kontaktformular werden Name, E-Mail-Adresse und Nachricht per E-Mail übermittelt, um Ihre Anfrage zu beantworten; bei der Newsletter-Anmeldung ist es allein die E-Mail-Adresse. Damit die Formulare nicht für Massensendungen missbraucht werden, wird dabei kurz festgehalten, wie viele Nachrichten von einer IP-Adresse ausgehen. Diese Einträge löschen sich spätestens nach 24 Stunden.',
+          'Es werden keine Cookies gesetzt und keine Analyse- oder Tracking-Werkzeuge eingesetzt.',
         ],
       },
       {
-        title: 'Aufruf der Website',
+        title: 'Weitergabe',
         paragraphs: [
-          'Beim Aufruf dieser Website werden technisch notwendige Angaben verarbeitet, die Ihr Browser automatisch übermittelt: IP-Adresse, Zeitpunkt des Zugriffs, aufgerufene Seite, übermittelte Datenmenge sowie Angaben zu Browser und Betriebssystem.',
-          'Diese Angaben sind erforderlich, um die Seite auszuliefern und ihren sicheren Betrieb zu gewährleisten. Sie werden nicht mit anderen Datenquellen zusammengeführt und nicht dazu verwendet, einzelne Personen zu identifizieren.',
+          'Ihre Daten werden nicht verkauft und nicht zu Werbezwecken weitergegeben. Für den Betrieb kommen zwei Dienstleister als Auftragsbearbeiter zum Einsatz, die vertraglich an Weisungen gebunden sind: Cloudflare für Hosting und Auslieferung der Website sowie Resend für den Versand der E-Mails. Beide Unternehmen haben ihren Sitz in den USA; dabei kann eine Bearbeitung von Daten im Ausland stattfinden.',
         ],
       },
       {
-        title: 'Kontaktformular',
+        title: 'Aufbewahrung',
         paragraphs: [
-          'Über das Kontaktformular werden Ihr Name, Ihre E-Mail-Adresse, Ihre Nachricht sowie die Angabe, ob Sie den Newsletter abonnieren möchten, erhoben. Diese Angaben werden ausschliesslich per E-Mail an die verantwortliche Stelle übermittelt und dort bearbeitet, um Ihre Anfrage zu beantworten.',
-          'Es besteht keine Datenbank, in der Formulareingaben gespeichert würden. Ihre Nachricht verbleibt im E-Mail-Postfach der verantwortlichen Stelle und wird gelöscht, sobald sie nicht mehr benötigt wird und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.',
-          'Die Angabe der Daten erfolgt freiwillig. Ohne Name, E-Mail-Adresse und Nachricht kann eine Anfrage jedoch nicht beantwortet werden.',
-        ],
-      },
-      {
-        title: 'Newsletter',
-        paragraphs: [
-          'Für die Anmeldung zum Newsletter wird ausschliesslich Ihre E-Mail-Adresse erhoben. Sie wird verwendet, um Ihnen in unregelmässigen Abständen Beiträge rund um Feng Shui und Raumgestaltung zuzustellen.',
-          'Die Anmeldung beruht auf Ihrer Einwilligung. Sie können diese jederzeit widerrufen, indem Sie sich abmelden oder eine kurze Nachricht an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a> senden. Die Rechtmässigkeit der bis dahin erfolgten Bearbeitung bleibt davon unberührt.',
-        ],
-      },
-      {
-        title: 'Schutz vor Missbrauch der Formulare',
-        paragraphs: [
-          'Damit die Formulare nicht für Massensendungen missbraucht werden, wird bei jedem Absenden gezählt, wie viele Nachrichten von einer IP-Adresse ausgegangen sind. Dazu wird die IP-Adresse zusammen mit einem Zählerstand kurzzeitig gespeichert.',
-          'Diese Einträge löschen sich automatisch, spätestens nach 24 Stunden. Sie werden ausschliesslich zu diesem Zweck verwendet, nicht ausgewertet und nicht mit anderen Daten verknüpft.',
-        ],
-      },
-      {
-        title: 'Eingesetzte Dienstleister',
-        paragraphs: [
-          'Für Betrieb und Versand werden zwei Dienstleister als Auftragsbearbeiter eingesetzt. Beide sind vertraglich verpflichtet, die Daten ausschliesslich weisungsgemäss zu bearbeiten.',
-        ],
-        items: [
-          '<strong>Cloudflare</strong> stellt Hosting und Auslieferung der Website bereit. Dabei fallen die oben beschriebenen technischen Angaben an. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Datenschutzerklärung von Cloudflare</a>',
-          '<strong>Resend</strong> versendet die E-Mails aus den Formularen. Der Versand läuft über Server in der Europäischen Union. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung von Resend</a>',
-        ],
-      },
-      {
-        title: 'Keine Cookies, keine Analyse',
-        paragraphs: [
-          'Diese Website setzt keine Cookies und verwendet keine Analyse-, Tracking- oder Werbewerkzeuge. Es findet keine Profilbildung statt, und es werden keine Besucherstatistiken erhoben.',
-          'Sämtliche Schriften sind lokal eingebunden. Beim Aufruf der Seite werden dadurch keine Verbindungen zu Servern Dritter aufgebaut.',
+          'Anfragen verbleiben im E-Mail-Postfach der verantwortlichen Stelle und werden gelöscht, sobald sie nicht mehr benötigt werden und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Anmeldung zum Newsletter können Sie jederzeit widerrufen.',
         ],
       },
       {
         title: 'Ihre Rechte',
         paragraphs: [
-          'Sie haben das Recht, Auskunft über die zu Ihrer Person bearbeiteten Daten zu verlangen sowie deren Berichtigung oder Löschung zu beantragen. Ebenso können Sie der Bearbeitung widersprechen und eine erteilte Einwilligung jederzeit widerrufen.',
-          'Wenden Sie sich dafür an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>. Zudem steht Ihnen der Weg an die zuständige Aufsichtsbehörde offen; in der Schweiz ist dies der Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte.',
-        ],
-      },
-      {
-        title: 'Datensicherheit',
-        paragraphs: [
-          'Die Übertragung zwischen Ihrem Browser und dieser Website erfolgt verschlüsselt über HTTPS. Ein vollständiger Schutz von Daten bei der Übermittlung über das Internet ist technisch allerdings nicht möglich.',
-        ],
-      },
-      {
-        title: 'Änderungen',
-        paragraphs: [
-          'Diese Datenschutzerklärung kann angepasst werden, wenn sich die Website oder die rechtlichen Vorgaben ändern. Massgebend ist die jeweils hier veröffentlichte Fassung.',
+          'Sie können Auskunft über die zu Ihrer Person bearbeiteten Daten verlangen sowie deren Berichtigung oder Löschung beantragen, der Bearbeitung widersprechen und eine erteilte Einwilligung jederzeit widerrufen. Wenden Sie sich dafür an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>.',
         ],
       },
     ],
