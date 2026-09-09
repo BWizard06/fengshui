@@ -135,7 +135,13 @@ draft: false
 Inhalt des Artikels.
 ```
 
-Übersicht und Detailseite werden daraus automatisch erzeugt. Die Übersicht zentriert die Karten,
+Übersicht und Detailseite werden daraus automatisch erzeugt.
+
+`description` ist freiwillig und erscheint nirgends auf der Seite – weder auf der Karte noch im
+Artikel. Der Wert landet ausschliesslich in der Meta-Beschreibung für Suchmaschinen und
+Link-Vorschauen; fehlt er, greift die allgemeine Blog-Beschreibung. Steht dort etwas, muss es
+wörtlich von der Autorin stammen. Dasselbe gilt für den gesamten Fliesstext: Vorgegebene Texte
+werden übernommen, nicht umformuliert und nicht ergänzt. Die Übersicht zentriert die Karten,
 solange weniger als drei Artikel vorhanden sind; ab drei greift das dreispaltige Raster.
 
 Bilder gehören nach `src/assets/images/blog/` und werden relativ eingebunden

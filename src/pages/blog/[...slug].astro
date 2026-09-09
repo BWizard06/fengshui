@@ -24,17 +24,20 @@ const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
 }).format(post.data.publishDate);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} path={`/blog/${post.id}`}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description ?? t.meta.blog.description}
+  path={`/blog/${post.id}`}
+>
   <article class="wrap max-w-[720px] pt-8 pb-11 desk:pt-16 desk:pb-24">
     <header class="mb-7 text-center desk:mb-12" data-reveal-group>
       <p class="mb-2.5 eyebrow text-sage">{publishedOn}</p>
       <h1 class="text-h1">{post.data.title}</h1>
-      <p class="mx-auto mt-3 max-w-[560px] text-lead font-light">{post.data.description}</p>
     </header>
 
     {
       post.data.cover && (
-        <div class="zoom-frame mb-7 w-full rounded-2xl shadow-card desk:mb-12 desk:rounded-[18px]">
+        <div class="mb-7 w-full overflow-hidden rounded-2xl shadow-card desk:mb-12 desk:rounded-[18px]">
           <Image
             src={post.data.cover}
             alt={post.data.coverAlt ?? ''}

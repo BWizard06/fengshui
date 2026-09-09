@@ -1,6 +1,6 @@
 ---
 title: Zeit für Neues
-description: Wie ein innerer Ruf mich von der Apotheke zum Feng Shui geführt hat – über Krankheit als Botschaft, fordernde Jahre und die Entscheidung, einen neuen Weg zu gehen.
+description: Schön, dass mein allererster Blog-Artikel den Weg zu Ihnen gefunden hat!
 publishDate: 2026-10-19
 cover: ../../assets/images/blog/herbsttal-laerchen.png
 coverAlt: Herbstliches Bergtal mit goldenen Lärchen und einem schmalen Weg
