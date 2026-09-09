@@ -19,6 +19,8 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
   month: 'long',
   year: 'numeric',
 });
+
+const columns = Math.min(posts.length, 3);
 ---
 
 <BaseLayout title={t.meta.blog.title} description={t.meta.blog.description} path="/blog">
@@ -33,7 +35,12 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
     {
       posts.length > 0 ? (
         <ul
-          class="flex flex-col gap-[18px] desk:grid desk:grid-cols-3 desk:gap-6"
+          class:list={[
+            'flex flex-col gap-[18px] desk:grid desk:gap-6',
+            columns === 1 && 'desk:mx-auto desk:max-w-[352px]',
+            columns === 2 && 'desk:mx-auto desk:max-w-[728px] desk:grid-cols-2',
+            columns >= 3 && 'desk:grid-cols-3',
+          ]}
           data-reveal-group
         >
           {posts.map((post) => (
@@ -82,7 +89,8 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
     }
 
     <section
-      class="mx-auto mt-10 max-w-[760px] rounded-[20px] border border-blush/42 bg-blush/16 px-6 py-9 desk:mt-16 desk:px-11 desk:py-12"
+      id="newsletter"
+      class="mx-auto mt-10 max-w-[760px] scroll-mt-28 rounded-[20px] border border-blush/42 bg-blush/16 px-6 py-9 desk:mt-16 desk:px-11 desk:py-12"
       data-reveal
     >
       <div class="mx-auto max-w-[560px] text-center">

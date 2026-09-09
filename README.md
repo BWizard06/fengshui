@@ -135,7 +135,26 @@ draft: false
 Inhalt des Artikels.
 ```
 
-Übersicht und Detailseite werden daraus automatisch erzeugt.
+Übersicht und Detailseite werden daraus automatisch erzeugt. Die Übersicht zentriert die Karten,
+solange weniger als drei Artikel vorhanden sind; ab drei greift das dreispaltige Raster.
+
+Bilder gehören nach `src/assets/images/blog/` und werden relativ eingebunden
+(`![Beschreibung](../../assets/images/blog/datei.jpg)`), damit Astro sie optimiert. Das Bild aus
+`cover` erscheint auf der Karte und als Auftakt des Artikels.
+
+Drei Bausteine stehen im Fliesstext zur Verfügung:
+
+```html
+<p class="lead">Einleitender Absatz, etwas grösser gesetzt.</p>
+
+<p class="note">Hervorgehobener Hinweis in einer gerahmten Box.</p>
+
+<figure class="figure-narrow">![Beschreibung](../../assets/images/blog/hochformat.jpg)</figure>
+```
+
+`figure-narrow` begrenzt Hochformat-Bilder auf 22rem und zentriert sie; ohne diesen Rahmen füllt
+ein Bild die Textspalte. Die Leerzeilen innerhalb des `figure`-Elements sind nötig, damit Markdown
+den Bildverweis darin noch verarbeitet.
 
 ## Kontaktformular und Newsletter
 
