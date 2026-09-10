@@ -20,6 +20,7 @@ interface Props {
     server: string;
     network: string;
     alreadySubscribed: string;
+    cannotSubscribe: string;
   };
   fieldErrors: {
     name: string;

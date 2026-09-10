@@ -204,6 +204,18 @@ Beide Wege tragen in dieselbe Audience ein, unterscheiden sich aber:
 
 Aus dem Kontaktformular wandert zusätzlich der Vorname ins Feld `FNAME`.
 
+Wird ein Kontakt in Mailchimp **endgültig gelöscht** («Forget this contact»), lässt er sich über
+die API nie wieder eintragen – Mailchimp antwortet dauerhaft mit «Forgotten Email Not Subscribed».
+Die Person muss sich dann über Mailchimps eigenes Formular neu anmelden:
+
+```
+https://gmx.us15.list-manage.com/subscribe?u=ec875f0d26b7df7b7ddd1b855&id=f06552ddff
+```
+
+Das Blog-Formular meldet diesen Fall verständlich und verweist auf die direkte Adresse, statt einen
+Serverfehler zu zeigen. Zum Aufräumen von Testeinträgen eignet sich deshalb «Archivieren» besser
+als endgültiges Löschen.
+
 Vor dem Eintrag wird geprüft, ob die Adresse schon in der Liste steht. Ist sie bereits angemeldet
 oder wartet auf ihre Bestätigung, meldet das Blog-Formular «Diese Adresse ist bereits für den
 Newsletter angemeldet» und es wird nichts geschrieben. Wer sich früher abgemeldet hatte, erhält

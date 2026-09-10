@@ -109,7 +109,10 @@ export async function subscribe(
   if (created.status === 400 && detail.toLowerCase().includes('already a list member')) {
     return { state: 'already' };
   }
-  if (created.status === 400 && detail.toLowerCase().includes('compliance state')) {
+  if (
+    created.status === 400 &&
+    /compliance state|permanently deleted|forgotten email/i.test(detail)
+  ) {
     return { state: 'failed', reason: 'blocked' };
   }
   if (

@@ -4,7 +4,7 @@ import type { APIContext } from 'astro';
 import type { RateLimitStore } from './rate-limit';
 
 export type ApiErrorCode =
-  'validation' | 'rateLimit' | 'notConfigured' | 'server' | 'alreadySubscribed';
+  'validation' | 'rateLimit' | 'notConfigured' | 'server' | 'alreadySubscribed' | 'cannotSubscribe';
 
 export const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {

@@ -18,6 +18,7 @@ interface Props {
     server: string;
     network: string;
     alreadySubscribed: string;
+    cannotSubscribe: string;
   };
   fieldError: string;
   privacy: {

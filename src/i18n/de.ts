@@ -40,6 +40,8 @@ export default {
         'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder schreiben Sie direkt an info@katischepis.ch.',
       network: 'Keine Verbindung zum Server. Bitte prüfen Sie Ihre Internetverbindung.',
       alreadySubscribed: 'Diese Adresse ist bereits für den Newsletter angemeldet.',
+      cannotSubscribe:
+        'Diese Adresse lässt sich nicht automatisch eintragen. Bitte schreiben Sie kurz an info@katischepis.ch.',
     },
     fields: {
       name: 'Bitte geben Sie Ihren Namen an.',

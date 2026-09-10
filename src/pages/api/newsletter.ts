@@ -73,6 +73,10 @@ export const POST: APIRoute = async (context) => {
       return fail('validation', 400, ['email']);
     }
 
+    if (outcome.reason === 'blocked') {
+      return fail('cannotSubscribe', 409);
+    }
+
     if (outcome.reason === 'auth') {
       console.error('[newsletter] Mailchimp lehnt den Schluessel ab – vermutlich abgelaufen');
       return fail('notConfigured', 500);
