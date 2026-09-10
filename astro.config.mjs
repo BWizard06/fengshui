@@ -16,6 +16,7 @@ export default defineConfig({
   env: {
     schema: {
       RESEND_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      MAILCHIMP_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   i18n: {

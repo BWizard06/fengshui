@@ -8,6 +8,8 @@ interface Props {
     sending: string;
     successTitle: string;
     successText: string;
+    pendingTitle: string;
+    pendingText: string;
   };
   errors: {
     validation: string;
@@ -15,6 +17,7 @@ interface Props {
     notConfigured: string;
     server: string;
     network: string;
+    alreadySubscribed: string;
   };
   fieldError: string;
   privacy: {
@@ -32,6 +35,7 @@ export default function NewsletterForm({ labels, errors, fieldError, privacy }: 
   const [status, setStatus] = useState<Status>('idle');
   const [errorKey, setErrorKey] = useState<keyof Props['errors'] | null>(null);
   const [invalid, setInvalid] = useState(false);
+  const [pending, setPending] = useState(false);
   const startedAt = useRef(Date.now());
 
   const submit = async (event: FormEvent) => {
@@ -51,11 +55,13 @@ export default function NewsletterForm({ labels, errors, fieldError, privacy }: 
 
       const result = (await response.json()) as {
         ok: boolean;
+        pending?: boolean;
         error?: keyof Props['errors'];
         fields?: string[];
       };
 
       if (result.ok) {
+        setPending(result.pending === true);
         setStatus('done');
         return;
       }
@@ -73,9 +79,11 @@ export default function NewsletterForm({ labels, errors, fieldError, privacy }: 
     return (
       <div className="text-center">
         <p className="mb-1.5 font-serif text-serif-md font-semibold text-taupe">
-          {labels.successTitle}
+          {pending ? labels.pendingTitle : labels.successTitle}
         </p>
-        <p className="text-body-sm font-light text-mute">{labels.successText}</p>
+        <p className="text-body-sm font-light text-mute">
+          {pending ? labels.pendingText : labels.successText}
+        </p>
       </div>
     );
   }

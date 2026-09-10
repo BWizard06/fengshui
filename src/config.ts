@@ -1,12 +1,21 @@
 export const features = {
   fengShuiTableOfContents: true,
-  contactConfirmationEmail: true,
+  contactConfirmationEmail: false,
 };
 
 export const mail = {
   from: 'Kati Schepis · Website <website@katischepis.ch>',
   to: 'info@katischepis.ch',
   replyTo: 'info@katischepis.ch',
+};
+
+export const mailchimp = {
+  audienceId: 'f06552ddff',
+  doubleOptIn: false,
+  tags: {
+    blog: 'Blogseite',
+    contact: 'Kontaktformular',
+  },
 };
 
 export const mailLimits = {

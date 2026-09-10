@@ -3,7 +3,8 @@ import { env } from 'cloudflare:workers';
 import type { APIContext } from 'astro';
 import type { RateLimitStore } from './rate-limit';
 
-export type ApiErrorCode = 'validation' | 'rateLimit' | 'notConfigured' | 'server';
+export type ApiErrorCode =
+  'validation' | 'rateLimit' | 'notConfigured' | 'server' | 'alreadySubscribed';
 
 export const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -34,6 +35,14 @@ export function getResendApiKey(): string | undefined {
   if (typeof fromBinding === 'string' && fromBinding.length > 0) return fromBinding;
 
   const fromEnv = getSecret('RESEND_API_KEY');
+  return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : undefined;
+}
+
+export function getMailchimpApiKey(): string | undefined {
+  const fromBinding = bindings()?.MAILCHIMP_API_KEY;
+  if (typeof fromBinding === 'string' && fromBinding.length > 0) return fromBinding;
+
+  const fromEnv = getSecret('MAILCHIMP_API_KEY');
   return typeof fromEnv === 'string' && fromEnv.length > 0 ? fromEnv : undefined;
 }
 

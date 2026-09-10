@@ -191,7 +191,52 @@ Die Domain ist in Resend verifiziert, Region eu-west-1.
 | `/api/newsletter` | Newsletter-Feld unten auf `/blog` | Benachrichtigung an Kati                       |
 
 Die Checkbox im Kontaktformular ist standardmässig leer. Ist sie gesetzt, steht `Newsletter: Ja`
-in der Mail an Kati. Die Weitergabe an Mailchimp ist noch nicht angebunden.
+in der Mail an Kati und die Adresse wandert zusätzlich nach Mailchimp.
+
+### Mailchimp
+
+Beide Wege tragen in dieselbe Audience ein, unterscheiden sich aber:
+
+| Weg                        | Mailchimp | Meldung an Kati                         | Tag               |
+| -------------------------- | --------- | --------------------------------------- | ----------------- |
+| Formular unten auf `/blog` | ja        | eigene Mail «Neue Newsletter-Anmeldung» | `Blogseite`       |
+| Haken im Kontaktformular   | ja        | keine – steht schon in der Anfrage      | `Kontaktformular` |
+
+Aus dem Kontaktformular wandert zusätzlich der Vorname ins Feld `FNAME`.
+
+Vor dem Eintrag wird geprüft, ob die Adresse schon in der Liste steht. Ist sie bereits angemeldet
+oder wartet auf ihre Bestätigung, meldet das Blog-Formular «Diese Adresse ist bereits für den
+Newsletter angemeldet» und es wird nichts geschrieben. Wer sich früher abgemeldet hatte, erhält
+von Mailchimp eine neue Bestätigungsmail, statt still wieder eingetragen zu werden. Adressen, die
+Mailchimp als unbrauchbar zurückweist, erscheinen als Feldfehler am Eingabefeld – nicht als
+Serverfehler.
+
+Audience und Verhalten stehen in `src/config.ts`:
+
+```ts
+export const mailchimp = {
+  audienceId: 'f06552ddff',
+  doubleOptIn: false,
+  tags: { blog: 'Blogseite', contact: 'Kontaktformular' },
+};
+```
+
+`doubleOptIn` auf `true` und Mailchimp verschickt vor dem Eintrag eine Bestätigungsmail; das
+Formular weist dann darauf hin und Kati erfährt in ihrer Meldung, dass die Bestätigung noch
+aussteht. Das schützt davor, dass jemand eine fremde Adresse einträgt, kostet aber einen
+zusätzlichen Klick.
+
+**Der Mailchimp-Schlüssel ist nur ein Jahr gültig.** Läuft er ab, antwortet Mailchimp mit 401; im
+Log steht dann `Mailchimp lehnt den Schluessel ab – vermutlich abgelaufen`, das Blog-Formular meldet
+einen Konfigurationsfehler und verweist auf die direkte Adresse. Kontaktanfragen kommen weiterhin
+an, nur der Newsletter-Eintrag unterbleibt. Neuen Schlüssel in Mailchimp erzeugen, dann:
+
+```bash
+npx wrangler secret put MAILCHIMP_API_KEY
+```
+
+Das Rechenzentrum wird aus dem Schlüssel gelesen (der Teil nach dem Bindestrich, aktuell `us15`),
+es braucht dafür keine eigene Variable.
 
 ### Schalter und Grenzwerte
 
@@ -314,10 +359,11 @@ Die Seite bleibt statisch, nur die beiden API-Routen laufen als Worker.
    npx wrangler kv namespace create RATE_LIMIT
    ```
 
-2. Den Resend-Schlüssel als Secret hinterlegen:
+2. Die beiden Schlüssel als Secrets hinterlegen:
 
    ```bash
    npx wrangler secret put RESEND_API_KEY
+   npx wrangler secret put MAILCHIMP_API_KEY
    ```
 
 3. Bauen und veröffentlichen:

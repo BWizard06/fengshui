@@ -1,15 +1,17 @@
 import type { APIRoute } from 'astro';
-import { features, mailLimits } from '../../config';
+import { features, mailchimp, mailLimits } from '../../config';
 import {
   EMAIL_PATTERN,
   fail,
   getClientIp,
+  getMailchimpApiKey,
   getRateLimitStore,
   getResendApiKey,
   isTooFast,
   ok,
 } from '../../lib/api';
 import { contactConfirmation, contactNotification, sendMail } from '../../lib/mail';
+import { getMailchimpConfig, subscribe } from '../../lib/mailchimp';
 import { checkRateLimit, recordSubmission } from '../../lib/rate-limit';
 
 export const prerender = false;
@@ -62,6 +64,28 @@ export const POST: APIRoute = async (context) => {
   }
 
   await recordSubmission(store, ip, emailCost);
+
+  if (newsletter) {
+    const audience = getMailchimpConfig(getMailchimpApiKey());
+
+    if (!audience) {
+      console.error('[contact] Newsletter gewuenscht, aber MAILCHIMP_API_KEY fehlt');
+    } else {
+      const outcome = await subscribe(audience, {
+        email,
+        firstName: name.split(/\s+/)[0],
+        tag: mailchimp.tags.contact,
+      });
+
+      if (outcome.state === 'failed') {
+        console.error(
+          outcome.reason === 'auth'
+            ? '[contact] Mailchimp lehnt den Schluessel ab – vermutlich abgelaufen'
+            : `[contact] Newsletter-Eintrag fehlgeschlagen (${outcome.reason})`
+        );
+      }
+    }
+  }
 
   if (features.contactConfirmationEmail) {
     try {

@@ -39,6 +39,7 @@ export default {
       server:
         'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später noch einmal oder schreiben Sie direkt an info@katischepis.ch.',
       network: 'Keine Verbindung zum Server. Bitte prüfen Sie Ihre Internetverbindung.',
+      alreadySubscribed: 'Diese Adresse ist bereits für den Newsletter angemeldet.',
     },
     fields: {
       name: 'Bitte geben Sie Ihren Namen an.',
@@ -557,6 +558,9 @@ export default {
       success: {
         title: 'Vielen Dank',
         text: 'Ihre Anmeldung ist eingegangen.',
+        pendingTitle: 'Fast geschafft',
+        pendingText:
+          'Wir haben Ihnen eine E-Mail geschickt. Bitte bestätigen Sie darin Ihre Anmeldung.',
       },
     },
   },

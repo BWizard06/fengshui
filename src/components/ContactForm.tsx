@@ -19,6 +19,7 @@ interface Props {
     notConfigured: string;
     server: string;
     network: string;
+    alreadySubscribed: string;
   };
   fieldErrors: {
     name: string;
