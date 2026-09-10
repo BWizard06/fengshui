@@ -37,13 +37,13 @@ const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
 
     {
       post.data.cover && (
-        <div class="mb-7 w-full overflow-hidden rounded-2xl shadow-card desk:mb-12 desk:rounded-[18px]">
+        <div class="breakout mb-8 overflow-hidden rounded-2xl shadow-card desk:mb-14 desk:rounded-[18px]">
           <Image
             src={post.data.cover}
             alt={post.data.coverAlt ?? ''}
-            widths={[420, 720, 1040]}
-            sizes="(min-width: 900px) 720px, 100vw"
-            class="block aspect-4/3 w-full object-cover"
+            widths={[420, 720, 960, 1440]}
+            sizes="(min-width: 1024px) 960px, calc(100vw - 4rem)"
+            class="block aspect-16/10 w-full object-cover desk:aspect-2/1"
             loading="eager"
           />
         </div>

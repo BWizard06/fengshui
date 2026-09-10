@@ -306,10 +306,20 @@
   }
 
   & h2 {
-    margin-top: 2.25rem;
+    clear: both;
+    margin-top: 3rem;
     margin-bottom: 0.875rem;
     font-size: var(--text-h2-lg);
     line-height: var(--text-h2-lg--line-height);
+  }
+
+  & h2::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 3.25rem;
+    margin-bottom: 1.375rem;
+    background-color: var(--color-blush);
   }
 
   & h3 {
@@ -372,6 +382,16 @@
     color: var(--color-taupe);
   }
 
+  & .lead::first-letter {
+    float: left;
+    margin: 0.12em 0.08em 0 0;
+    font-family: var(--font-serif);
+    font-size: 3.4em;
+    line-height: 0.78;
+    font-weight: 500;
+    color: var(--color-rose);
+  }
+
   & .note {
     margin-top: 2.75rem;
     margin-bottom: 0;
@@ -389,8 +409,34 @@
     max-width: 22rem;
   }
 
-  & .figure-narrow img {
+  & .figure-wide {
+    width: 100%;
+    margin-block: 2.75rem;
+  }
+
+  & .figure-side {
+    margin: 2rem auto;
+    max-width: 18rem;
+  }
+
+  & figure img {
     margin: 0;
+  }
+
+  @media (width >= 56.25rem) {
+    & .figure-wide {
+      width: min(100vw - 4rem, 60rem);
+      margin-block: 3.5rem;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    & .figure-side {
+      float: right;
+      width: 17rem;
+      margin: 0.5rem 0 1.5rem 2.5rem;
+      max-width: none;
+    }
   }
 
   & strong {
@@ -407,6 +453,18 @@
 }
 
 @layer components {
+  .breakout {
+    width: 100%;
+  }
+
+  @media (width >= 56.25rem) {
+    .breakout {
+      width: min(100vw - 4rem, 60rem);
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
   .zoom-frame {
     overflow: hidden;
     isolation: isolate;

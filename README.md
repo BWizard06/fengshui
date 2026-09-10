@@ -158,9 +158,26 @@ Drei Bausteine stehen im Fliesstext zur Verfügung:
 <figure class="figure-narrow">![Beschreibung](../../assets/images/blog/hochformat.jpg)</figure>
 ```
 
-`figure-narrow` begrenzt Hochformat-Bilder auf 22rem und zentriert sie; ohne diesen Rahmen füllt
-ein Bild die Textspalte. Die Leerzeilen innerhalb des `figure`-Elements sind nötig, damit Markdown
-den Bildverweis darin noch verarbeitet.
+Für Bilder stehen drei Rahmen zur Verfügung, damit ein Artikel nicht zur Abfolge aus Text und
+dazwischengelegten Bildern wird:
+
+| Rahmen          | Wirkung                                                             |
+| --------------- | ------------------------------------------------------------------- |
+| ohne            | Bild füllt die Textspalte                                           |
+| `figure-wide`   | Bild bricht ab 900px beidseitig aus der Spalte aus, bis 960px breit |
+| `figure-side`   | Bild steht ab 900px rechts im Satz, der Text umfliesst es           |
+| `figure-narrow` | Hochformat zentriert auf 22rem begrenzt                             |
+
+```html
+<figure class="figure-wide">![Beschreibung](../../assets/images/blog/breit.jpg)</figure>
+```
+
+Die Leerzeilen innerhalb des `figure`-Elements sind nötig, damit Markdown den Bildverweis darin
+noch verarbeitet. Unterhalb von 900px füllen alle Varianten schlicht die Spalte.
+
+Dazu kommt etwas Rhythmus im Fliesstext: Der `lead`-Absatz erhält eine Initiale, jede `##`-Über-
+schrift einen feinen Strich darüber. Das Titelbild aus `cover` läuft auf der Artikelseite als
+breites Band im Verhältnis 2:1 über die Textspalte hinaus.
 
 ## Kontaktformular und Newsletter
 

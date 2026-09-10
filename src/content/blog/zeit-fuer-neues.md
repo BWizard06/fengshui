@@ -34,7 +34,11 @@ Bei mir war an einem Donnerstag im März 2026 solch ein Moment gekommen: Nachdem
 
 An jenem Morgen fiel mir wie Schuppen von den Augen, dass ich mich und meine Vorstellungen von einem glücklichen Leben über eine lange Zeit hinweg vernachlässigt und stattdessen einfach nur funktioniert hatte. Die Scheidung vier Jahre zuvor hatte zur Folge gehabt, dass ich in einem «Nestmodell» lebte, wo ich die Hälfte der Zeit in der angestammten Familienwohnung mit den Kindern und die andere Hälfte der Zeit in einer kleinen Wohnung im Nachbarort verbrachte. Das Hin- und Herpendeln zwischen zwei Wohnsitzen forderte mich kräftemässig und auch emotional. In der Apotheke arbeitete ich in einem Team mit wundervollen Menschen, wo ich mich aufgehoben und verstanden fühlte, aber der Berufsalltag mit vielen, meist oberflächlichen Kundenkontakten, wenig Rückzugsmöglichkeiten und den langen Arbeitstagen brachte mich regelmässig an meine Belastungsgrenze. Ich hatte deshalb mein Pensum reduziert, anstatt, wie es von der Scheidungsanwältin bei den Unterhaltszahlungen eingeplant worden war, aufgestockt.
 
+<figure class="figure-wide">
+
 ![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/laerchenwald.jpg)
+
+</figure>
 
 ## Herausfordernde Zeiten für unsere persönliche Entwicklung
 
@@ -44,6 +48,12 @@ Als ich über meine aktuelle Situation sinnierte, wurde mir klar, dass es höchs
 
 Plötzlich erinnerte ich mich an das kleine Feng-Shui-Buch, das mir vor einigen Monaten beim Stöbern in einem Büchergeschäft in die Hände gefallen war. Die Inneneinrichtung und das Gestalten mit Farben hatte mir schon immer viel Freude bereitet, deshalb standen in meinem Regal zahlreiche Bücher über «Interior Design» und Farbkonzepte. Eine meiner besten Freundinnen, hatte mich immer wieder versucht zu motivieren, beruflich in diese Richtung zu gehen.
 
+<figure class="figure-side">
+
+![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.png)
+
+</figure>
+
 Beim Lesen des kleinen Buches hatte ich rasch realisiert, dass es bei Feng Shui um weit mehr ging, als nur darum, Wohnräume hübsch einzurichten: Bei dieser Jahrtausende alten Lehre ging es um das Wissen, wie wir Energien in unserer unmittelbaren Umgebung zu unserem Wohle lenken und nutzen können.
 
 In meiner kleinen Wohnung hatte ich versucht, soweit es mir ohne fundierte Kenntnisse und nur anhand des erworbenen Buches möglich war, die beschriebenen Feng-Shui-Regeln nach und nach umzusetzen. Dies hatte mir sehr viel Freude bereitet. Und auf einmal war er da, dieser Impuls: «Wieso mache ich nicht eine Feng-Shui-Ausbildung?»
@@ -51,12 +61,6 @@ In meiner kleinen Wohnung hatte ich versucht, soweit es mir ohne fundierte Kennt
 Ich setzte mich an den Computer und begann zu recherchieren, wo ich eine solide Ausbildung absolvieren könnte. Der «Zufall» wollte, dass zwei Tage später ein Wochenend-Kurs bei einem zertifizierten Feng-Shui-Institut startete. Der Ausbildner wohnte im Nachbarort und hatte, wie ich, Pharmazie an der ETH in Zürich studiert, den Beruf aber nur kurz ausgeübt, um sich dann über viele Jahre hinweg, auch bei längeren Aufenthalten in Asien, ein immenses Wissen im Bereich Feng Shui und chinesischer Astrologie anzueignen.
 
 Eines ergab das andere, und alles fühlte sich auf einmal ganz leicht und sehr stimmig an. Mittlerweile habe ich die Feng-Shui-Grundausbildung und die Aufbaukurse abgeschlossen und werde voraussichtlich in den nächsten Monaten mein Diplom erwerben. Das Eintauchen in diese neue Welt empfinde ich als eine grosse Bereicherung in meinem Leben. Bei der Analyse meiner eigenen Wohnung war ich beeindruckt von der Klarheit, mit der mein Grundriss meine Lebenssituation widerspiegelte.
-
-<figure class="figure-narrow">
-
-![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.png)
-
-</figure>
 
 ## Feng Shui – eine traditionelle Energielehre für mehr Harmonie in der heutigen Zeit
 
