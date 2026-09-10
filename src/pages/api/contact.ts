@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { features, mailchimp, mailLimits } from '../../config';
+import { defaultLocale } from '../../i18n/config';
 import {
   EMAIL_PATTERN,
   fail,
@@ -74,6 +75,7 @@ export const POST: APIRoute = async (context) => {
       const outcome = await subscribe(audience, {
         email,
         firstName: name.split(/\s+/)[0],
+        language: defaultLocale,
         tag: mailchimp.tags.contact,
       });
 

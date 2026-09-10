@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { mailchimp, mailLimits } from '../../config';
+import { defaultLocale } from '../../i18n/config';
 import {
   EMAIL_PATTERN,
   fail,
@@ -54,7 +55,11 @@ export const POST: APIRoute = async (context) => {
   const decision = await checkRateLimit(store, ip, 1);
   if (!decision.allowed) return fail('rateLimit', 429);
 
-  const outcome = await subscribe(audience, { email, tag: mailchimp.tags.blog });
+  const outcome = await subscribe(audience, {
+    email,
+    language: defaultLocale,
+    tag: mailchimp.tags.blog,
+  });
 
   if (outcome.state === 'already') {
     await recordSubmission(store, ip, 0);

@@ -15,6 +15,7 @@ export interface MailchimpConfig {
 export interface SubscribeInput {
   email: string;
   firstName?: string;
+  language: string;
   tag: string;
 }
 
@@ -73,6 +74,7 @@ export async function subscribe(
         email_address: input.email,
         status: 'pending',
         status_if_new: 'pending',
+        language: input.language,
         ...(merge ? { merge_fields: merge } : {}),
       }),
     });
@@ -94,6 +96,7 @@ export async function subscribe(
     body: JSON.stringify({
       email_address: input.email,
       status: targetState,
+      language: input.language,
       tags: [input.tag],
       ...(merge ? { merge_fields: merge } : {}),
     }),
