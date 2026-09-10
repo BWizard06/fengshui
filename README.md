@@ -221,10 +221,16 @@ export const mailchimp = {
 };
 ```
 
-`doubleOptIn` auf `true` und Mailchimp verschickt vor dem Eintrag eine Bestätigungsmail; das
-Formular weist dann darauf hin und Kati erfährt in ihrer Meldung, dass die Bestätigung noch
-aussteht. Das schützt davor, dass jemand eine fremde Adresse einträgt, kostet aber einen
-zusätzlichen Klick.
+`doubleOptIn` ist eingeschaltet: Neue Anmeldungen landen in Mailchimp mit dem Status `pending`,
+worauf Mailchimp die Bestätigungsmail verschickt. Erst nach dem Klick auf den Link darin zählt die
+Person als Mitglied. Das Formular weist darauf hin, und in Katis Meldung steht, dass die
+Bestätigung noch aussteht. Auf `false` gesetzt wird sofort eingetragen, ohne Bestätigungsschritt.
+
+Der Audience-Schalter «Double opt-in» in Mailchimp betrifft nur deren eigene Formulare und muss
+dafür nicht umgestellt werden – massgebend ist der Status, den die Website setzt.
+
+Text und Gestaltung der Bestätigungsmail liegen in Mailchimp unter _Audience › Signup forms ›
+Form builder › Opt-in confirmation email_, nicht in diesem Projekt.
 
 **Der Mailchimp-Schlüssel ist nur ein Jahr gültig.** Läuft er ab, antwortet Mailchimp mit 401; im
 Log steht dann `Mailchimp lehnt den Schluessel ab – vermutlich abgelaufen`, das Blog-Formular meldet

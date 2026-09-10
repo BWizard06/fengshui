@@ -11,7 +11,7 @@ export const mail = {
 
 export const mailchimp = {
   audienceId: 'f06552ddff',
-  doubleOptIn: false,
+  doubleOptIn: true,
   tags: {
     blog: 'Blogseite',
     contact: 'Kontaktformular',
