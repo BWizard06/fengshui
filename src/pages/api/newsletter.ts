@@ -86,7 +86,7 @@ export const POST: APIRoute = async (context) => {
   }
 
   try {
-    await sendMail(apiKey, newsletterNotification(email, outcome.state === 'pending'));
+    await sendMail(apiKey, newsletterNotification(email));
   } catch (error) {
     console.error('[newsletter] Meldung an Kati fehlgeschlagen', error);
   }

@@ -121,18 +121,15 @@ export function contactConfirmation(submission: ContactSubmission): MailMessage 
   };
 }
 
-export function newsletterNotification(email: string, pending = false): MailMessage {
-  const stand = pending ? 'Wartet auf die Bestätigung per E-Mail' : 'In Mailchimp eingetragen';
-  const schluss = pending
-    ? 'Sobald die Person den Bestätigungslink angeklickt hat, erscheint sie in Ihrer Mailchimp-Liste.'
-    : 'Die Adresse steht bereits in Ihrer Mailchimp-Liste, Sie müssen nichts weiter tun.';
+export function newsletterNotification(email: string): MailMessage {
+  const schluss =
+    'Jemand hat sich über die Website für Ihren Newsletter angemeldet. Der Eintrag in Mailchimp läuft automatisch, Sie müssen nichts unternehmen.';
 
   const html = shell(
     'Neue Newsletter-Anmeldung',
     `<table style="width:100%;border-collapse:collapse;border-bottom:1px solid rgba(220,207,195,0.55);margin-bottom:22px">
         ${row('E-Mail', `<a href="mailto:${escapeHtml(email)}" style="color:#C7968A">${escapeHtml(email)}</a>`)}
         ${row('Quelle', 'Formular auf der Blogseite')}
-        ${row('Stand', escapeHtml(stand))}
       </table>
       <p style="margin:0">${schluss}</p>`
   );
@@ -142,7 +139,6 @@ export function newsletterNotification(email: string, pending = false): MailMess
     '',
     `E-Mail: ${email}`,
     'Quelle: Formular auf der Blogseite',
-    `Stand: ${stand}`,
     '',
     schluss,
   ].join('\n');

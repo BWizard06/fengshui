@@ -235,8 +235,17 @@ export const mailchimp = {
 
 `doubleOptIn` ist eingeschaltet: Neue Anmeldungen landen in Mailchimp mit dem Status `pending`,
 worauf Mailchimp die Bestätigungsmail verschickt. Erst nach dem Klick auf den Link darin zählt die
-Person als Mitglied. Das Formular weist darauf hin, und in Katis Meldung steht, dass die
-Bestätigung noch aussteht. Auf `false` gesetzt wird sofort eingetragen, ohne Bestätigungsschritt.
+Person als Mitglied. Das Formular weist die anmeldende Person darauf hin. Auf `false` gesetzt wird
+sofort eingetragen, ohne Bestätigungsschritt.
+
+Die Meldung an Kati nennt bewusst keinen Bearbeitungsstand. Ob jemand den Bestätigungslink
+angeklickt hat, erfährt die Website nicht, und eine zweite Mail folgt deshalb nie – ein Hinweis auf
+eine ausstehende Bestätigung würde eine Aufgabe suggerieren, die es nicht gibt. Massgebend ist
+immer die Liste in Mailchimp.
+
+Meldet sich jemand an, der sich früher abgemeldet hatte, verschickt Mailchimp eine neue
+Bestätigungsmail; die Person zählt erst nach dem Klick wieder als Mitglied. Das gilt für beide
+Formulare gleichermassen, und der Herkunfts-Tag wird dabei ebenfalls gesetzt.
 
 Der Audience-Schalter «Double opt-in» in Mailchimp betrifft nur deren eigene Formulare und muss
 dafür nicht umgestellt werden – massgebend ist der Status, den die Website setzt.

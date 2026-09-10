@@ -80,7 +80,10 @@ export async function subscribe(
     });
 
     if (revived.status === 401) return { state: 'failed', reason: 'auth' };
-    if (revived.ok) return { state: 'pending' };
+    if (revived.ok) {
+      await applyTag(config, input);
+      return { state: 'pending' };
+    }
 
     console.error('[mailchimp] Reaktivierung fehlgeschlagen', await safeDetail(revived));
     return { state: 'failed', reason: 'request' };
@@ -124,6 +127,21 @@ export async function subscribe(
 
   console.error('[mailchimp] Eintrag fehlgeschlagen', created.status, detail);
   return { state: 'failed', reason: 'request' };
+}
+
+async function applyTag(config: MailchimpConfig, input: SubscribeInput): Promise<void> {
+  try {
+    const response = await request(config, `${memberPath(config, input.email)}/tags`, {
+      method: 'POST',
+      body: JSON.stringify({ tags: [{ name: input.tag, status: 'active' }] }),
+    });
+
+    if (!response.ok) {
+      console.error('[mailchimp] Tag konnte nicht gesetzt werden', await safeDetail(response));
+    }
+  } catch (error) {
+    console.error('[mailchimp] Tag konnte nicht gesetzt werden', error);
+  }
 }
 
 async function safeDetail(response: Response): Promise<string> {
