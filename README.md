@@ -216,7 +216,7 @@ Audience und Verhalten stehen in `src/config.ts`:
 ```ts
 export const mailchimp = {
   audienceId: 'f06552ddff',
-  doubleOptIn: false,
+  doubleOptIn: true,
   tags: { blog: 'Blogseite', contact: 'Kontaktformular' },
 };
 ```
@@ -229,8 +229,13 @@ Bestätigung noch aussteht. Auf `false` gesetzt wird sofort eingetragen, ohne Be
 Der Audience-Schalter «Double opt-in» in Mailchimp betrifft nur deren eigene Formulare und muss
 dafür nicht umgestellt werden – massgebend ist der Status, den die Website setzt.
 
+Neue Kontakte werden mit `language: de` angelegt, damit Mailchimp sie als deutschsprachig führt.
+
 Text und Gestaltung der Bestätigungsmail liegen in Mailchimp unter _Audience › Signup forms ›
-Form builder › Opt-in confirmation email_, nicht in diesem Projekt.
+Form builder_, im Auswahlfeld dann _Opt-in confirmation email_ – nicht in diesem Projekt. Erscheint
+der Eintrag dort nicht, liegt es am Audience-Schalter «Double opt-in»: Steht er auf aus, blendet
+Mailchimp die zugehörigen Vorlagen aus. Einschalten macht sie sichtbar und ändert nichts am
+Verhalten der Website, weil diese den Status ohnehin selbst setzt.
 
 **Der Mailchimp-Schlüssel ist nur ein Jahr gültig.** Läuft er ab, antwortet Mailchimp mit 401; im
 Log steht dann `Mailchimp lehnt den Schluessel ab – vermutlich abgelaufen`, das Blog-Formular meldet
