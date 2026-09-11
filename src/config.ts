@@ -1,3 +1,7 @@
+export const deployment = {
+  live: false,
+};
+
 export const features = {
   fengShuiTableOfContents: true,
   contactConfirmationEmail: false,

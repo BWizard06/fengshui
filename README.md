@@ -380,6 +380,39 @@ Die Datenschutzerklärung beschreibt den tatsächlichen Stand: keine Cookies, ke
 eingebundene Schriften, Formulardaten nur per E-Mail, IP-Zähler mit maximal 24 Stunden Lebensdauer,
 Cloudflare und Resend als Auftragsbearbeiter. Ändert sich daran etwas, gehört der Text angepasst.
 
+## Testseite und Livegang
+
+`src/config.ts` entscheidet, ob die Seite als Testversion oder als öffentliche Seite ausgeliefert
+wird:
+
+```ts
+export const deployment = {
+  live: false,
+};
+```
+
+|                 | `live: false`       | `live: true`                    |
+| --------------- | ------------------- | ------------------------------- |
+| `robots.txt`    | `Disallow: /`       | `Allow: /` samt Sitemap-Verweis |
+| Meta-Tag        | `noindex, nofollow` | keines                          |
+| Sitemap im Head | nicht verlinkt      | verlinkt                        |
+
+Beide Ebenen zusammen sind nötig: `robots.txt` hält Suchmaschinen vom Crawlen ab, das Meta-Tag
+verhindert die Aufnahme in den Index auch dann, wenn jemand die Adresse verlinkt.
+
+Der Wert wird beim Bauen ausgewertet, nicht zur Laufzeit – nach dem Umschalten muss also neu
+gebaut und veröffentlicht werden.
+
+**Vor dem Livegang prüfen**, dass `live` auf `true` steht. Bleibt der Schalter auf `false`, bleibt
+die öffentliche Seite dauerhaft aus dem Index, ohne dass etwas kaputt aussieht. Kontrolle nach dem
+Veröffentlichen:
+
+```bash
+curl https://www.katischepis.ch/robots.txt
+```
+
+Steht dort `Disallow: /`, wurde der Schalter vergessen.
+
 ## Deployment auf Cloudflare
 
 Die Seite bleibt statisch, nur die beiden API-Routen laufen als Worker.
