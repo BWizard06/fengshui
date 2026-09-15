@@ -715,20 +715,35 @@ export default {
         title: 'Welche Daten bearbeitet werden',
         paragraphs: [
           'Beim Aufruf der Website übermittelt Ihr Browser technisch notwendige Angaben wie IP-Adresse, Zeitpunkt und aufgerufene Seite. Sie dienen der Auslieferung und dem sicheren Betrieb und werden nicht mit anderen Daten verknüpft.',
-          'Über das Kontaktformular werden Name, E-Mail-Adresse und Nachricht per E-Mail übermittelt, um Ihre Anfrage zu beantworten; bei der Newsletter-Anmeldung ist es allein die E-Mail-Adresse. Damit die Formulare nicht für Massensendungen missbraucht werden, wird dabei kurz festgehalten, wie viele Nachrichten von einer IP-Adresse ausgehen. Diese Einträge löschen sich spätestens nach 24 Stunden.',
+          'Über das Kontaktformular werden Name, E-Mail-Adresse und Nachricht per E-Mail übermittelt, um Ihre Anfrage zu beantworten. Damit die Formulare nicht für Massensendungen missbraucht werden, wird dabei kurz festgehalten, wie viele Nachrichten von einer IP-Adresse ausgehen. Diese Einträge löschen sich spätestens nach 24 Stunden.',
           'Es werden keine Cookies gesetzt und keine Analyse- oder Tracking-Werkzeuge eingesetzt.',
+        ],
+      },
+      {
+        title: 'Newsletter',
+        paragraphs: [
+          'Für den Newsletter wird Ihre E-Mail-Adresse erhoben, bei einer Anmeldung über das Kontaktformular zusätzlich Ihr Vorname. Die Verwaltung erfolgt über Mailchimp.',
+          'Nach der Anmeldung erhalten Sie eine E-Mail mit einem Bestätigungslink. Erst wenn Sie diesen anklicken, wird Ihre Adresse in den Verteiler aufgenommen. Damit ist sichergestellt, dass niemand eine fremde Adresse eintragen kann.',
+          'Die Anmeldung beruht auf Ihrer Einwilligung. Sie können sie jederzeit widerrufen – über den Abmeldelink am Ende jedes Newsletters oder mit einer kurzen Nachricht an <a href="mailto:info@katischepis.ch">info@katischepis.ch</a>. Die Rechtmässigkeit der bis dahin erfolgten Bearbeitung bleibt davon unberührt.',
         ],
       },
       {
         title: 'Weitergabe',
         paragraphs: [
-          'Ihre Daten werden nicht verkauft und nicht zu Werbezwecken weitergegeben. Für den Betrieb kommen zwei Dienstleister als Auftragsbearbeiter zum Einsatz, die vertraglich an Weisungen gebunden sind: Cloudflare für Hosting und Auslieferung der Website sowie Resend für den Versand der E-Mails. Beide Unternehmen haben ihren Sitz in den USA; dabei kann eine Bearbeitung von Daten im Ausland stattfinden.',
+          'Ihre Daten werden nicht verkauft und nicht zu Werbezwecken an Dritte weitergegeben.',
+          'Für den Betrieb kommen drei Dienstleister als Auftragsbearbeiter zum Einsatz, die vertraglich an Weisungen gebunden sind. Alle drei haben ihren Sitz in den USA; dabei kann eine Bearbeitung von Daten im Ausland stattfinden.',
+        ],
+        items: [
+          '<strong>Cloudflare</strong> für Hosting und Auslieferung der Website',
+          '<strong>Resend</strong> für den Versand der E-Mails aus den Formularen',
+          '<strong>Mailchimp</strong> (Intuit Inc.) für die Verwaltung und den Versand des Newsletters',
         ],
       },
       {
         title: 'Aufbewahrung',
         paragraphs: [
-          'Anfragen verbleiben im E-Mail-Postfach der verantwortlichen Stelle und werden gelöscht, sobald sie nicht mehr benötigt werden und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Die Anmeldung zum Newsletter können Sie jederzeit widerrufen.',
+          'Anfragen verbleiben im E-Mail-Postfach der verantwortlichen Stelle und werden gelöscht, sobald sie nicht mehr benötigt werden und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.',
+          'Ihre Angaben zum Newsletter bleiben gespeichert, bis Sie sich abmelden. Danach wird die Adresse als abgemeldet vermerkt, damit Sie keine weiteren Zusendungen erhalten.',
         ],
       },
       {
