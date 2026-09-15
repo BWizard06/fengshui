@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import FormField from './FormField';
 
 interface Props {
@@ -55,7 +55,7 @@ export default function ContactForm({ labels, errors, fieldErrors, privacy }: Pr
 
   const errorFor = (field: FieldName) => (invalid.includes(field) ? fieldErrors[field] : undefined);
 
-  const submit = async (event: FormEvent) => {
+  const submit = async (event: SubmitEvent) => {
     event.preventDefault();
     if (status === 'sending') return;
 

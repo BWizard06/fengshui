@@ -61,13 +61,13 @@ export default function MobileMenu({ items, logoSrc, logoAlt, ctaHref, labels }:
         mounted &&
         createPortal(
           <div
-            className="fixed inset-0 z-100 flex animate-menu-in flex-col bg-cream/[0.985] px-[26px] pt-11 pb-[34px] backdrop-blur-[14px]"
+            className="fixed inset-x-0 top-0 z-100 flex h-dvh animate-menu-in flex-col overflow-y-auto overscroll-contain bg-cream/[0.985] px-[26px] pt-5 pb-6 backdrop-blur-[14px]"
             role="dialog"
             aria-modal="true"
             aria-label={labels.open}
           >
-            <div className="flex items-center justify-between pt-1.5">
-              <img src={logoSrc} alt={logoAlt} className="h-[54px] w-auto" />
+            <div className="flex flex-none items-center justify-between">
+              <img src={logoSrc} alt={logoAlt} className="h-[44px] w-auto" />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
@@ -78,17 +78,17 @@ export default function MobileMenu({ items, logoSrc, logoAlt, ctaHref, labels }:
               </button>
             </div>
 
-            <nav className="mt-[26px] flex flex-col gap-0.5">
+            <nav className="mt-3 flex flex-none flex-col">
               {items.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   aria-current={item.active ? 'page' : undefined}
-                  className="flex items-center justify-between border-b border-line/50 px-0.5 py-[15px] no-underline"
+                  className="flex items-center justify-between border-b border-line/50 px-0.5 py-2.5 no-underline"
                 >
                   <span
-                    className={`font-serif text-[1.6875rem] font-medium ${
+                    className={`font-serif text-[1.5rem] leading-tight font-medium ${
                       item.active ? 'text-taupe' : 'text-mute'
                     }`}
                   >
@@ -101,7 +101,7 @@ export default function MobileMenu({ items, logoSrc, logoAlt, ctaHref, labels }:
               ))}
             </nav>
 
-            <div className="mt-auto pt-8 text-center">
+            <div className="mt-auto flex-none pt-6 text-center">
               <a
                 href={ctaHref}
                 onClick={() => setOpen(false)}
@@ -109,7 +109,7 @@ export default function MobileMenu({ items, logoSrc, logoAlt, ctaHref, labels }:
               >
                 {labels.cta}
               </a>
-              <p className="mt-4 font-script text-[1.625rem] text-rose">{labels.tagline}</p>
+              <p className="mt-3 font-script text-[1.5rem] text-rose">{labels.tagline}</p>
             </div>
           </div>,
           document.body

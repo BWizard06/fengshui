@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react';
+import { useRef, useState, type SubmitEvent } from 'react';
 
 interface Props {
   labels: {
@@ -39,7 +39,7 @@ export default function NewsletterForm({ labels, errors, fieldError, privacy }: 
   const [pending, setPending] = useState(false);
   const startedAt = useRef(Date.now());
 
-  const submit = async (event: FormEvent) => {
+  const submit = async (event: SubmitEvent) => {
     event.preventDefault();
     if (status === 'sending') return;
 
