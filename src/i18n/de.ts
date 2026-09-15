@@ -629,6 +629,8 @@ export default {
         name: 'Ben Brändle',
         role: 'Webdesign & Entwicklung',
         imageAlt: 'Ben Brändle, Webdesign und Entwicklung',
+        linkHref: 'https://braendle.tech',
+        linkLabel: 'braendle.tech',
         text: 'Ben Brändle gestaltet und entwickelt individuelle Websites – von der ersten Konzeption über das visuelle Design bis zur technischen Umsetzung. Für diese Website hat er das gesamte Erscheinungsbild entworfen und umgesetzt, damit sich die Ruhe und Harmonie des Feng Shui auch digital spürbar überträgt.',
       },
     ] as PartnerEntry[],

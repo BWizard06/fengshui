@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 
 interface Area {
   key: string;
@@ -60,16 +60,18 @@ export default function BaguaExplorer({ areas, labels }: Props) {
                 setOpen(true);
               }}
               aria-haspopup="dialog"
-              style={{
-                backgroundColor: active ? `${area.accent}1F` : '#FFFFFF',
-                borderColor: active ? area.accent : 'rgb(220 207 195 / 0.55)',
-              }}
-              className="rounded-xl border px-[5px] pt-3.5 pb-3 text-center transition-[background-color,border-color] duration-200 hover:border-blush desk:rounded-[14px] desk:px-3 desk:pt-[22px] desk:pb-[18px]"
+              style={
+                {
+                  '--cell-bg': active ? `${area.accent}1F` : '#FFFFFF',
+                  '--cell-border': active ? area.accent : 'rgb(220 207 195 / 0.55)',
+                } as CSSProperties
+              }
+              className="group rounded-xl border border-[var(--cell-border)] bg-[var(--cell-bg)] px-[5px] pt-3.5 pb-3 text-center transition-[background-color,border-color,box-shadow,transform] duration-200 ease-gentle hover:-translate-y-0.5 hover:border-rose hover:shadow-card desk:rounded-[14px] desk:px-3 desk:pt-[22px] desk:pb-[18px]"
             >
               <img
                 src={area.iconSrc}
                 alt=""
-                className="mx-auto mb-1.5 block size-[34px] rounded-full object-cover mix-blend-multiply desk:mb-2.5 desk:size-[50px]"
+                className="mx-auto mb-1.5 block size-[34px] rounded-full object-cover mix-blend-multiply transition-transform duration-300 ease-gentle group-hover:scale-110 desk:mb-2.5 desk:size-[50px]"
                 loading="lazy"
               />
               <span className="block text-[0.53125rem] font-medium tracking-[0.1rem] text-mute uppercase desk:text-[0.65625rem] desk:tracking-[0.15625rem]">

@@ -158,6 +158,10 @@ Drei Bausteine stehen im Fliesstext zur Verfügung:
 <figure class="figure-narrow">![Beschreibung](../../assets/images/blog/hochformat.jpg)</figure>
 ```
 
+Der Fliesstext eines Artikels blendet bewusst nicht ein: Auf mehreren tausend Wörtern stört
+Bewegung beim Lesen mehr, als sie schmückt. Titel, Titelbild und die Bilder im Text animieren
+weiterhin – bei den Bildern über ein `data-reveal` am `figure`-Element.
+
 Für Bilder stehen drei Rahmen zur Verfügung, damit ein Artikel nicht zur Abfolge aus Text und
 dazwischengelegten Bildern wird:
 

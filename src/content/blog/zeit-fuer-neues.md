@@ -34,7 +34,7 @@ Bei mir war an einem Donnerstag im März 2026 solch ein Moment gekommen: Nachdem
 
 An jenem Morgen fiel mir wie Schuppen von den Augen, dass ich mich und meine Vorstellungen von einem glücklichen Leben über eine lange Zeit hinweg vernachlässigt und stattdessen einfach nur funktioniert hatte. Die Scheidung vier Jahre zuvor hatte zur Folge gehabt, dass ich in einem «Nestmodell» lebte, wo ich die Hälfte der Zeit in der angestammten Familienwohnung mit den Kindern und die andere Hälfte der Zeit in einer kleinen Wohnung im Nachbarort verbrachte. Das Hin- und Herpendeln zwischen zwei Wohnsitzen forderte mich kräftemässig und auch emotional. In der Apotheke arbeitete ich in einem Team mit wundervollen Menschen, wo ich mich aufgehoben und verstanden fühlte, aber der Berufsalltag mit vielen, meist oberflächlichen Kundenkontakten, wenig Rückzugsmöglichkeiten und den langen Arbeitstagen brachte mich regelmässig an meine Belastungsgrenze. Ich hatte deshalb mein Pensum reduziert, anstatt, wie es von der Scheidungsanwältin bei den Unterhaltszahlungen eingeplant worden war, aufgestockt.
 
-<figure class="figure-wide">
+<figure class="figure-wide" data-reveal>
 
 ![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/laerchenwald.jpg)
 
@@ -48,7 +48,7 @@ Als ich über meine aktuelle Situation sinnierte, wurde mir klar, dass es höchs
 
 Plötzlich erinnerte ich mich an das kleine Feng-Shui-Buch, das mir vor einigen Monaten beim Stöbern in einem Büchergeschäft in die Hände gefallen war. Die Inneneinrichtung und das Gestalten mit Farben hatte mir schon immer viel Freude bereitet, deshalb standen in meinem Regal zahlreiche Bücher über «Interior Design» und Farbkonzepte. Eine meiner besten Freundinnen, hatte mich immer wieder versucht zu motivieren, beruflich in diese Richtung zu gehen.
 
-<figure class="figure-side">
+<figure class="figure-side" data-reveal>
 
 ![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.png)
 
