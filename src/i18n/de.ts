@@ -683,8 +683,12 @@ export default {
         ],
       },
       {
-        title: 'Gestaltung',
-        paragraphs: ['Gestaltung und Umsetzung: Ben Brändle'],
+        title: 'Bildnachweis und Gestaltung',
+        paragraphs: [
+          'Fotografie: Kati Schepis-Buck',
+          'Porträt: Gonzalo, <a href="https://gonzalo.ch" target="_blank" rel="noopener">gonzalo.ch</a>',
+          'Gestaltung und Umsetzung: Ben Brändle',
+        ],
       },
     ],
   },
