@@ -171,7 +171,7 @@ export default {
           items: [
             'Grundausbildung Modul 1–4',
             'Feng Shui Aufbaukurs 1–3 («Fliegende Sterne»)',
-            'Radiästhesie 1 und 2',
+            'Radiästhesie 1, 2 und 3',
           ],
         },
         {
@@ -292,7 +292,7 @@ export default {
       lead: 'Zur Kompassschule gehören die Methoden des «Ba Gua» und der «Fliegenden Sterne».',
       title: 'Das «Ba Gua»',
       intro:
-        'Im nächsten Schritt wird das Ba Gua wie eine energetische Landkarte über den Grundriss gelegt. Dadurch entsteht eine klare innere Ordnung: Der Wohnraum wird in acht Bereiche gegliedert, die sich harmonisch um ein zentrales Zentrum anordnen und den acht Trigrammen entsprechen:',
+        'Das Ba Gua wird wie eine Art energetische Landkarte über den Grundriss gelegt. Dadurch entsteht eine klare innere Ordnung: Der Wohnraum wird in acht Bereiche gegliedert, die sich harmonisch um ein zentrales Zentrum anordnen und den acht Trigrammen entsprechen:',
       afterGrid:
         'Jedes dieser Trigramme steht für bestimmte Lebensbereiche und ist mit spezifischen Qualitäten, Farben und Elementen verbunden. Auch gesundheitliche Themen sind diesen Bereichen zugeordnet – sie können sowohl körperliche Ebenen wie Organe und Organsysteme als auch emotionale und psychische Aspekte betreffen.',
       elementsAlt: 'Die fünf Elemente – Holz, Feuer, Erde, Metall und Wasser im Kreislauf',
@@ -683,11 +683,8 @@ export default {
         ],
       },
       {
-        title: 'Bildnachweis und Gestaltung',
-        paragraphs: [
-          'Fotografie: Gonzalo, <a href="https://gonzalo.ch" target="_blank" rel="noopener">gonzalo.ch</a>',
-          'Gestaltung und Umsetzung: Ben Brändle',
-        ],
+        title: 'Gestaltung',
+        paragraphs: ['Gestaltung und Umsetzung: Ben Brändle'],
       },
     ],
   },
