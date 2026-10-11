@@ -25,7 +25,6 @@ pnpm-debug.log*
 
 # editor / tooling
 .vscode/
-.claude/
 .dev.vars
 .wrangler/
 
