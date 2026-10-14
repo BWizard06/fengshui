@@ -540,7 +540,7 @@ export default {
   blog: {
     eyebrow: 'Impulse & Inspiration',
     title: 'Blog',
-    lead: 'Alle ein bis zwei Monate erscheint hier ein neuer Artikel rund um Feng Shui, Raumgestaltung und harmonisches Wohnen.',
+    lead: 'Hier erscheinen regelmässig neue Artikel rund um Feng Shui, Raumgestaltung und harmonisches Wohnen.',
     empty: {
       title: 'Die ersten Artikel entstehen gerade',
       text: 'Schauen Sie bald wieder vorbei – oder schreiben Sie mir, welche Themen Sie besonders interessieren.',
@@ -549,7 +549,7 @@ export default {
     newsletter: {
       eyebrow: 'Newsletter',
       title: 'Impulse direkt in Ihr Postfach',
-      text: 'Alle ein bis zwei Monate ein neuer Beitrag rund um Feng Shui, Raumgestaltung und harmonisches Wohnen. Jederzeit abbestellbar.',
+      text: 'Hier erscheinen regelmässig neue Artikel rund um Feng Shui, Raumgestaltung und harmonisches Wohnen. Jederzeit abbestellbar.',
       label: 'E-Mail-Adresse',
       placeholder: 'ihre@e-mail.ch',
       submit: 'Anmelden',
@@ -581,7 +581,7 @@ export default {
       email: 'E-Mail',
       message: 'Ihre Nachricht',
       newsletter: 'Ich möchte den Newsletter abonnieren',
-      newsletterHint: 'Alle ein bis zwei Monate ein Beitrag. Jederzeit abbestellbar.',
+      newsletterHint: 'Regelmässig ein neuer Beitrag. Jederzeit abbestellbar.',
       privacy: {
         text: 'Ihre Angaben werden per E-Mail übermittelt, um Ihre Anfrage zu beantworten. Näheres in der',
         linkLabel: 'Datenschutzerklärung',

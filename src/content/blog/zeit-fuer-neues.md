@@ -2,7 +2,7 @@
 title: Zeit für Neues
 description: Schön, dass mein allererster Blog-Artikel den Weg zu Ihnen gefunden hat!
 publishDate: 2026-10-19
-cover: ../../assets/images/blog/herbsttal-laerchen.png
+cover: ../../assets/images/blog/herbsttal-laerchen.jpeg
 coverAlt: Herbstliches Bergtal mit goldenen Lärchen und einem schmalen Weg
 draft: false
 ---
@@ -36,7 +36,7 @@ An jenem Morgen fiel mir wie Schuppen von den Augen, dass ich mich und meine Vor
 
 <figure class="figure-wide" data-reveal>
 
-![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/laerchenwald.jpg)
+![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/laerchenwald.jpeg)
 
 </figure>
 
