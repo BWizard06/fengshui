@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PillLink from '../components/PillLink.astro';
+import { localizePath, resolveLocale, useTranslations } from '../i18n';
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t.notFound.title} description={t.notFound.text} path="/404" indexable={false}>
+  <div class="wrap max-w-[720px] pt-8 pb-16 text-center desk:pt-16 desk:pb-28">
+    <PageIntro
+      eyebrow={t.notFound.eyebrow}
+      title={t.notFound.title}
+      lead={t.notFound.text}
+      class="mb-8 desk:mb-10"
+    />
+    <div data-reveal>
+      <PillLink href={localizePath('/', locale)}>{t.notFound.action}</PillLink>
+    </div>
+  </div>
+</BaseLayout>

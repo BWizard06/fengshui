@@ -642,6 +642,13 @@ export default {
     address: 'Kati Schepis-Buck, 8413 Neftenbach',
   },
 
+  notFound: {
+    eyebrow: 'Fehler 404',
+    title: 'Diese Seite gibt es nicht',
+    text: 'Vielleicht hat sich die Adresse geändert, oder es hat sich ein Tippfehler eingeschlichen.',
+    action: 'Zur Startseite',
+  },
+
   legal: {
     label: 'Rechtliches',
     imprint: 'Impressum',

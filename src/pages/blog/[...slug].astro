@@ -1,9 +1,10 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { business } from '../../config';
 import { htmlLang, localizePath, resolveLocale, useTranslations } from '../../i18n';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -22,12 +23,34 @@ const publishedOn = new Intl.DateTimeFormat(htmlLang[locale], {
   month: 'long',
   year: 'numeric',
 }).format(post.data.publishDate);
+
+const shareImage = post.data.cover
+  ? await getImage({ src: post.data.cover, width: 1200, height: 630, fit: 'cover', format: 'jpg' })
+  : undefined;
+
+const articleUrl = new URL(`/blog/${post.id}`, Astro.site).href;
+
+const articleData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  ...(post.data.description ? { description: post.data.description } : {}),
+  datePublished: post.data.publishDate.toISOString().slice(0, 10),
+  inLanguage: htmlLang[locale],
+  author: { '@type': 'Person', name: business.owner },
+  publisher: { '@id': new URL('/#business', Astro.site).href },
+  mainEntityOfPage: articleUrl,
+  ...(shareImage ? { image: new URL(shareImage.src, Astro.site).href } : {}),
+};
 ---
 
 <BaseLayout
   title={post.data.title}
   description={post.data.description ?? t.meta.blog.description}
   path={`/blog/${post.id}`}
+  ogImage={shareImage?.src}
+  ogType="article"
+  structuredData={articleData}
 >
   <article class="wrap max-w-[720px] pt-8 pb-11 desk:pt-16 desk:pb-24">
     <header class="mb-7 text-center desk:mb-12" data-reveal-group>

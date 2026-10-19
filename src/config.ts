@@ -1,5 +1,11 @@
-export const deployment = {
-  live: false,
+export const business = {
+  owner: 'Kati Schepis-Buck',
+  email: 'info@katischepis.ch',
+  telephone: '+41793823680',
+  street: 'Auenrainstrasse 7',
+  postalCode: '8413',
+  locality: 'Neftenbach',
+  country: 'CH',
 };
 
 export const features = {

@@ -30,7 +30,7 @@ npm run dev
 ```
 
 Für den Versand braucht es eine `.env` mit `RESEND_API_KEY` und `MAILCHIMP_API_KEY`. Schalter
-für Testbetrieb, Bestätigungsmails und Grenzwerte stehen in `src/config.ts`.
+für Bestätigungsmails und Grenzwerte stehen in `src/config.ts`.
 
 | Skript            | Zweck                           |
 | ----------------- | ------------------------------- |

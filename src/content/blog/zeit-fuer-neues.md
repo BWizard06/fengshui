@@ -50,7 +50,7 @@ Plötzlich erinnerte ich mich an das kleine Feng-Shui-Buch, das mir vor einigen 
 
 <figure class="figure-side" data-reveal>
 
-![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.png)
+![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.jpeg)
 
 </figure>
 

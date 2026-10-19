@@ -2,7 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { deployment } from '../config';
+import { business } from '../config';
 import { htmlLang, localizePath, locales, resolveLocale, useTranslations } from '../i18n';
 import '../styles/global.css';
 
@@ -11,9 +11,20 @@ interface Props {
   description: string;
   path: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
+  indexable?: boolean;
+  structuredData?: Record<string, unknown>;
 }
 
-const { title, description, path, ogImage } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  ogImage,
+  ogType = 'website',
+  indexable = true,
+  structuredData,
+} = Astro.props;
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -21,6 +32,27 @@ const t = useTranslations(locale);
 const canonical = new URL(localizePath(path, locale), Astro.site);
 const socialImage = new URL(ogImage ?? '/og-image.jpg', Astro.site);
 const fullTitle = path === '/' ? title : `${title} · ${t.site.shortName}`;
+
+const businessData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': new URL('/#business', Astro.site).href,
+  name: t.site.name,
+  url: new URL('/', Astro.site).href,
+  image: new URL('/og-image.jpg', Astro.site).href,
+  email: business.email,
+  telephone: business.telephone,
+  founder: { '@type': 'Person', name: business.owner },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.street,
+    postalCode: business.postalCode,
+    addressLocality: business.locality,
+    addressCountry: business.country,
+  },
+};
+
+const toJsonLd = (data: Record<string, unknown>) => JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -31,24 +63,25 @@ const fullTitle = path === '/' ? title : `${title} · ${t.site.shortName}`;
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {indexable && <link rel="canonical" href={canonical} />}
 
     {
-      locales.map((alt) => (
-        <link
-          rel="alternate"
-          hreflang={htmlLang[alt]}
-          href={new URL(localizePath(path, alt), Astro.site)}
-        />
-      ))
+      indexable &&
+        locales.map((alt) => (
+          <link
+            rel="alternate"
+            hreflang={htmlLang[alt]}
+            href={new URL(localizePath(path, alt), Astro.site)}
+          />
+        ))
     }
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={t.site.name} />
     <meta property="og:locale" content={htmlLang[locale].replace('-', '_')} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {indexable && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -56,8 +89,15 @@ const fullTitle = path === '/' ? title : `${title} · ${t.site.shortName}`;
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    {deployment.live && <link rel="sitemap" href="/sitemap-index.xml" />}
-    {!deployment.live && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+
+    <script is:inline type="application/ld+json" set:html={toJsonLd(businessData)} />
+    {
+      structuredData && (
+        <script is:inline type="application/ld+json" set:html={toJsonLd(structuredData)} />
+      )
+    }
 
     <ClientRouter />
 
