@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { defaultLocale, locales } from './src/i18n/config.ts';
 
 export default defineConfig({
-  site: 'https://www.katischepis.ch',
+  site: 'https://katischepis.ch',
   trailingSlash: 'never',
   adapter: cloudflare({
     imageService: { build: 'compile', runtime: 'passthrough' },
