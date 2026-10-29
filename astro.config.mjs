@@ -9,6 +9,9 @@ import { defaultLocale, locales } from './src/i18n/config.ts';
 export default defineConfig({
   site: 'https://katischepis.ch',
   trailingSlash: 'never',
+  redirects: {
+    '/blog/zeit-fuer-neues': '/blog/1',
+  },
   adapter: cloudflare({
     imageService: { build: 'compile', runtime: 'passthrough' },
     prerenderEnvironment: 'node',
