@@ -178,7 +178,10 @@ const anchor = 'scroll-mt-24 desk:scroll-mt-32';
       <ul class="flex flex-col gap-4 desk:grid desk:grid-cols-2 desk:gap-6" data-reveal-group>
         {
           t.fengShui.schools.cards.map((card) => (
-            <li class="rounded-[18px] border border-line/55 bg-white px-[22px] py-[26px] desk:px-9 desk:py-[38px]">
+            <li
+              id={card.id}
+              class="scroll-mt-24 rounded-[18px] border border-line/55 bg-white px-[22px] py-[26px] desk:scroll-mt-32 desk:px-9 desk:py-[38px]"
+            >
               <p class="mb-2 eyebrow text-sage desk:mb-2.5">{card.eyebrow}</p>
               <p class="mb-3 font-serif text-serif-lg font-semibold text-taupe">{card.title}</p>
               {card.paragraphs.map((paragraph, index) => (

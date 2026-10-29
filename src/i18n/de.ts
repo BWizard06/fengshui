@@ -231,6 +231,7 @@ export default {
       cards: [
         {
           eyebrow: 'Intuitiv · Visuell · Landschaftlich',
+          id: 'formschule',
           title: 'Die Formschule',
           paragraphs: [
             'Die Formschule befasst sich mit der physischen, sichtbaren Umgebung. Im Fokus stehen das unmittelbare Umfeld sowie die räumlichen Formen. Dabei wird untersucht, wie Landschaften, angrenzende Gebäude, Möbel und deren Anordnung den Fluss der Lebensenergie Qi beeinflussen.',
@@ -239,6 +240,7 @@ export default {
         },
         {
           eyebrow: 'Mathematisch · Richtungsbasiert · Exakt',
+          id: 'kompassschule',
           title: 'Die Kompassschule',
           paragraphs: [
             'In der Kompassschule wird Feng Shui auf Grundlage des «Ba Gua» (übersetzt: «acht Trigramme») angewendet. Im Mittelpunkt steht dabei eine präzise und zugleich ganzheitliche Betrachtung Ihres Wohnraums.',

@@ -2,7 +2,7 @@
 title: Zeit für Neues
 description: Schön, dass mein allererster Blog-Artikel den Weg zu Ihnen gefunden hat!
 publishDate: 2026-10-19
-cover: ../../assets/images/blog/herbsttal-laerchen.jpeg
+cover: ../../assets/images/blog/zeit-fuer-neues/herbsttal-laerchen.jpeg
 coverAlt: Herbstliches Bergtal mit goldenen Lärchen und einem schmalen Weg
 draft: false
 ---
@@ -36,7 +36,7 @@ An jenem Morgen fiel mir wie Schuppen von den Augen, dass ich mich und meine Vor
 
 <figure class="figure-wide" data-reveal>
 
-![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/laerchenwald.jpeg)
+![Blick von unten in einen herbstlichen Lärchenwald vor blauem Himmel](../../assets/images/blog/zeit-fuer-neues/laerchenwald.jpeg)
 
 </figure>
 
@@ -50,7 +50,7 @@ Plötzlich erinnerte ich mich an das kleine Feng-Shui-Buch, das mir vor einigen 
 
 <figure class="figure-side" data-reveal>
 
-![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/herzstein.jpeg)
+![Ein herzförmiger Stein auf einem Baumstrunk, umlegt mit weiteren Steinen und roten Beeren](../../assets/images/blog/zeit-fuer-neues/herzstein.jpeg)
 
 </figure>
 
