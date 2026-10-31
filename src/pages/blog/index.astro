@@ -20,7 +20,19 @@ const dateFormatter = new Intl.DateTimeFormat(htmlLang[locale], {
   year: 'numeric',
 });
 
-const columns = Math.min(posts.length, 3);
+const builtAt = Date.now();
+
+const listLayout = (count: number) =>
+  [
+    'flex flex-col gap-[18px] desk:grid desk:gap-6',
+    count === 1 && 'desk:mx-auto desk:max-w-[352px]',
+    count === 2 && 'desk:mx-auto desk:max-w-[728px] desk:grid-cols-2',
+    count >= 3 && 'desk:grid-cols-3',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+const listLayouts = [1, 2, 3].map(listLayout);
 ---
 
 <BaseLayout title={t.meta.blog.title} description={t.meta.blog.description} path="/blog">
@@ -34,17 +46,16 @@ const columns = Math.min(posts.length, 3);
 
     {
       posts.length > 0 ? (
-        <ul
-          class:list={[
-            'flex flex-col gap-[18px] desk:grid desk:gap-6',
-            columns === 1 && 'desk:mx-auto desk:max-w-[352px]',
-            columns === 2 && 'desk:mx-auto desk:max-w-[728px] desk:grid-cols-2',
-            columns >= 3 && 'desk:grid-cols-3',
-          ]}
-          data-reveal-group
-        >
+        <ul class={listLayout(posts.length)} data-blog-list data-reveal-group>
           {posts.map((post) => (
-            <li class="overflow-hidden rounded-[18px] border border-line/55 bg-white transition-[border-color,box-shadow,transform] duration-300 ease-gentle focus-within:border-blush/70 focus-within:shadow-card hover:-translate-y-0.5 hover:border-blush/70 hover:shadow-card">
+            <li
+              class="overflow-hidden rounded-[18px] border border-line/55 bg-white transition-[border-color,box-shadow,transform] duration-300 ease-gentle focus-within:border-blush/70 focus-within:shadow-card hover:-translate-y-0.5 hover:border-blush/70 hover:shadow-card"
+              data-publish-at={
+                post.data.publishDate.valueOf() > builtAt
+                  ? post.data.publishDate.toISOString()
+                  : undefined
+              }
+            >
               <a href={localizePath(`/blog/${post.id}`, locale)} class="block no-underline">
                 {post.data.cover && (
                   <Image
@@ -79,6 +90,20 @@ const columns = Math.min(posts.length, 3);
         </div>
       )
     }
+
+    <script define:vars={{ listLayouts }}>
+      const list = document.querySelector('[data-blog-list]');
+      const upcoming = list
+        ? [...list.querySelectorAll('[data-publish-at]')].filter(
+            (item) => Date.parse(item.dataset.publishAt) > Date.now()
+          )
+        : [];
+      if (upcoming.length > 0) {
+        upcoming.forEach((item) => item.remove());
+        const count = Math.min(list.children.length, 3);
+        if (count > 0) list.className = listLayouts[count - 1];
+      }
+    </script>
 
     <section
       id="newsletter"
